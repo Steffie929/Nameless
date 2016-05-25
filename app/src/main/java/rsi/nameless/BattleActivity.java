@@ -26,6 +26,8 @@ public class BattleActivity extends AppCompatActivity {
         this.enemy = battle.getEnemy();
         playerTurn = false;
 
+        //More code!
+
         HP_player = (TextView) findViewById(R.id.hpbar_player);
         HP_enemy = (TextView) findViewById(R.id.hpbar_enemy);
         playerName = (TextView) findViewById(R.id.name_player);
