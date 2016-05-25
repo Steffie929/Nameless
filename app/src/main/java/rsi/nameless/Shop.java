@@ -1,13 +1,12 @@
 package rsi.nameless;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * Created by Stéphanie on 20-5-2016.
  */
-public class Shop extends Event implements Serializable {
+public class Shop extends Event {
     private ArrayList<Weapon> WeaponsInShop;
     private ArrayList<Armour> ArmourInShop;
     private ArrayList<Potion> PotionsInShop;

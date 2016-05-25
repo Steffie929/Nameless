@@ -31,4 +31,21 @@ public class EnemyLibrary {
     public int getNrEnemies(){
         return enemies.size();
     }
+
+    /**
+     * Get all enemies with a given level
+     * @param level the level of the enemies you want
+     * @return an ArrayList with all enemies of the specified level
+     */
+    public ArrayList<Character> getEnemiesWithLevel (int level) {
+        ArrayList<Character> result = new ArrayList<>();
+        int size = enemies.size();
+        for (int i = 0; i < size; i++) {
+            Character enemy = enemies.get(i);
+            if (enemy.getLevel() == level) {
+                result.add(enemy);
+            }
+        }
+        return result;
+    }
 }

@@ -7,6 +7,6 @@ public class EmptyEvent extends Event {
     String empty;
 
     public EmptyEvent(){
-        empty = "this doesnt do anything";
+        empty = "This doesnt do anything";
     }
 }

@@ -2,6 +2,7 @@ package rsi.nameless;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +14,7 @@ import android.widget.TextView;
 public class BattleActivity extends AppCompatActivity {
     private Battle battle;
     private Character player, enemy;
-    private TextView HP_player, HP_enemy,playerName, enemyName, info, messages;
+    private TextView HP_player, HP_enemy, playerName, enemyName, info, messages;
     private boolean playerTurn; // is true when the user can click a button to set their next action.
 
     @Override
@@ -47,20 +48,43 @@ public class BattleActivity extends AppCompatActivity {
     }
 
     public void startRound(){
+        if(player.getCurrentHP() <= 0){
+            battleOver();
+            return;
+        }
+        else if(enemy.getCurrentHP() <=0){
+            getRewards();
+            return;
+        }
+        else if(battle.isRanAway()){
+            battleOver();
+            return;
+        }
         battle.chooseEnemyAction();
         info.setText("Choose your action");
         playerTurn = true;
     }
 
-    public void getRewards(){
+    private void battleOver() {
+        battle.resetBoosts();
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("Character_Key", player);
+        setResult(RESULT_OK, returnIntent);
+        finish();
+    }
+
+    private void getRewards(){
+        battle.resetBoosts();
         AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
         helpBuilder.setTitle("Rewards");
-        helpBuilder.setMessage("You won:\n\t- lots of items\n\t- even more xp");
+        helpBuilder.setMessage("You won:\n\t-Lots of items\n\t-Plenty of XP");
         helpBuilder.setPositiveButton("Ok",
                 new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
-
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("Character_Key", player);
+                        setResult(RESULT_OK, returnIntent);
                         finish();
                     }
                 });
@@ -80,17 +104,10 @@ public class BattleActivity extends AppCompatActivity {
         HP_enemy.setText("\t" + enemy.getCurrentHP() + " / " + enemy.getMaxHP());
 
         if(player.getCurrentHP() <= 0){
-            finish();
-            return;
+            info.setText("You lost the fight!");
         }
         else if(enemy.getCurrentHP() <=0){
-            getRewards();
-            //finish();
-            return;
-        }
-        else if(battle.isRanAway()){
-            finish();
-            return;
+            info.setText("You won the fight!");
         }
     }
 
@@ -121,6 +138,9 @@ public class BattleActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Button used to run away
+     */
     public void cowardButton(View v){
         if(playerTurn){
             battle.setPlayerAction(BattleAction.RUN, 0);

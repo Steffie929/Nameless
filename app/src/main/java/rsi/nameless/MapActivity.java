@@ -4,18 +4,16 @@ import android.content.Intent;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
-public class MapActivity extends AppCompatActivity implements GestureDetector.OnGestureListener{
+public class MapActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
     private CanvasMap drawView;
     private GestureDetectorCompat gDetector;
     private Map map;
 
-
-
+    private final int BATTLE_KEY = 7;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,7 +21,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         setContentView(R.layout.activity_map);
 
 
-        String playerName = (String) getIntent().getStringExtra("PLAYER_NAME");
+        String playerName = getIntent().getStringExtra("PLAYER_NAME");
         MainModel m = new MainModel(playerName);
         drawView = (CanvasMap) findViewById(R.id.view);
         map = m.getCurrentMap();
@@ -34,39 +32,42 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
     public void startBattleActivity(Battle battle){
         Intent intent = new Intent(this, BattleActivity.class);
         intent.putExtra("CURRENT_BATTLE", battle);
-        startActivity(intent);
+        startActivityForResult(intent, BATTLE_KEY);
         drawView.invalidate();
     }
 
-    public void startShopActivity(Shop shop){
-        /*Intent intent = new Intent(this, ShopActivity.class);
-        intent.putExtra("CURRENT_SHOP", shop);
-        startActivity(intent);
-        drawView.invalidate();*/
+    /**
+     * Get a result when returning from another activity that was started with startActivityForResult
+     * RequestCodes: BattleActivity --> BATTLE_KEY = 7
+     * @param requestCode the requestCode that was sent
+     * @param resultCode to see if the result was ok, indicated by RESULT_OK
+     * @param data the Intent that was sent back by the other Activity
+     */
+    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+        if (requestCode == BATTLE_KEY) {
+            if (resultCode == RESULT_OK) {
+                Character player = (Character) data.getSerializableExtra("Character_Key");
+                map.setPlayer(player);
+            }
+        }
     }
-
 
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
         float x,y;
-        x= e.getX()-40;
+        x = e.getX()-40;
         y = e.getY()-250;
-        Log.d("DEBUG", "MapActivity, onSingleTap\n\t\tclicked on:\tgetX() " + x + " " + y);
-
+        //Log.d("DEBUG", "MapActivity, onSingleTap\n\t\tclicked on:\tgetX() " + x + " " + y);
 
         Move move = new Move(map, drawView, x, y);
         drawView.invalidate();
-        if(map.getEvent(map.getCurrentPoint()-1) instanceof Battle){
-            Battle currentBattle = (Battle) map.getEvent(map.getCurrentPoint()-1);
+        if(map.inBattle()){
+            Battle currentBattle = (Battle) map.getEvent(map.getCurrentPoint());
             startBattleActivity(currentBattle);
         }
-        else if(map.getEvent(map.getCurrentPoint()-1) instanceof Shop){
-            Shop currentShop = (Shop) map.getEvent(map.getCurrentPoint()-1);
-            startShopActivity(currentShop);
-        }
-
         return false;
     }
+
     @Override
     public void onLongPress(MotionEvent e) {
         int x,y;

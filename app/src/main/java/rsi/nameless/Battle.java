@@ -32,7 +32,7 @@ public class Battle extends Event implements Serializable{
         inventoryNumber = -1;
         random = new Random();
         ranAway = false;
-        battleInfo = "not initialised yet";
+        battleInfo = "Not initialised yet";
     }
 
     /**
@@ -143,10 +143,10 @@ public class Battle extends Event implements Serializable{
                     else
                         battleInfo += player.getName() + " does 0 damage\n";
                 }
-                else if(hitSucces(false))
-                    battleInfo += "You missed\n";
+                else if(enemyAction == BattleAction.DEFEND)
+                    battleInfo += "Your attack was blocked\n";
                 else
-                    battleInfo += "Your attack was blocked";
+                    battleInfo += "You missed\n";
                 break;
             case DEFEND:
                 battleInfo += player.getName() + " defends\n";
@@ -155,7 +155,7 @@ public class Battle extends Event implements Serializable{
                 battleInfo += player.getName() + " uses an item\n";
                 Item pitem = player.getItemFromBackPack(inventoryNumber);
                 if (pitem == null) {
-                    battleInfo += "using item failed";
+                    battleInfo += "Using item failed\n";
                     return;
                 }
                 ItemType ptype = pitem.getType();
@@ -182,17 +182,17 @@ public class Battle extends Event implements Serializable{
                 player.setWeapon(inventoryNumber);
                 break;
             case RUN:
-                battleInfo += player.getName() + "tries to run away! :( \n";
+                battleInfo += player.getName() + " tries to run away\n";
                 int goal = 50;
                 int difference = player.getSpeed() - enemy.getSpeed();
                 goal += difference*10;
                 int rand = random.nextInt(100);
                 if (rand < goal) {
-                    battleInfo += "you escaped\n";
+                    battleInfo += "You escaped!\n";
                     ranAway = true;
                 }
                 else
-                    battleInfo += enemy.getName() + "was too fast to escape";
+                    battleInfo += enemy.getName() + " was too fast to escape!\n";
                 break;
             default:
                 break;
@@ -204,7 +204,7 @@ public class Battle extends Event implements Serializable{
      */
     private void performEnemyAction () {
         if (enemy.getCurrentHP() <= 0) {
-            battleInfo += enemy.getName() + " died.";
+            battleInfo += enemy.getName() + " died.\n";
             return;
         }
         switch (enemyAction) {
@@ -219,10 +219,10 @@ public class Battle extends Event implements Serializable{
                     else
                         battleInfo += enemy.getName() + " does 0 damage\n";
                 }
-                else if(hitSucces(false))
-                    battleInfo += enemy.getName() + "missed\n";
+                else if(playerAction == BattleAction.DEFEND)
+                    battleInfo += enemy.getName() + " was blocked\n";
                 else
-                    battleInfo += enemy.getName() + "was blocked\n";
+                    battleInfo += enemy.getName() + " missed\n";
                 break;
             case DEFEND:
                 battleInfo += enemy.getName() + " defends\n";
@@ -231,7 +231,7 @@ public class Battle extends Event implements Serializable{
                 battleInfo += enemy.getName() + " uses an item\n";
                 Item pitem = enemy.getItemFromBackPack(enemyInventoryNumber);
                 if (pitem == null) {
-                    battleInfo += "item use failed\n";
+                    battleInfo += "Item use failed\n";
                     return;
                 }
                 ItemType ptype = pitem.getType();
@@ -253,7 +253,7 @@ public class Battle extends Event implements Serializable{
                 enemy.setWeapon(enemyInventoryNumber);
                 break;
             case RUN:
-                battleInfo += enemy.getName() + " tries to run away, ";
+                battleInfo += enemy.getName() + " tries to run away\n";
                 int goal = 50;
                 int difference = enemy.getSpeed() - player.getSpeed();
                 goal += difference*10;
@@ -375,5 +375,16 @@ public class Battle extends Event implements Serializable{
      */
     public boolean isRanAway() {
         return ranAway;
+    }
+
+    /**
+     * Use this to undo the temporary boosts on player
+     */
+    public void resetBoosts() {
+        player.changeStrength(-boosts[0]);
+        player.changeDefense(-boosts[1]);
+        player.changeSkill(-boosts[2]);
+        player.changeSpeed(-boosts[3]);
+        player.changeMaxHP(-boosts[4]);
     }
 }

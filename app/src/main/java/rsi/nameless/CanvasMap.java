@@ -45,14 +45,14 @@ public class CanvasMap extends View  {
     }
 
     /**
-     * This method is called when an instance of SimpleCanvas is created.
+     * This method is called when an instance of CanvasMap is created.
      * It creates a canvas that fills the screen and sets the stage to START.
      */
     public void start() {
         paint = new Paint();
         mapHeight=getResources().getDisplayMetrics().heightPixels;
         mapWidth=getResources().getDisplayMetrics().widthPixels;
-        Log.d("DEBUG", "SimpleCanvas, start()\n\t\tcanvas height and width: " + mapHeight + "  " + mapWidth);
+        Log.d("DEBUG", "CanvasMap, start()\n\t\tcanvas height and width: " + mapHeight + "  " + mapWidth);
         Bitmap bitmap = Bitmap.createBitmap(mapHeight, mapWidth, Bitmap.Config.RGB_565);
         canvas = new Canvas(bitmap);
     }
@@ -95,7 +95,7 @@ public class CanvasMap extends View  {
             pathY[i] = Ycoord[orderY[i]];
         }
 
-        Log.d("DEBUG", "SimpleCanvas, ondraw, \n\t\t "+ "canvasWidth: " + mapWidth + "  canvasHeight: " + mapHeight);
+        Log.d("DEBUG", "CanvasMap, ondraw, \n\t\t "+ "canvasWidth: " + mapWidth + "  canvasHeight: " + mapHeight);
 
         drawBackground();
         drawRoads();
@@ -111,11 +111,11 @@ public class CanvasMap extends View  {
             Event event = map.getEvent(i);
             if(event instanceof Battle){
                 d = ResourcesCompat.getDrawable(getResources(), R.drawable.icon_battle, null);
-                drawIcon(d, i+1);
+                drawIcon(d, i);
             }
             else if(event instanceof Shop){
                 d = ResourcesCompat.getDrawable(getResources(), R.drawable.shop, null);
-                drawBigIcon(d, i+1);
+                drawBigIcon(d, i);
             }
         }
 
@@ -127,13 +127,13 @@ public class CanvasMap extends View  {
     /**
      * Draws an icon 'd' with a height of 150 and width of 150 at location 'p' on the map.
      * used for battle icons
-     * @param d
-     * @param p
+     * @param d The icon to draw
+     * @param p The location on the map
      */
     public void drawIcon(Drawable d, int p){
         int x,y;
-        x= Math.round(pathX[p-1]);
-        y = Math.round(pathY[p-1]);
+        x= Math.round(pathX[p]);
+        y = Math.round(pathY[p]);
         d.setBounds(x-75, y-75, x+75, y+75);
         d.draw(canvas);
     }
@@ -141,13 +141,13 @@ public class CanvasMap extends View  {
     /**
      * Draws an icon 'd' with a height of 250 and width of 200 at location 'p' on the map.
      * Used for the shop icon
-     * @param d
-     * @param p
+     * @param d The icon to draw
+     * @param p The location on the map
      */
     public void drawBigIcon(Drawable d, int p){
         int x,y;
-        x= Math.round(pathX[p-1]);
-        y = Math.round(pathY[p-1]);
+        x= Math.round(pathX[p]);
+        y = Math.round(pathY[p]);
         d.setBounds(x-125, y-100, x+125, y+100);
         d.draw(canvas);
     }
@@ -155,13 +155,13 @@ public class CanvasMap extends View  {
     /**
      * Draws an icon 'd' with a height of 150 and width of 100 at location 'p' on the map.
      * Used for the player icon
-     * @param d
-     * @param p
+     * @param d The icon to draw
+     * @param p The location on the map
      */
     public void drawPlayerIcon(Drawable d, int p){
         int x,y;
-        x= Math.round(pathX[p-1]);
-        y = Math.round(pathY[p-1]);
+        x= Math.round(pathX[p]);
+        y = Math.round(pathY[p]);
         //d.setBounds(left, top, right, bottom);
         d.setBounds(x-50, y-75, x+50, y+75);//100 breed 150 hoog
         d.draw(canvas);
