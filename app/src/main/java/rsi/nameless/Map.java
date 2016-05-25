@@ -129,6 +129,10 @@ public class Map {
         return currentPoint;
     }
 
+    public Character getPlayer(){
+        return player;
+    }
+
     /**
      * Getter for an event at an index
      * @param index the index of the event

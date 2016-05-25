@@ -41,8 +41,8 @@ public class Character implements Serializable {
         backpack = new ArrayList<>();
         currentXP = 0;
         maxXP = 10;
-        weapon = new Weapon ("No weapon", 0, 0, 0, 0, 0, 1, 0);
-        armour = new Armour ("No armour", 0, 0, 0, 0, 0, 1, 0);
+        weapon = new Weapon ("No weapon", 0, 0, 0, 0, 0, 1, 0, R.drawable.empty);
+        armour = new Armour ("No armour", 0, 0, 0, 0, 0, 1, 0, R.drawable.empty);
     }
 
     public Character (String name, int str, int def, int skl, int spd, int maxHP,
@@ -58,10 +58,10 @@ public class Character implements Serializable {
         this.gold = gold;
         this.maxXP = maxExp;
         this.level = level;
-        this.backpack = backpack;
-        this.weapon = new Weapon ("No weapon", 0, 0, 0, 0, 0, 1, 0);
+        this.backpack = new ArrayList<>();
+        this.weapon = new Weapon ("No weapon", 0, 0, 0, 0, 0, 1, 0, R.drawable.item1);
         setWeapon(weapon);
-        this.armour = new Armour ("No armour", 0, 0, 0, 0, 0, 1, 0);
+        this.armour = new Armour ("No armour", 0, 0, 0, 0, 0, 1, 0, R.drawable.item3);
         setArmour(armour);
         currentXP = 0;
     }

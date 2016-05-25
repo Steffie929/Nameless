@@ -8,12 +8,15 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
+import java.io.Serializable;
+
 public class MapActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
     private CanvasMap drawView;
     private GestureDetectorCompat gDetector;
     private Map map;
 
     private final int BATTLE_KEY = 7;
+    private final int SHOP_KEY = 4;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,13 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         Intent intent = new Intent(this, BattleActivity.class);
         intent.putExtra("CURRENT_BATTLE", battle);
         startActivityForResult(intent, BATTLE_KEY);
+        drawView.invalidate();
+    }
+
+    public void startShopActivity(Shop shop){
+        Intent intent = new Intent(this, ShopActivity.class);
+        intent.putExtra("CURRENT_SHOP", shop);
+        startActivityForResult(intent, SHOP_KEY);
         drawView.invalidate();
     }
 
@@ -64,6 +74,11 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         if(map.inBattle()){
             Battle currentBattle = (Battle) map.getEvent(map.getCurrentPoint());
             startBattleActivity(currentBattle);
+        }
+        else if(map.inShop()){
+            Shop currentShop = (Shop) map.getEvent(map.getCurrentPoint());
+            currentShop.setPlayer(map.getPlayer());
+            startShopActivity(currentShop);
         }
         return false;
     }

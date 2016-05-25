@@ -15,8 +15,9 @@ public class Item implements Serializable {
     private final int level;
     private final int price;
     private final ItemType type;
+    private final int imgID;
 
-    public Item (String itemName, int strB, int defB, int sklB, int spdB, int HPB, int level, int price, ItemType type) {
+    public Item (String itemName, int strB, int defB, int sklB, int spdB, int HPB, int level, int price, ItemType type, int imgID) {
         name = itemName;
         strengthBonus = strB;
         defenseBonus = defB;
@@ -26,6 +27,7 @@ public class Item implements Serializable {
         this.level = level;
         this.price = price;
         this.type = type;
+        this.imgID = imgID;
     }
 
     /**
@@ -89,10 +91,16 @@ public class Item implements Serializable {
         return type;
     }
 
+    public int getImgID(){
+        return imgID;
+    }
+
     @Override
     public String toString(){
         return name;
     }
+
+
 
     /**
      * Compares this Item with another Item. If they have the same name it returns true

@@ -1,11 +1,12 @@
 package rsi.nameless;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Stéphanie on 20-5-2016.
  */
-public class ItemLibrary {
+public class ItemLibrary implements Serializable{
     private ArrayList<Weapon> weapons;
     private ArrayList<Armour> armour;
     private ArrayList<Potion> potions;
@@ -23,24 +24,24 @@ public class ItemLibrary {
     }
 
     private void addWeapons () {
-        weapons.add( new Weapon ("No weapon", 0, 0, 0, 0, 0, 1, 0) ); //Name, str, def, skl, spd, HP, level, price
-        weapons.add( new Weapon ("Stick", 1, 0, 1, 0, 0, 1, 0) );
-        weapons.add( new Weapon ("Training Sword", 2, -1, 1, 0, 0, 1, 5) );
-        weapons.add( new Weapon ("Bunny Teeth", 1, 0, 0, 0, 0, 1, 0) );
+        weapons.add( new Weapon ("No weapon", 0, 0, 0, 0, 0, 1, 0, R.drawable.item1) ); //Name, str, def, skl, spd, HP, level, price
+        weapons.add( new Weapon ("Stick", 1, 0, 1, 0, 0, 1, 0, R.drawable.item1) );
+        weapons.add( new Weapon ("Training Sword", 2, -1, 1, 0, 0, 1, 5, R.drawable.item1) );
+        weapons.add( new Weapon ("Bunny Teeth", 1, 0, 0, 0, 0, 1, 0, R.drawable.item1) );
     }
 
     private void addPotions () {
-        potions.add( new Potion ("Refreshment potion", 0, 0, 0, 0, 0, 1, 7, 5, 3) ); //Name, str, def, skl, spd, MaxHP, lvl, price, HPRes, nrUses
-        potions.add( new Potion ("Potion of Fortitude", 2, 0, 0, 0, 0, 1, 5, 0, 1) );
-        potions.add( new Potion ("Potion of Protection", 0, 2, 0, 0, 0, 1, 5, 0, 1) );
-        potions.add( new Potion ("Potion of Talent", 0, 0, 2, 0, 0, 1, 5, 0, 1) );
-        potions.add( new Potion ("Potion of Agility", 0, 0, 0, 2, 0, 1, 5, 0, 1) );
+        potions.add( new Potion ("Refreshment potion", 0, 0, 0, 0, 0, 1, 7, 5, 3, R.drawable.item2) ); //Name, str, def, skl, spd, MaxHP, lvl, price, HPRes, nrUses
+        potions.add( new Potion ("Potion of Fortitude", 2, 0, 0, 0, 0, 1, 5, 0, 1, R.drawable.item2) );
+        potions.add( new Potion ("Potion of Protection", 0, 2, 0, 0, 0, 1, 5, 0, 1, R.drawable.item2) );
+        potions.add( new Potion ("Potion of Talent", 0, 0, 2, 0, 0, 1, 5, 0, 1, R.drawable.item2) );
+        potions.add( new Potion ("Potion of Agility", 0, 0, 0, 2, 0, 1, 5, 0, 1, R.drawable.item2) );
     }
 
     private void addArmour () {
-        armour.add( new Armour ("No armour", 0, 0, 0, 0, 0, 1, 0));
-        armour.add( new Armour ("Snail Shell", 0, 2, 0, -1, 0, 1, 1));
-        armour.add( new Armour ("Small Shield", 0, 2, 0, 0, 0, 1, 1));
+        armour.add( new Armour ("No armour", 0, 0, 0, 0, 0, 1, 0, R.drawable.item3));
+        armour.add( new Armour ("Snail Shell", 0, 2, 0, -1, 0, 1, 1,R.drawable.item3));
+        armour.add( new Armour ("Small Shield", 0, 2, 0, 0, 0, 1, 1,R.drawable.item3));
     }
 
     public Weapon getWeapon (int index) {

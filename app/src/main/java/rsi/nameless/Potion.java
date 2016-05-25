@@ -7,8 +7,8 @@ public class Potion extends Item {
     private final int HPRestore;
     private int nrUses;
 
-    public Potion (String itemName, int strB, int defB, int sklB, int spdB, int HPB, int level, int price, int HPRestore, int nrUses) {
-        super(itemName, strB, defB, sklB, spdB, HPB, level, price, ItemType.POTION);
+    public Potion (String itemName, int strB, int defB, int sklB, int spdB, int HPB, int level, int price, int HPRestore, int nrUses, int imgID) {
+        super(itemName, strB, defB, sklB, spdB, HPB, level, price, ItemType.POTION, imgID);
         this.HPRestore = HPRestore;
         this.nrUses = nrUses;
     }

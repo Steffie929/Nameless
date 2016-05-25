@@ -1,12 +1,13 @@
 package rsi.nameless;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * Created by Stéphanie on 20-5-2016.
  */
-public class Shop extends Event {
+public class Shop extends Event implements Serializable{
     private ArrayList<Weapon> WeaponsInShop;
     private ArrayList<Armour> ArmourInShop;
     private ArrayList<Potion> PotionsInShop;
@@ -70,6 +71,10 @@ public class Shop extends Event {
         }
     }
 
+    public void setPlayer(Character player){
+        this.player = player;
+    }
+
     public void enterShop(Character c){
         player = c;
         boolean done = false;
@@ -105,5 +110,17 @@ public class Shop extends Event {
         player.setGold(price);
         System.out.println("Succesful purchase");
         return false;
+    }
+
+    public int getNrOfItems(){
+        return ItemsInShop.size();
+    }
+
+    public ArrayList<Item> getItemsInShop(){
+        return ItemsInShop;
+    }
+
+    public Character getPlayer(){
+        return player;
     }
 }
