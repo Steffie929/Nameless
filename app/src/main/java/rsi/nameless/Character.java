@@ -36,13 +36,13 @@ public class Character implements Serializable {
         speed = 10;
         maxHP = 15;
         currentHP = maxHP;
-        gold = 0;
+        gold = 10;
         level = 1;
         backpack = new ArrayList<>();
         currentXP = 0;
         maxXP = 10;
-        weapon = new Weapon ("No weapon", 0, 0, 0, 0, 0, 1, 0, R.drawable.empty);
-        armour = new Armour ("No armour", 0, 0, 0, 0, 0, 1, 0, R.drawable.empty);
+        weapon = new Weapon ("No weapon","No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.empty);
+        armour = new Armour ("No armour","No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.empty);
     }
 
     public Character (String name, int str, int def, int skl, int spd, int maxHP,
@@ -59,9 +59,9 @@ public class Character implements Serializable {
         this.maxXP = maxExp;
         this.level = level;
         this.backpack = new ArrayList<>();
-        this.weapon = new Weapon ("No weapon", 0, 0, 0, 0, 0, 1, 0, R.drawable.item1);
+        this.weapon = new Weapon ("No weapon","No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.item1);
         setWeapon(weapon);
-        this.armour = new Armour ("No armour", 0, 0, 0, 0, 0, 1, 0, R.drawable.item3);
+        this.armour = new Armour ("No armour","No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.item3);
         setArmour(armour);
         currentXP = 0;
     }

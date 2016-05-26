@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public class Item implements Serializable {
     private final String name;
+    private final String description;
     private final int strengthBonus;
     private final int defenseBonus;
     private final int skillBonus;
@@ -17,8 +18,9 @@ public class Item implements Serializable {
     private final ItemType type;
     private final int imgID;
 
-    public Item (String itemName, int strB, int defB, int sklB, int spdB, int HPB, int level, int price, ItemType type, int imgID) {
+    public Item (String itemName, String description, int strB, int defB, int sklB, int spdB, int HPB, int level, int price, ItemType type, int imgID) {
         name = itemName;
+        this.description = description;
         strengthBonus = strB;
         defenseBonus = defB;
         skillBonus = sklB;
@@ -82,6 +84,10 @@ public class Item implements Serializable {
      */
     public int getHPBonus() {
         return HPBonus;
+    }
+
+    public String getDescription(){
+        return description;
     }
 
     /**

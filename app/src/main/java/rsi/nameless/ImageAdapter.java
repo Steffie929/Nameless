@@ -58,6 +58,10 @@ public class ImageAdapter extends BaseAdapter {
         mThumbIds.remove(pos);
     }
 
+    public void clearItems(){
+        mThumbIds = new ArrayList<>();
+    }
+
     /**
      *  Deze functie veranderd plaatje uit mThumbIds
      * @param pos geeft aan waar je iets wilt veranderen
