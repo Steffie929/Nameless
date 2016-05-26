@@ -16,15 +16,15 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Shop Inventory"
         android:id="@+id/TV_SI"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentTop="true"
+        android:padding="5dp"/>
 
     <GridView
         android:id="@+id/ShopInventory"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:background="@color/White"
+        android:background="#55FFFFFF"
         android:columnWidth="80dp"
         android:numColumns="auto_fit"
         android:verticalSpacing="5dp"
@@ -41,20 +41,21 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Player Inventory"
         android:id="@+id/TV_PI"
+        android:padding="5dp"
         android:layout_below="@id/ShopInventory" />
 
     <GridView
         android:id="@+id/PlayerInventory"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:background="@color/White"
+        android:background="#55FFFFFF"
         android:columnWidth="80dp"
         android:numColumns="auto_fit"
         android:verticalSpacing="5dp"
         android:horizontalSpacing="5dp"
         android:stretchMode="columnWidth"
         android:gravity="center"
-        android:layout_below="@id/TV_PI"
+        android:layout_below="@+id/TV_PI"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -62,8 +63,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Exit Shop"
+        android:textSize="20dp"
         android:id="@+id/button"
+        android:padding="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/PlayerInventory" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Gold!"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:id="@+id/gold_counter"
+        android:layout_below="@+id/PlayerInventory"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/imageView"
+        android:src="@drawable/gold"
+        android:scaleType="centerInside"
+        android:padding="5dp"
+        android:layout_below="@+id/PlayerInventory"
+        android:layout_toLeftOf="@+id/gold_counter"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>
