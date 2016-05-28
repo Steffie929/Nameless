@@ -80,6 +80,38 @@ public class ShopActivity extends AppCompatActivity {
             }
         });
 
+        gridPlayer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, final int position, long id) {
+                Log.d("SHOP", "playergold: " + player.getGold() + " pos: " + position);
+                final Item clickedItem = player.getItemFromBackPack(position);
+                final AlertDialog.Builder helpBuilder = new AlertDialog.Builder(context);
+                helpBuilder.setTitle(clickedItem.getName());
+                helpBuilder.setMessage(clickedItem.getDescription()+"\n\nSell value: " + (clickedItem.getPrice()/2) + " gold.");
+
+                helpBuilder.setPositiveButton("Sell",
+                        new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int which) {
+                                player.setGold((clickedItem.getPrice()/2));
+                                player.removeItemFromBackpack(position);
+                                shop.getItemsInShop().add(clickedItem);
+                                updateGridviews();
+                            }
+                        });
+                helpBuilder.setNegativeButton("Back",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                //TODO back
+                            }
+                        });
+
+                // Remember, create doesn't show the dialog
+                AlertDialog helpDialog = helpBuilder.create();
+                helpDialog.show();
+
+            }
+        });
+
     }
 
     public void updateGridviews(){

@@ -175,6 +175,10 @@ public class Character implements Serializable {
         skill += boost;
     }
 
+    public void removeItemFromBackpack(int position){
+        backpack.remove(position);
+    }
+
     /**
      * @return the speed
      */
