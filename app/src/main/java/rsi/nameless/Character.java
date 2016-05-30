@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class Character implements Serializable {
     private final String name;
-    private final int imgID;
+    private int imgID;
     private int strength;
     private int defense;
     private int skill;
@@ -341,6 +341,15 @@ public class Character implements Serializable {
         else {
             currentHP += delta;
         }
+    }
+
+    public void changeCharIcon (int imgID){
+        if (weapon.getName().contains("Sword") && !armour.getName().contains("Shield"))
+            this.imgID = R.drawable.char_training_sword;
+        if (!weapon.getName().contains("Sword") && armour.getName().contains("Shield"))
+            this.imgID = R.drawable.char_shield;
+
+
     }
 
 }
