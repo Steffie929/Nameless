@@ -37,8 +37,12 @@ public class ShopActivity extends AppCompatActivity {
         gridPlayer = (GridView) findViewById(R.id.PlayerInventory);
         iaPlayer = new ImageAdapter(this);
 
+<<<<<<< HEAD
 
         a = 5;
+=======
+        a = 7;
+>>>>>>> origin/master
         updateGridviews();
 
         startAct();
