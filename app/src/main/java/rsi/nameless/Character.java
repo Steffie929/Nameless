@@ -45,6 +45,9 @@ public class Character implements Serializable {
         armour = new Armour ("No armour","No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.empty);
     }
 
+    /**
+     * Constructor with maximum customizability
+     */
     public Character (String name, int str, int def, int skl, int spd, int maxHP,
                       int gold, int maxExp, int level, ArrayList<Item> backpack, Weapon weapon, Armour armour, int imgID) {
         this.imgID = imgID;
@@ -59,10 +62,8 @@ public class Character implements Serializable {
         this.maxXP = maxExp;
         this.level = level;
         this.backpack = new ArrayList<>();
-        this.weapon = new Weapon ("No weapon","No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.item1);
-        setWeapon(weapon);
-        this.armour = new Armour ("No armour","No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.item3);
-        setArmour(armour);
+        this.weapon = weapon;
+        this.armour = armour;
         currentXP = 0;
     }
 
@@ -84,6 +85,22 @@ public class Character implements Serializable {
             currentXP -= maxXP;
             maxXP = level*10;
         }
+    }
+
+    /**
+     * Give the player bonus XP (ex: For winning a battle)
+     * Automatically checks if the player can level up afterwards
+     * @param bonusXP The extra XP the player gets
+     */
+    public void giveBonusXP(int bonusXP) {
+        currentXP += bonusXP;
+        if (currentXP > maxXP) {
+            levelUp();
+        }
+    }
+
+    public int getMaxXP() {
+        return maxXP;
     }
 
     /**

@@ -23,7 +23,6 @@ public class ImageAdapter extends BaseAdapter {
     }
 
 
-
     public int getCount() {
         return mThumbIds.size();
     }
@@ -33,7 +32,6 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     /**
-     *
      * @param position Naar welke positie kijk je
      * @return wat voor plaatje is dit
      */
