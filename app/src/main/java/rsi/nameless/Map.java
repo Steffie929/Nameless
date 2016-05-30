@@ -16,6 +16,7 @@ public class Map {
     private int level; //Level of the map
     private ItemLibrary items;
     private ArrayList<Character> mapEnemies;
+    private ArrayList<Character> mapBosses;
     private boolean battle; // is the player currently in a battle event
     private boolean shop; // is the player currently in a shop event
 
@@ -28,6 +29,7 @@ public class Map {
     public Map(int level, Character player, EnemyLibrary enemies, ItemLibrary items){
         this.level = level;
         mapEnemies = enemies.getEnemiesWithLevel(level);
+        mapBosses = enemies.getBossesWithLevel(level);
         this.items = items;
         this.events = new eventType[9];
         battle = false;
@@ -55,6 +57,11 @@ public class Map {
             int limit = mapEnemies.size();
             int randomInt = rand.nextInt(limit);
             return new Battle(player, mapEnemies.get(randomInt));
+        } else if (index == 9){
+            Random rand = new Random();
+            int limit = mapBosses.size();
+            int randomInt = rand.nextInt(limit);
+            return new Battle(player, mapBosses.get(randomInt));
         } else {
             return new EmptyEvent();
         }

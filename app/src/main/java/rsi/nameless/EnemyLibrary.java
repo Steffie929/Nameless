@@ -1,5 +1,6 @@
 package rsi.nameless;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 public class EnemyLibrary {
     private ItemLibrary itemLibrary;
     private ArrayList<Character> enemies;
+    private ArrayList<Character> bosses;
 
     public EnemyLibrary (ItemLibrary itemLibrary) {
         this.itemLibrary = itemLibrary;
@@ -22,13 +24,20 @@ public class EnemyLibrary {
         ArrayList<Item> snailBackpack = new ArrayList<>();
         snailBackpack.add(itemLibrary.getPotion(2));
         enemies.add(new Character ("Snail", 8, 9, 9, 7, 9, 3, 4, 1, snailBackpack, itemLibrary.getWeapon(0), itemLibrary.getArmour(1), R.drawable.snail));
+    }
 
+    private void fillBossList() {
         ArrayList<Item> wolfBackpack = new ArrayList<>();
-        enemies.add(new Character ("Wolf", 11, 10, 10, 10, 15, 5, 10, 2, wolfBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.wolf));
+        enemies.add(new Character ("Wolf", 11, 10, 10, 10, 15, 5, 10, 1, wolfBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.wolf));
+
     }
 
     public Character getEnemy (int index) {
         return enemies.get(index);
+    }
+
+    public Character getBoss (int index) {
+        return bosses.get(index);
     }
 
     public int getNrEnemies(){
@@ -47,6 +56,18 @@ public class EnemyLibrary {
             Character enemy = enemies.get(i);
             if (enemy.getLevel() == level) {
                 result.add(enemy);
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<Character> getBossesWithLevel (int level) {
+        ArrayList<Character> result = new ArrayList<>();
+        int size = bosses.size();
+        for (int i = 0; i < size; i++) {
+            Character boss = bosses.get(i);
+            if (boss.getLevel() == level) {
+                result.add(boss);
             }
         }
         return result;
