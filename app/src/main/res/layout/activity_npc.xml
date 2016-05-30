@@ -15,13 +15,15 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/imageViewNPC"
         android:src="@drawable/bunny"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#22FFFFFF"
-        android:layout_above="@+id/option1"
+        android:background="#44FFFFFF"
+        android:id="@+id/textNPC"
+        android:textSize="18dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="false" />
 
@@ -31,6 +33,7 @@
         android:layout_height="wrap_content"
         android:text="New Button"
         android:id="@+id/option1"
+        android:onClick="option1"
         android:layout_above="@+id/option2" />
 
     <Button
@@ -38,6 +41,7 @@
         android:layout_height="wrap_content"
         android:text="New Button"
         android:id="@+id/option2"
+        android:onClick="option2"
         android:layout_above="@+id/option3" />
 
     <Button
@@ -45,6 +49,7 @@
         android:layout_height="wrap_content"
         android:text="New Button"
         android:id="@+id/option3"
+        android:onClick="option3"
         android:layout_alignParentBottom="true" />
 
 

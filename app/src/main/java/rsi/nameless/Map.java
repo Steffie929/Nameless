@@ -19,17 +19,16 @@ public class Map {
     private Character boss;
     private boolean battle; // is the player currently in a battle event
     private boolean shop; // is the player currently in a shop event
-
-    private float[] pathX; //X-coordinates of points 1,..,9 on the map
-    private float[] pathY; // Y-coordinates of points 1,..,9 on the map
+    private Conversation conv; //The starting conversation of the map
 
     /**
      * Basic constructor
      */
-    public Map(int level, Character player, EnemyLibrary enemies, ItemLibrary items){
+    public Map(int level, Character player, EnemyLibrary enemies, ItemLibrary items, ConversationLibrary convLib){
         this.level = level;
         mapEnemies = enemies.getEnemiesWithLevel(level);
         boss = enemies.getBoss(level-1);
+        conv = convLib.getConversation(level-1);
         this.items = items;
         this.events = new eventType[9];
         battle = false;
@@ -100,13 +99,6 @@ public class Map {
         }
     }
 
-    /**
-     * Go back to the previous point
-     */
-    public void goBack() {
-        currentPoint = previousPoint;
-        previousPoint = 8;
-    }
 
     /**
      * Getter for battle
@@ -143,6 +135,10 @@ public class Map {
      */
     public Event getEvent(int index) {
         return generateEvent(index);
+    }
+
+    public Conversation getConversation(){
+        return conv;
     }
     
 }

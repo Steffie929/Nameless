@@ -31,6 +31,9 @@ public class EnemyLibrary {
     private void fillBossList() {
         ArrayList<Item> wolfBackpack = new ArrayList<>();
         bosses.add(new Character ("Wolf", 11, 10, 10, 10, 15, 5, 10, 1, wolfBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.wolf));
+
+        ArrayList<Item> endBossBackpack = new ArrayList<>();
+        bosses.add(new Character ("Stranger", 11, 10, 10, 10, 15, 5, 10, 1, wolfBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.stranger_battle));
     }
 
     public Character getEnemy (int index) {
