@@ -387,4 +387,23 @@ public class Battle extends Event implements Serializable{
         player.changeSpeed(-boosts[3]);
         player.changeMaxHP(-boosts[4]);
     }
+
+    public void getRewards() {
+        ArrayList<Item> possibleRewards = enemy.getBackpack();
+        Weapon enemyWeapon = enemy.getWeapon();
+        if (enemyWeapon != null && !enemyWeapon.getName().equals("No weapon")) {
+            possibleRewards.add(enemyWeapon);
+        }
+        Armour enemyArmour = enemy.getArmour();
+        if (enemyArmour != null && !enemyArmour.getName().equals("No armour")) {
+            possibleRewards.add(enemyArmour);
+        }
+        int nrOfRewards = random.nextInt(3) + 1;
+        if (nrOfRewards > possibleRewards.size()) {
+            nrOfRewards = possibleRewards.size();
+        }
+        for (int i = 0; i < nrOfRewards; i++) {
+            player.addItemToBackpack(possibleRewards.get(i));
+        }
+    }
 }

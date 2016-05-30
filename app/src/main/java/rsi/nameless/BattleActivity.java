@@ -74,7 +74,8 @@ public class BattleActivity extends AppCompatActivity {
         finish();
     }
 
-    private void getRewards(){
+    private void getRewards() {
+        battle.getRewards();
         battle.resetBoosts();
         AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
         helpBuilder.setTitle("Rewards");
