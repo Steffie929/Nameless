@@ -69,6 +69,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:gravity="center"
+        android:onClick="exitShop"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/PlayerInventory" />
