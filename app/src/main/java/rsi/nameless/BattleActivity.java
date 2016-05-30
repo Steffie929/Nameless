@@ -89,9 +89,8 @@ public class BattleActivity extends AppCompatActivity {
                         finish();
                     }
                 });
-
-        // Remember, create doesn't show the dialog
         AlertDialog helpDialog = helpBuilder.create();
+        helpDialog.setCancelable(false);
         helpDialog.show();
 
     }

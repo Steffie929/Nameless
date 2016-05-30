@@ -1,5 +1,7 @@
 package rsi.nameless;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -58,6 +60,20 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
             if (resultCode == RESULT_OK) {
                 Character player = (Character) data.getSerializableExtra("Character_Key");
                 map.setPlayer(player);
+                if (player.getCurrentHP() <= 0) {
+                    AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
+                    helpBuilder.setTitle("You died");
+                    helpBuilder.setMessage("");
+                    helpBuilder.setPositiveButton("Return to Main Menu",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            });
+                    AlertDialog helpDialog = helpBuilder.create();
+                    helpDialog.setCancelable(false);
+                    helpDialog.show();
+                }
             }
         }
     }

@@ -4,6 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+/**
+ * Used to display conversations
+ */
 public class npcActivity extends AppCompatActivity {
 
     @Override
