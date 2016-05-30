@@ -21,7 +21,10 @@ public class EnemyLibrary {
 
         ArrayList<Item> snailBackpack = new ArrayList<>();
         snailBackpack.add(itemLibrary.getPotion(2));
-        enemies.add(new Character ("Snail", 8, 9, 9, 7, 9, 3, 4, 1, snailBackpack, itemLibrary.getWeapon(0), itemLibrary.getArmour(1), R.drawable.snail2));
+        enemies.add(new Character ("Snail", 8, 9, 9, 7, 9, 3, 4, 1, snailBackpack, itemLibrary.getWeapon(0), itemLibrary.getArmour(1), R.drawable.snail));
+
+        ArrayList<Item> wolfBackpack = new ArrayList<>();
+        enemies.add(new Character ("Wolf", 11, 10, 10, 10, 15, 5, 10, 2, wolfBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.wolf));
     }
 
     public Character getEnemy (int index) {
