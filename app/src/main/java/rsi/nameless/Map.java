@@ -71,12 +71,11 @@ public class Map {
         Random rand = new Random();
         int rdNR = rand.nextInt(3);
         events[rdNR+3] = eventType.SHOP;
-        for(int i=1; i<8; i++){
+        for(int i=0; i<8; i++){
             if(events[i] == null){
                 events[i] = eventType.BATTLE;
             }
         }
-        events[0] = eventType.EMPTY;
         events[8] = eventType.EMPTY;
     }
 

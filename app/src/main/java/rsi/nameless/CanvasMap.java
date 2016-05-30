@@ -193,6 +193,11 @@ public class CanvasMap extends View  {
         Drawable d = ResourcesCompat.getDrawable(getResources(), R.drawable.achtergrond1, null);
         d.setBounds(0, 0, mapWidth, mapHeight);
         d.draw(canvas);
+
+        d = ResourcesCompat.getDrawable(getResources(), R.drawable.backpack, null);
+        d.setBounds(mapWidth-150, mapHeight-150,mapWidth,mapHeight);
+        d.draw(canvas);
+
     }
 
     public float[] getPathX(){
