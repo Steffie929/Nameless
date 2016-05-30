@@ -28,6 +28,7 @@ public class ItemLibrary implements Serializable{
         weapons.add( new Weapon ("Stick", "A simple stick, it is better than nothing.", 1, 0, 1, 0, 0, 1, 0, R.drawable.stick) );
         weapons.add( new Weapon ("Training Sword", "A simple and worn training sword. Not very sharp, but it does more damage than a stick.", 2, -1, 1, 0, 0, 1, 5, R.drawable.training_sword) );
         weapons.add( new Weapon ("Bunny Teeth","A bunny's weapon of choice." , 1, 0, 0, 0, 0, 1, 2, R.drawable.bunny_teeth) );
+        weapons.add( new Weapon ("Wolf Teeth","A wolf's weapon of choice." , 1, 0, 0, 1, 0, 1, 3, R.drawable.bunny_teeth) );
     }
 
     private void addPotions () {

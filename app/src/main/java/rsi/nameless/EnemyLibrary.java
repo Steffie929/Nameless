@@ -30,7 +30,6 @@ public class EnemyLibrary {
     private void fillBossList() {
         ArrayList<Item> wolfBackpack = new ArrayList<>();
         enemies.add(new Character ("Wolf", 11, 10, 10, 10, 15, 5, 10, 1, wolfBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.wolf));
-
     }
 
     public Character getEnemy (int index) {
