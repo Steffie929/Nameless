@@ -10,8 +10,6 @@ public class MainModel {
     private EnemyLibrary enemies;
     private ItemLibrary items;
     private ConversationLibrary convLib;
-    private float[] pathX;
-    private float[] pathY;
 
     public MainModel(String playerName){
         this.items = new ItemLibrary();
