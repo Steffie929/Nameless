@@ -15,6 +15,7 @@ public class EnemyLibrary {
         this.itemLibrary = itemLibrary;
         enemies = new ArrayList<>();
         fillEnemyList();
+        fillBossList();
     }
 
     private void fillEnemyList() { //Name, str, def, skl, spd, maxHP, gold, maxXP, level, backpack, weapon
