@@ -9,8 +9,6 @@ public class MainModel {
     private Map currentMap;
     private EnemyLibrary enemies;
     private ItemLibrary items;
-    private float[] pathX;
-    private float[] pathY;
 
     public MainModel(String playerName){
         this.items = new ItemLibrary();

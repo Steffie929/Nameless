@@ -79,7 +79,7 @@ public class BattleActivity extends AppCompatActivity {
         battle.resetBoosts();
         AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
         helpBuilder.setTitle("Rewards");
-        helpBuilder.setMessage("You won:\n\t-Lots of items\n\t-Plenty of XP");
+        helpBuilder.setMessage(battle.getRewardString());
         helpBuilder.setPositiveButton("Ok",
                 new DialogInterface.OnClickListener() {
 
