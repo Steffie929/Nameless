@@ -109,9 +109,11 @@ public class CanvasMap extends View  {
 
         for(int i=0; i<8;i++){
             Event event = map.getEvent(i);
-            if(event instanceof Battle){
+            if(event instanceof Battle && i != 0){
                 d = ResourcesCompat.getDrawable(getResources(), R.drawable.icon_battle, null);
                 drawIcon(d, i);
+            }
+            if(event instanceof Battle && i == 0){
             }
             else if(event instanceof Shop){
                 d = ResourcesCompat.getDrawable(getResources(), R.drawable.shop, null);
