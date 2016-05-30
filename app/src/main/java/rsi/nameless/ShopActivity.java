@@ -21,6 +21,7 @@ public class ShopActivity extends AppCompatActivity {
     private Context context;
     private GridView gridShop, gridPlayer;
     private ImageAdapter iaShop, iaPlayer;
+    int a;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class ShopActivity extends AppCompatActivity {
         gridPlayer = (GridView) findViewById(R.id.PlayerInventory);
         iaPlayer = new ImageAdapter(this);
 
+        a = 7;
         updateGridviews();
 
         startAct();
