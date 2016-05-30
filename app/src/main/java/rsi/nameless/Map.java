@@ -57,7 +57,7 @@ public class Map {
             int limit = mapEnemies.size();
             int randomInt = rand.nextInt(limit);
             return new Battle(player, mapEnemies.get(randomInt));
-        } else if (index == 9){
+        } else if (index == 0){
             Random rand = new Random();
             int limit = mapBosses.size();
             int randomInt = rand.nextInt(limit);
