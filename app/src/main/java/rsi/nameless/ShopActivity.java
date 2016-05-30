@@ -21,6 +21,7 @@ public class ShopActivity extends AppCompatActivity {
     private Context context;
     private GridView gridShop, gridPlayer;
     private ImageAdapter iaShop, iaPlayer;
+    int a;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,8 @@ public class ShopActivity extends AppCompatActivity {
         gridPlayer = (GridView) findViewById(R.id.PlayerInventory);
         iaPlayer = new ImageAdapter(this);
 
+
+        a = 5;
         updateGridviews();
 
         startAct();
@@ -55,13 +58,14 @@ public class ShopActivity extends AppCompatActivity {
 
                             public void onClick(DialogInterface dialog, int which) {
                                 if(player.getGold()< clickedItem.getPrice()){
-
+                                    extraMessage("You don't have enough gold");
                                 }
                                 else{
-                                    int dummy = player.addItemToBackpack(clickedItem);
-                                    player.setGold(0-clickedItem.getPrice());
-                                    boolean a = shop.getItemsInShop().remove(clickedItem);
-                                    iaShop.removeItem(position);
+                                    if(shop.getItemsInShop().remove(clickedItem)){
+                                        player.addItemToBackpack(clickedItem);
+                                        player.setGold(0-clickedItem.getPrice());
+                                        iaShop.removeItem(position);
+                                    }
                                     updateGridviews();
                                 }
                             }
@@ -114,6 +118,20 @@ public class ShopActivity extends AppCompatActivity {
 
     }
 
+    public void extraMessage(String s){
+        final AlertDialog.Builder helpBuilder = new AlertDialog.Builder(context);
+        helpBuilder.setTitle("");
+        helpBuilder.setMessage(s);
+
+        helpBuilder.setPositiveButton("ok",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        AlertDialog helpDialog = helpBuilder.create();
+        helpDialog.show();
+    }
+
     public void updateGridviews(){
         iaShop.clearItems();
         ArrayList<Item> items = shop.getItemsInShop();
@@ -131,7 +149,7 @@ public class ShopActivity extends AppCompatActivity {
         playerGold.setText("" + player.getGold());
     }
 
-    public void exitShop(){
+    public void exitShop(View v){
         finish();
     }
 

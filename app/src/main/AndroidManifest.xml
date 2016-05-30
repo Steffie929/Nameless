@@ -18,6 +18,7 @@
         <activity android:name=".MapActivity" />
         <activity android:name=".BattleActivity" />
         <activity android:name=".ShopActivity" />
+        <activity android:name=".npcActivity"></activity>
     </application>
 
 </manifest>
