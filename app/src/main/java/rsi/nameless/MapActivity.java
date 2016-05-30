@@ -31,7 +31,9 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         drawView = (CanvasMap) findViewById(R.id.view);
         map = m.getCurrentMap();
         drawView.setMap(map);
-        this.gDetector = new GestureDetectorCompat(this,this);
+
+
+        //this.gDetector = new GestureDetectorCompat(this,this);
     }
 
     public void startBattleActivity(Battle battle){
