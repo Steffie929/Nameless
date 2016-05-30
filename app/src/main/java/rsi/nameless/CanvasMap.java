@@ -114,6 +114,8 @@ public class CanvasMap extends View  {
                 drawIcon(d, i);
             }
             if(event instanceof Battle && i == 0){
+                d = ResourcesCompat.getDrawable(getResources(), R.drawable.icon_battle, null);
+                drawBigIcon(d, i);
             }
             else if(event instanceof Shop){
                 d = ResourcesCompat.getDrawable(getResources(), R.drawable.shop, null);
