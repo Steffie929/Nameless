@@ -108,6 +108,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
             currentShop.setPlayer(map.getPlayer());
             startShopActivity(currentShop);
         }
+        map.setEvent(map.getCurrentPoint(), Map.eventType.EMPTY);
         return false;
     }
 

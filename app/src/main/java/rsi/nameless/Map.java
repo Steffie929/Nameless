@@ -34,7 +34,7 @@ public class Map {
         battle = false;
         shop = false;
         this.player = player;
-        generateEvents();
+        generateEventTypes();
         currentPoint = 8;
         previousPoint = 8;
     }
@@ -51,7 +51,7 @@ public class Map {
     private Event generateEvent(int index) {
         if (events[index] == eventType.SHOP) {
             return new Shop(level, items);
-        } else if (events[index] == eventType.BATTLE) {
+        } else if (events[index] == eventType.BATTLE && index!=0) {
             Random rand = new Random();
             int limit = mapEnemies.size();
             int randomInt = rand.nextInt(limit);
@@ -66,7 +66,7 @@ public class Map {
     /**
      * Fills the world with eventTypes (Shop, Battles, etc)
      */
-    private void generateEvents(){
+    private void generateEventTypes(){
         Random rand = new Random();
         int rdNR = rand.nextInt(3);
         events[rdNR+3] = eventType.SHOP;
@@ -135,6 +135,10 @@ public class Map {
      */
     public Event getEvent(int index) {
         return generateEvent(index);
+    }
+
+    public void setEvent(int index, eventType type){
+        this.events[index] = type;
     }
 
     public Conversation getConversation(){
