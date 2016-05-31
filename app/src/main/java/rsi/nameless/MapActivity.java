@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.Toast;
@@ -90,15 +91,33 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         }
     }
 
+    public boolean openBackpack(float x, float y){
+        Log.d("DEBUG", "BACKPACK?       width: " + drawView.getWidth() + "\theight " + drawView.getHeight());
+        if(Math.abs(x-drawView.getWidth()) < 200 && Math.abs(y-drawView.getHeight()) < 400){
+            return true;
+        }
+        else
+            return false;
+    }
+
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
         float x,y;
         x = e.getX()-40;
         y = e.getY()-250;
-        //Log.d("DEBUG", "MapActivity, onSingleTap\n\t\tclicked on:\tgetX() " + x + " " + y);
+        Log.d("DEBUG", "MapActivity, onSingleTap\n\t\tclicked on:\tgetX() " + x + " " + y);
+
+        if(openBackpack(x,y)){
+            Intent intent = new Intent(this, BackpackActivity.class);
+            intent.putExtra("CURRENT_PLAYER", map.getPlayer());
+            startActivity(intent);
+            return false;
+        }
+
 
         Move move = new Move(map, drawView, x, y);
         drawView.invalidate();
+
         if(map.inBattle()){
             Battle currentBattle = (Battle) map.getEvent(map.getCurrentPoint());
             startBattleActivity(currentBattle);
