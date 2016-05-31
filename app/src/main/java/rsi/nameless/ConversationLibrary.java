@@ -71,7 +71,7 @@ public class ConversationLibrary {
 
         options = new String[3];
         Link[] linksC = {b1,b2,b3};
-        text = "*Sigh* Let's skip the pleasantries. Have you heard about any unusual events recently\n?"
+        text = "*Sigh* Let's skip the pleasantries. Have you heard about any unusual events recently?\n"
                 + "Unusually aggressive wildlife, natural disasters or something similar? ";
         options[0] = "Well, now that you mention it the animals here have become really aggressive lately.";
         options[1] = "No, things are pretty much the same as always.";

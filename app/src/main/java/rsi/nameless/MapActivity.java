@@ -18,8 +18,10 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
     private GestureDetectorCompat gDetector;
     private Map map;
 
-    private final int BATTLE_KEY = 7;
     private final int SHOP_KEY = 4;
+    private final int BATTLE_KEY = 7;
+    private final int CONVERSATION_KEY = 42;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         Intent intent = new Intent(this, npcActivity.class);
         intent.putExtra("CURRENT_CONVERSATION", conv);
         intent.putExtra("CURRENT_PLAYER", map.getPlayer());
-        startActivity(intent);
+        startActivityForResult(intent, CONVERSATION_KEY);
         drawView.invalidate();
     }
 
@@ -69,7 +71,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
      * @param data the Intent that was sent back by the other Activity
      */
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
-        if (requestCode == BATTLE_KEY) {
+        if (requestCode == BATTLE_KEY || requestCode == CONVERSATION_KEY) {
             if (resultCode == RESULT_OK) {
                 Character player = (Character) data.getSerializableExtra("Character_Key");
                 map.setPlayer(player);

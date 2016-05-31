@@ -17,7 +17,7 @@ import android.widget.TextView;
 /**
  * Used to display conversations
  */
-public class npcActivity extends AppCompatActivity{
+public class npcActivity extends AppCompatActivity {
     private ImageView iV;
     private Button o1,o2,o3;
     private TextView tV;
@@ -26,8 +26,9 @@ public class npcActivity extends AppCompatActivity{
     private Battle possibleBattle;
     private GestureDetectorCompat gDetector;
     private Character player;
-    private final int BATTLE_KEY = 7;
     private boolean end;
+
+    private final int BATTLE_KEY = 7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class npcActivity extends AppCompatActivity{
         update();
     }
 
-    public void update(){
+    public void update() {
         Log.d("NPC", currentLink.getOption(0));
         o1.setText(currentLink.getOption(0));
         o2.setText(currentLink.getOption(1));
@@ -57,12 +58,12 @@ public class npcActivity extends AppCompatActivity{
         tV.setText(currentLink.getText());
     }
 
-    public void option1(View v){
+    public void option1(View v) {
         if(o1.getVisibility() ==View.GONE)
             return;
 
         currentLink = currentLink.getNext(0);
-        if(currentLink.isLast()){
+        if(currentLink.isLast()) {
             tV.setText(currentLink.getText());
             o1.setVisibility(View.GONE);
             o2.setVisibility(View.GONE);
@@ -73,12 +74,12 @@ public class npcActivity extends AppCompatActivity{
             update();
     }
 
-    public void option2(View v){
+    public void option2(View v) {
         if(o2.getVisibility() ==View.GONE)
             return;
 
         currentLink = currentLink.getNext(1);
-        if(currentLink.isLast()){
+        if(currentLink.isLast()) {
             tV.setText(currentLink.getText());
             o1.setVisibility(View.GONE);
             o2.setVisibility(View.GONE);
@@ -89,12 +90,12 @@ public class npcActivity extends AppCompatActivity{
             update();
     }
 
-    public void option3(View v){
+    public void option3(View v) {
         if(o3.getVisibility() ==View.GONE)
             return;
 
         currentLink = currentLink.getNext(2);
-        if(currentLink.isLast()){
+        if(currentLink.isLast()) {
             tV.setText(currentLink.getText());
             o1.setVisibility(View.GONE);
             o2.setVisibility(View.GONE);
@@ -105,34 +106,48 @@ public class npcActivity extends AppCompatActivity{
             update();
     }
 
-    public void endActivity(){
-        if(currentLink.isBattle()){
+    public void endActivity() {
+        if(currentLink.isBattle()) {
             possibleBattle = new Battle(player, conversation.getEnemy());
             Intent intent = new Intent(this, BattleActivity.class);
-            intent.putExtra("CURRENT_BATTLE", possibleBattle);
-            startActivityForResult(intent, BATTLE_KEY);
-            finish();
+            intent.putExtra("CURRENT_BATTLE", possibleBattle);      // finish() niet nodig, gebeurt in methode onActivityResult(int, int, Intent)
+            startActivityForResult(intent, BATTLE_KEY);             // Niet hier alsnog finish() neerzetten
         }
-        else if(currentLink.isReward()){
+        else if(currentLink.isReward()) {
             player.setGold(player.getLevel()*5);
+            Intent returnIntent = new Intent();
+            setResult(RESULT_CANCELED, returnIntent);
             finish();
         }
-        else{
+        else {
+            Intent returnIntent = new Intent();
+            setResult(RESULT_CANCELED, returnIntent);
             finish();
         }
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event){
+    public boolean onTouchEvent(MotionEvent event) {
 
         int action = MotionEventCompat.getActionMasked(event);
-        if(action == MotionEvent.ACTION_UP && end){
+        if(action == MotionEvent.ACTION_UP && end) {
             endActivity();
         }
 
         return false;
     }
 
+    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+        if (requestCode == BATTLE_KEY) {
+            if (resultCode == RESULT_OK) {
+                Character player = (Character) data.getSerializableExtra("Character_Key");
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("Character_Key", player);
+                setResult(RESULT_OK, returnIntent);
+                finish();
+            }
+        }
+    }
 
 
 
