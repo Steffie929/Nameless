@@ -150,4 +150,8 @@ public class BattleActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
 }

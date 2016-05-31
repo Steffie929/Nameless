@@ -149,6 +149,8 @@ public class npcActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+    }
 
 }
