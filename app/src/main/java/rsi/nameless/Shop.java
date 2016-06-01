@@ -75,43 +75,6 @@ public class Shop extends Event implements Serializable{
         this.player = player;
     }
 
-    public void enterShop(Character c){
-        player = c;
-        boolean done = false;
-        Scanner scanner = new Scanner(System.in);
-
-        while(!done){
-            System.out.println("What item would you like to purchase?, to exit the shop enter 'Exit'.");
-            String s = scanner.nextLine();
-
-            if(s.equalsIgnoreCase("exit"))
-                return;
-
-            for(int i=0; i < ItemsInShop.size();i++){
-                if(s.equalsIgnoreCase(ItemsInShop.get(i).getName())){
-                    tryToBuy(i);
-                    break;
-                }
-            }
-            System.out.println("We couldn't find the item you were looking for, please try again.\n");
-        }
-        scanner.close();
-    }
-
-    public boolean tryToBuy(int index){
-        Item item = ItemsInShop.get(index);
-        int price = item.getPrice();
-        if(player.getGold() < price){
-            System.out.println("You do not have enough gold to buy this item");
-            return false;
-        }
-
-        player.addItemToBackpack(item);
-        player.setGold(price);
-        System.out.println("Succesful purchase");
-        return false;
-    }
-
     public int getNrOfItems(){
         return ItemsInShop.size();
     }

@@ -6,17 +6,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-
 import java.util.ArrayList;
 
 /**
- * Created by Stéphanie on 23-4-2016.
+ * Created by Rick Koenders on 1-6-2016.
  */
-public class ImageAdapter extends BaseAdapter {
+public class RowAdapter extends BaseAdapter {
     private ArrayList<Integer> mThumbIds;
     private Context mContext;
 
-    public ImageAdapter(Context c) {
+    public RowAdapter(Context c) {
         mContext = c;
         mThumbIds = new ArrayList<>();
     }
@@ -65,7 +64,19 @@ public class ImageAdapter extends BaseAdapter {
      * @param c geeft aan welk plaatje je wilt gebruiken
      */
     public void setImage(int pos, int c){
-        mThumbIds.add(c, pos);
+        switch(c) {
+            case 1:
+                mThumbIds.add(c, pos);
+                break;
+            case 2:
+                mThumbIds.add(c, pos);
+                break;
+            case 3:
+                mThumbIds.add(c, pos);
+                break;
+            case 4:
+                mThumbIds.add(c, pos);
+        }
     }
 
     // create a new ImageView for each item referenced by the Adapter

@@ -91,6 +91,12 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
                 }
             }
         }
+        if (requestCode == SHOP_KEY) {
+            if (resultCode == RESULT_OK) {
+                Character player = (Character) data.getSerializableExtra("Character_Key");
+                map.setPlayer(player);
+            }
+        }
     }
 
     public boolean openBackpack(float x, float y){
@@ -165,6 +171,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         //ignore
+        //TODO Add fling/swipe possibility
         return false;
     }
 }

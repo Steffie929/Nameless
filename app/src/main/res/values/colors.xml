@@ -8,4 +8,10 @@
     <color name="Black">#000000</color>
     <color name="Grey">#CCCCCC</color>
     <color name="ShopYellow">#F6B73D</color>
+    <color name="DayDreamBlue">#09738A</color>
+    <color name="HighSkyBlue">#107FC9</color>
+    <color name="AfternoonBlue">#0E4EAD</color>
+    <color name="EveningBlue">#0B108C</color>
+    <color name="MoonviewBlue">#0C0F66</color>
+    <color name="Hazel">#C09F7C</color>
 </resources>
