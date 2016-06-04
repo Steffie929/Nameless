@@ -108,6 +108,16 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
             return false;
     }
 
+    public boolean openStatScreen(float x, float y){
+        Log.d("DEBUG", "StatScreen?       width: " + drawView.getWidth() + "\theight " + drawView.getHeight());
+        if(x < 200 && Math.abs(y-drawView.getHeight()) < 400){
+            return true;
+        }
+        else
+            return false;
+
+    }
+
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
         float x,y;
@@ -117,6 +127,13 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
 
         if(openBackpack(x,y)){
             Intent intent = new Intent(this, BackpackActivity.class);
+            intent.putExtra("CURRENT_PLAYER", map.getPlayer());
+            startActivity(intent);
+            return false;
+        }
+
+        if(openStatScreen(x,y)){
+            Intent intent = new Intent(this, CharacterScreen.class);
             intent.putExtra("CURRENT_PLAYER", map.getPlayer());
             startActivity(intent);
             return false;
