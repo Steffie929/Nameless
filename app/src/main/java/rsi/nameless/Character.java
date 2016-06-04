@@ -241,6 +241,10 @@ public class Character implements Serializable {
         return weapon;
     }
 
+    public int getCurrentXP(){
+        return currentXP;
+    }
+
     /**
      * Change your current weapon to a weapon in your backpack
      * @param index The index of the weapon in your backpack

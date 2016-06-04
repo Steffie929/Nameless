@@ -54,14 +54,6 @@
                 android:textSize="20dp"
                 android:id="@+id/armorEquipped"/>
         </TableRow>
-
-        <TableRow>
-            <TextView
-                android:text="Equipped shield"
-                android:textSize="20dp"
-                android:id="@+id/shieldEquipped"/>
-
-        </TableRow>
     </TableLayout>
 
 
