@@ -8,16 +8,17 @@ public class Move {
     private CanvasMap sc;
     private float clX;
     private float clY;
+    private boolean succes;
 
     public Move(Map map, CanvasMap sc, float clickX, float clickY){
         this.map = map;
         this.sc = sc;
         clX = clickX;
         clY = clickY;
-        tryMove();
+        succes = false;
     }
 
-    public void tryMove(){
+    public boolean tryMove(){
         int currentPoint = map.getCurrentPoint();
 
         switch(currentPoint){
@@ -49,11 +50,13 @@ public class Move {
                 tryPoint(7);
                 break;
         }
+        return succes;
     }
 
     public void tryPoint(int nextP){
         if(Math.abs(clX-sc.getPathX()[nextP]) <= 150 && Math.abs(clY-sc.getPathY()[nextP]) <= 150) {
             map.setCurrentPoint(nextP);
+            succes = true;
         }
     }
 }

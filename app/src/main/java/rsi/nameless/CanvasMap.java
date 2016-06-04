@@ -29,6 +29,7 @@ public class CanvasMap extends View  {
     private Paint paint;
     private Canvas canvas;
     private Map map; //A class that keeps track of the current state of the map. (location player, location and type of events etc.)
+    private Drawable playerIcon;
 
 
     public CanvasMap(Context context, AttributeSet attrs, int defStyle) {
@@ -59,6 +60,7 @@ public class CanvasMap extends View  {
     
     public void setMap(Map map){
         this.map =map;
+        playerIcon = ResourcesCompat.getDrawable(getResources(), this.map.getPlayer().getImgID(), null);
     }
 
 
@@ -100,6 +102,7 @@ public class CanvasMap extends View  {
         drawBackground();
         drawRoads();
         drawEventIcons();
+        drawPlayerIcon(map.getCurrentPoint());
         
     }
 
@@ -122,9 +125,6 @@ public class CanvasMap extends View  {
                 drawBigIcon(d, i);
             }
         }
-
-        d = ResourcesCompat.getDrawable(getResources(), R.drawable.char_icon, null);
-        drawPlayerIcon(d, map.getCurrentPoint());
     }
 
 
@@ -162,13 +162,13 @@ public class CanvasMap extends View  {
      * @param d The icon to draw
      * @param p The location on the map
      */
-    public void drawPlayerIcon(Drawable d, int p){
+    public void drawPlayerIcon(int p){
         int x,y;
         x= Math.round(pathX[p]);
         y = Math.round(pathY[p]);
         //d.setBounds(left, top, right, bottom);
-        d.setBounds(x-50, y-75, x+50, y+75);//100 breed 150 hoog
-        d.draw(canvas);
+        playerIcon.setBounds(x-50, y-75, x+50, y+75);//100 breed 150 hoog
+        playerIcon.draw(canvas);
     }
 
     public void drawRoads(){

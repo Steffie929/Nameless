@@ -124,6 +124,10 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
 
 
         Move move = new Move(map, drawView, x, y);
+        if(!move.tryMove()){
+            return false;
+        }
+
         drawView.invalidate();
 
         if(map.inBattle()){
