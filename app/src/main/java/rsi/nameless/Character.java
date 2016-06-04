@@ -86,6 +86,10 @@ public class Character implements Serializable {
             maxXP = level*10;
         }
     }
+    public void giveBonusXP(int delta){
+        currentXP += delta;
+        levelUp();
+    }
 
     /**
      * @return true if the backpack contain a potion
@@ -363,4 +367,10 @@ public class Character implements Serializable {
         else if (!weapon.getName().contains("Sword") && !armour.getName().contains("Shield"))
             this.imgID = R.drawable.char_icon;
     }
+
+    public int getMaxXP(){
+        return maxXP;
+    }
+
+
 }
