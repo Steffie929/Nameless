@@ -78,7 +78,7 @@ public class BackpackActivity extends AppCompatActivity {
             row.addView(image);
 
             TextView text = new TextView(this);
-            text.setText(getItemInformation(item));
+            text.setText(getItemInformation(item, false));
             text.setTextColor(Color.WHITE);
             text.setPadding(5, 5, 5, 5);
             text.setOnClickListener(new View.OnClickListener() {
@@ -90,20 +90,20 @@ public class BackpackActivity extends AppCompatActivity {
                     String message;
                     if (itemType == ItemType.POTION) {
                         positiveAction = "Use";
-                        message = backpackactivity.getItemInformation(item);
+                        message = backpackactivity.getItemInformation(item, true);
                     }  else {
                         positiveAction = "Equip";
-                        message = "Equid the following item:\n" + backpackactivity.getItemInformation(item);
+                        message = "Equid the following item:\n" + backpackactivity.getItemInformation(item, true);
                         message += "\n\n";
                         if (itemType == ItemType.WEAPON) {
                             if (!player.getWeapon().getName().equals("No weapon"))
-                                message += "Current weapon:\n" + backpackactivity.getItemInformation(player.getWeapon());
+                                message += "Current weapon:\n" + backpackactivity.getItemInformation(player.getWeapon(), true);
                             else {
                                 message += "You currently have no weapon!";
                             }
                         } else if (itemType == ItemType.ARMOUR){
                             if (!player.getArmour().getName().equals("No armour"))
-                                message += "Current armour:\n" + backpackactivity.getItemInformation(player.getArmour());
+                                message += "Current armour:\n" + backpackactivity.getItemInformation(player.getArmour(), true);
                             else {
                                 message += "You currently have no armour!";
                             }
@@ -186,10 +186,13 @@ public class BackpackActivity extends AppCompatActivity {
      * Makes a String with all information about the Item neatly organized
      * @return The String that contains all information about the Item
      */
-    public String getItemInformation(Item item) {
+    public String getItemInformation(Item item, boolean removeOneTabFromStrength) {
         String result = new String("");
         result += item.getName() + "\n";
         int strTabNumber = getTabNumber(item.getStrengthBonus(), 12);
+        if (removeOneTabFromStrength) {
+            strTabNumber--;
+        }
         int defTabNumber = getTabNumber(item.getDefenseBonus(), 12);
         int sklTabNumber = getTabNumber(item.getSkillBonus(), 15);
         result += "Strength: " + item.getStrengthBonus() + getTabs(strTabNumber) + "Speed: " + item.getSpeedBonus() + "\n";
