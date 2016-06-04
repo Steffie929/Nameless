@@ -351,5 +351,4 @@ public class Character implements Serializable {
         else if (!weapon.getName().contains("Sword") && !armour.getName().contains("Shield"))
             this.imgID = R.drawable.char_icon;
     }
-
 }
