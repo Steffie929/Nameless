@@ -365,24 +365,28 @@ public class Character implements Serializable {
         }
     }
 
-    public void changeCharIcon (int imgID){
-        if (weapon.getName().contains("sword") && !armour.getName().contains("shield") && level <2)
+    public void changeCharIcon (){
+        if(weapon == null || armour == null)
+            return;
+        String w = "" + weapon.getName();
+        String a = "" + armour.getName();
+        if (w.contains("Sword") && !a.contains("Shield") && level <2)
             this.imgID = R.drawable.ci_1_sw_nosh;
-        else if (!weapon.getName().contains("sword") && armour.getName().contains("shield")&& level <2)
+        else if (!w.contains("Sword") && a.contains("Shield")&& level <2)
             this.imgID = R.drawable.ci_1_nosw_sh;
-        else if (!weapon.getName().contains("sword") && !armour.getName().contains("shield")&& level <2)
+        else if (!w.contains("Sword") && !a.contains("Shield")&& level <2)
             this.imgID = R.drawable.ci_1_nosw_nosh;
-        else if (weapon.getName().contains("sword") && !armour.getName().contains("shield") && level <4)
+        else if (w.contains("Sword") && !a.contains("Shield") && level <4)
             this.imgID = R.drawable.ci_2_sw_nosh;
-        else if (!weapon.getName().contains("sword") && armour.getName().contains("shield")&& level <4)
+        else if (!w.contains("Sword") && a.contains("Shield")&& level <4)
             this.imgID = R.drawable.ci_2_nosw_sh;
-        else if (!weapon.getName().contains("sword") && !armour.getName().contains("shield")&& level <4)
+        else if (!w.contains("Sword") && !a.contains("Shield")&& level <4)
             this.imgID = R.drawable.ci_2_nosw_nosh;
-        if (weapon.getName().contains("sword") && !armour.getName().contains("shield"))
+        else if (w.contains("Sword") && !a.contains("Shield"))
             this.imgID = R.drawable.ci_3_sw_nosh_nohlm;
-        else if (!weapon.getName().contains("sword") && armour.getName().contains("shield"))
+        else if (!w.contains("Sword") && a.contains("Shield"))
             this.imgID = R.drawable.ci_3_nosw_sh_nohlm;
-        else if (!weapon.getName().contains("sword") && !armour.getName().contains("shield"))
+        else if (!w.contains("Sword") && !a.contains("Shield"))
             this.imgID = R.drawable.ci_3_nosw_nosh_nohlm;
     }
 

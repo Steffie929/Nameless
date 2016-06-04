@@ -132,10 +132,12 @@ public class BackpackActivity extends AppCompatActivity {
                                         }
                                     } else if (itemType == ItemType.WEAPON) {
                                         player.setWeapon(itemIndex);
+                                        player.changeCharIcon();
                                         backpack = player.getBackpack();
                                         fillBackpack();
                                     } else if (itemType == ItemType.ARMOUR) {
                                         player.setArmour(itemIndex);
+                                        player.changeCharIcon();
                                         backpack = player.getBackpack();
                                         fillBackpack();
                                     }
