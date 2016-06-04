@@ -19,6 +19,7 @@ public class Character implements Serializable {
     private int level;
     private int currentXP;
     private int maxXP;
+    private int boosts[]; //0 str, 1 def, 2 skl, 3 spd, 4 maxHP
 
     private Armour armour;
     private Weapon weapon;
@@ -43,6 +44,7 @@ public class Character implements Serializable {
         currentXP = 0;
         maxXP = 10;
         weapon = items.getWeapon(1);
+        boosts = new int[5];
         armour = new Armour ("No armour","No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.empty);
     }
 
@@ -294,7 +296,7 @@ public class Character implements Serializable {
             Armour arm = (Armour) item;
             setArmour(arm);
             backpack.remove(arm);
-            if (!old.getName().equals("No weapon"))
+            if (!old.getName().equals("No armour"))
                 backpack.add(old);
         }
     }
@@ -390,5 +392,43 @@ public class Character implements Serializable {
         return maxXP;
     }
 
+    public int[] getBoosts() {
+        return boosts;
+    }
 
+    public void revertBoosts() { //0 str, 1 def, 2 skl, 3 spd, 4 maxHP
+        strength -= boosts[0];
+        defense -= boosts[1];
+        skill -= boosts[2];
+        speed -= boosts[3];
+        changeMaxHP(-boosts[4]);
+        for (int i = 0; i <= 4; i++) {
+            boosts[i] = 0;
+        }
+    }
+
+    public void boostStrength(int boost) {
+        boosts[0] += boost;
+        strength += boost;
+    }
+
+    public void boostDefense(int boost) {
+        boosts[1] += boost;
+        defense += boost;
+    }
+
+    public void boostSkill(int boost) {
+        boosts[2] += boost;
+        skill += boost;
+    }
+
+    public void boostSpeed(int boost) {
+        boosts[3] += boost;
+        speed += boost;
+    }
+
+    public void boostMaxHP(int boost) {
+        boosts[4] += boost;
+        changeMaxHP(boost);
+    }
 }

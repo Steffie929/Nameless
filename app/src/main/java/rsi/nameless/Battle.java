@@ -11,7 +11,6 @@ import java.util.Random;
  */
 public class Battle extends Event implements Serializable{
     private Character player;
-    private int[] boosts; //0 str, 1 def, 2 skl, 3 spd, 4 maxHP
     private Character enemy;
     private BattleAction playerAction;
     private int playerActionRepeats;
@@ -26,7 +25,6 @@ public class Battle extends Event implements Serializable{
 
     public Battle (Character player, Character enemy) {
         this.player = player;
-        boosts = new int[5];
         this.enemy = enemy;
         playerAction = BattleAction.NOTHING;
         enemyAction = BattleAction.NOTHING;
@@ -165,16 +163,11 @@ public class Battle extends Event implements Serializable{
                     Potion potion = (Potion) pitem;
                     if (potion.canBeUsed()) {
                         player.changeCurrentHP(potion.getHPRestore());
-                        player.changeStrength(potion.getStrengthBonus());
-                        boosts[0] += potion.getStrengthBonus();
-                        player.changeDefense(potion.getDefenseBonus());
-                        boosts[1] += potion.getDefenseBonus();
-                        player.changeSkill(potion.getSkillBonus());
-                        boosts[2] += potion.getSkillBonus();
-                        player.changeSpeed(potion.getSpeedBonus());
-                        boosts[3] += potion.getSpeedBonus();
-                        player.changeMaxHP(potion.getHPBonus());
-                        boosts[4] += potion.getHPBonus();
+                        player.boostStrength(potion.getStrengthBonus());
+                        player.boostDefense(potion.getDefenseBonus());
+                        player.boostSkill(potion.getSkillBonus());
+                        player.boostSpeed(potion.getSpeedBonus());
+                        player.boostMaxHP(potion.getHPBonus());
                         if (!potion.afterUsing())
                             player.getBackpack().remove(potion);
                     }
@@ -377,17 +370,6 @@ public class Battle extends Event implements Serializable{
      */
     public boolean isRanAway() {
         return ranAway;
-    }
-
-    /**
-     * Use this to undo the temporary boosts on player
-     */
-    public void resetBoosts() {
-        player.changeStrength(-boosts[0]);
-        player.changeDefense(-boosts[1]);
-        player.changeSkill(-boosts[2]);
-        player.changeSpeed(-boosts[3]);
-        player.changeMaxHP(-boosts[4]);
     }
 
     public void getRewards() {

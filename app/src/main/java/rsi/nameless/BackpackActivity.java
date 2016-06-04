@@ -21,7 +21,6 @@ public class BackpackActivity extends AppCompatActivity {
     private Character player;
     private ArrayList<Item> backpack;
     private final int maxBackpackSize = 30;
-    private int[] boosts;
     private TableLayout table;
 
     @Override
@@ -30,7 +29,6 @@ public class BackpackActivity extends AppCompatActivity {
         setContentView(R.layout.activity_backpack);
         player = (Character) getIntent().getSerializableExtra("CURRENT_PLAYER");
         backpack = player.getBackpack();
-        boosts = new int[5];
         table = (TableLayout) findViewById(R.id.backpack_table);
         fillBackpack();
     }
@@ -121,16 +119,11 @@ public class BackpackActivity extends AppCompatActivity {
                                         Potion potion = (Potion) item;
                                         if (potion.canBeUsed()) {
                                             player.changeCurrentHP(potion.getHPRestore());
-                                            player.changeStrength(potion.getStrengthBonus());
-                                            boosts[0] += potion.getStrengthBonus();
-                                            player.changeDefense(potion.getDefenseBonus());
-                                            boosts[1] += potion.getDefenseBonus();
-                                            player.changeSkill(potion.getSkillBonus());
-                                            boosts[2] += potion.getSkillBonus();
-                                            player.changeSpeed(potion.getSpeedBonus());
-                                            boosts[3] += potion.getSpeedBonus();
-                                            player.changeMaxHP(potion.getHPBonus());
-                                            boosts[4] += potion.getHPBonus();
+                                            player.boostStrength(potion.getStrengthBonus());
+                                            player.boostDefense(potion.getDefenseBonus());
+                                            player.boostSkill(potion.getSkillBonus());
+                                            player.boostSpeed(potion.getSpeedBonus());
+                                            player.boostMaxHP(potion.getHPBonus());
                                             if (!potion.afterUsing()) {
                                                 player.getBackpack().remove(potion);
                                                 backpack = player.getBackpack();
@@ -171,6 +164,9 @@ public class BackpackActivity extends AppCompatActivity {
      * Go back to the previous activity by closing this one
      */
     public void backpackBackButton (View v) {
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("Character_Key", player);
+        setResult(RESULT_OK, returnIntent);
         finish();
     }
 
@@ -179,7 +175,9 @@ public class BackpackActivity extends AppCompatActivity {
      * Go to the "Character" screen
      */
     public void backpackCharacterButton (View v) {
-        //TODO Character screen
+        Intent intent = new Intent(this, CharacterScreen.class);
+        intent.putExtra("CURRENT_PLAYER", player);
+        startActivity(intent);
     }
 
     /**
