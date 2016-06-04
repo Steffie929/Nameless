@@ -20,6 +20,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
 
     private final int SHOP_KEY = 4;
     private final int BATTLE_KEY = 7;
+    private final int BACKPACK_KEY = 37;
     private final int CONVERSATION_KEY = 42;
 
 
@@ -91,7 +92,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
                 }
             }
         }
-        if (requestCode == SHOP_KEY) {
+        if (requestCode == SHOP_KEY || requestCode == BACKPACK_KEY) {
             if (resultCode == RESULT_OK) {
                 Character player = (Character) data.getSerializableExtra("Character_Key");
                 map.setPlayer(player);
@@ -128,7 +129,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         if(openBackpack(x,y)){
             Intent intent = new Intent(this, BackpackActivity.class);
             intent.putExtra("CURRENT_PLAYER", map.getPlayer());
-            startActivity(intent);
+            startActivityForResult(intent, BACKPACK_KEY);
             return false;
         }
 

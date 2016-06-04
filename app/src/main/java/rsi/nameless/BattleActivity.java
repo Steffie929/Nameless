@@ -66,7 +66,7 @@ public class BattleActivity extends AppCompatActivity {
     }
 
     private void battleOver() {
-        battle.resetBoosts();
+        player.revertBoosts();
         Intent returnIntent = new Intent();
         returnIntent.putExtra("Character_Key", player);
         setResult(RESULT_OK, returnIntent);
@@ -75,7 +75,7 @@ public class BattleActivity extends AppCompatActivity {
 
     private void getRewards() {
         battle.getRewards();
-        battle.resetBoosts();
+        player.revertBoosts();
         AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
         helpBuilder.setTitle("Rewards");
         helpBuilder.setMessage(battle.getRewardString());
