@@ -39,7 +39,7 @@ public class BattleActivity extends AppCompatActivity {
 
         playerName.setText(player.getName());
         enemyName.setText(enemy.getName());
-        dummy = "\t" + player.getCurrentHP() + " / " + player.getMaxHP();
+        dummy = player.getCurrentHP() + " / " + player.getMaxHP();
         HP_player.setText(dummy);
         dummy = "\t" + enemy.getCurrentHP() + " / " + enemy.getMaxHP();
         HP_enemy.setText(dummy);
@@ -99,8 +99,12 @@ public class BattleActivity extends AppCompatActivity {
         info.setText("");
         Log.d("BATTLE", "user-input received");
         battle.performActions();
-        messages.setText(battle.getBattleInfo());
-        HP_player.setText("\t" + player.getCurrentHP() + " / " + player.getMaxHP());
+        String battleInfo = battle.getBattleInfo();
+        if (battleInfo != null && battleInfo.length() > 0 && battleInfo.charAt(battleInfo.length()-1)=='\n') {
+            battleInfo = battleInfo.substring(0, battleInfo.length()-1);
+        }
+        messages.setText(battleInfo);
+        HP_player.setText(player.getCurrentHP() + " / " + player.getMaxHP());
         HP_enemy.setText("\t" + enemy.getCurrentHP() + " / " + enemy.getMaxHP());
 
         if(player.getCurrentHP() <= 0){
