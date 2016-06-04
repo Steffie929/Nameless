@@ -9,15 +9,16 @@ public class MainModel {
     private Map currentMap;
     private EnemyLibrary enemies;
     private ItemLibrary items;
-    private float[] pathX;
-    private float[] pathY;
+    private ConversationLibrary convLib;
 
     public MainModel(String playerName){
         this.items = new ItemLibrary();
         this.enemies = new EnemyLibrary(items);
         this.player = new Character(playerName);
+        convLib = new ConversationLibrary(enemies);
         currentLevel = 1;
-        currentMap = new Map(currentLevel, player, enemies, items);
+        currentMap = new Map(currentLevel, player, enemies, items, convLib);
+
     }
 
     public Map getCurrentMap(){

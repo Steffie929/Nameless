@@ -346,10 +346,10 @@ public class Character implements Serializable {
     public void changeCharIcon (int imgID){
         if (weapon.getName().contains("Sword") && !armour.getName().contains("Shield"))
             this.imgID = R.drawable.char_training_sword;
-        if (!weapon.getName().contains("Sword") && armour.getName().contains("Shield"))
+        else if (!weapon.getName().contains("Sword") && armour.getName().contains("Shield"))
             this.imgID = R.drawable.char_shield;
-
-
+        else if (!weapon.getName().contains("Sword") && !armour.getName().contains("Shield"))
+            this.imgID = R.drawable.char_icon;
     }
 
 }

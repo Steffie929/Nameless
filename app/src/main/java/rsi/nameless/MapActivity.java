@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.Toast;
@@ -17,8 +18,10 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
     private GestureDetectorCompat gDetector;
     private Map map;
 
-    private final int BATTLE_KEY = 7;
     private final int SHOP_KEY = 4;
+    private final int BATTLE_KEY = 7;
+    private final int CONVERSATION_KEY = 42;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,9 +34,19 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         drawView = (CanvasMap) findViewById(R.id.view);
         map = m.getCurrentMap();
         drawView.setMap(map);
+        Conversation conv = map.getConversation();
+        startConversation(conv);
 
 
         this.gDetector = new GestureDetectorCompat(this,this);
+    }
+
+    public void startConversation(Conversation conv){
+        Intent intent = new Intent(this, npcActivity.class);
+        intent.putExtra("CURRENT_CONVERSATION", conv);
+        intent.putExtra("CURRENT_PLAYER", map.getPlayer());
+        startActivityForResult(intent, CONVERSATION_KEY);
+        drawView.invalidate();
     }
 
     public void startBattleActivity(Battle battle){
@@ -58,7 +71,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
      * @param data the Intent that was sent back by the other Activity
      */
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
-        if (requestCode == BATTLE_KEY) {
+        if (requestCode == BATTLE_KEY || requestCode == CONVERSATION_KEY) {
             if (resultCode == RESULT_OK) {
                 Character player = (Character) data.getSerializableExtra("Character_Key");
                 map.setPlayer(player);
@@ -80,15 +93,33 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         }
     }
 
+    public boolean openBackpack(float x, float y){
+        Log.d("DEBUG", "BACKPACK?       width: " + drawView.getWidth() + "\theight " + drawView.getHeight());
+        if(Math.abs(x-drawView.getWidth()) < 200 && Math.abs(y-drawView.getHeight()) < 400){
+            return true;
+        }
+        else
+            return false;
+    }
+
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
         float x,y;
         x = e.getX()-40;
         y = e.getY()-250;
-        //Log.d("DEBUG", "MapActivity, onSingleTap\n\t\tclicked on:\tgetX() " + x + " " + y);
+        Log.d("DEBUG", "MapActivity, onSingleTap\n\t\tclicked on:\tgetX() " + x + " " + y);
+
+        if(openBackpack(x,y)){
+            Intent intent = new Intent(this, BackpackActivity.class);
+            intent.putExtra("CURRENT_PLAYER", map.getPlayer());
+            startActivity(intent);
+            return false;
+        }
+
 
         Move move = new Move(map, drawView, x, y);
         drawView.invalidate();
+
         if(map.inBattle()){
             Battle currentBattle = (Battle) map.getEvent(map.getCurrentPoint());
             startBattleActivity(currentBattle);
@@ -98,6 +129,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
             currentShop.setPlayer(map.getPlayer());
             startShopActivity(currentShop);
         }
+        map.setEvent(map.getCurrentPoint(), Map.eventType.EMPTY);
         return false;
     }
 

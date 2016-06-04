@@ -22,6 +22,7 @@ public class Battle extends Event implements Serializable{
     private Random random;
     private boolean ranAway;
     private String battleInfo;
+    private String battleRewards;
 
     public Battle (Character player, Character enemy) {
         this.player = player;
@@ -33,6 +34,7 @@ public class Battle extends Event implements Serializable{
         random = new Random();
         ranAway = false;
         battleInfo = "Not initialised yet";
+        battleRewards = new String();
     }
 
     /**
@@ -389,6 +391,10 @@ public class Battle extends Event implements Serializable{
     }
 
     public void getRewards() {
+        int bonusXP = enemy.getMaxXP();
+        player.giveBonusXP(bonusXP);
+        battleRewards += "XP earned: " + bonusXP + "\n";
+
         ArrayList<Item> possibleRewards = enemy.getBackpack();
         Weapon enemyWeapon = enemy.getWeapon();
         if (enemyWeapon != null && !enemyWeapon.getName().equals("No weapon")) {
@@ -402,8 +408,19 @@ public class Battle extends Event implements Serializable{
         if (nrOfRewards > possibleRewards.size()) {
             nrOfRewards = possibleRewards.size();
         }
+        boolean first = true;
         for (int i = 0; i < nrOfRewards; i++) {
-            player.addItemToBackpack(possibleRewards.get(i));
+            if (first) {
+                battleRewards += "\nItems found:\n";
+            }
+            Item reward = possibleRewards.get(i);
+            player.addItemToBackpack(reward);
+            battleRewards += "-" + reward.getName() + "\n";
+            first = false;
         }
+    }
+
+    public String getRewardString() {
+        return battleRewards;
     }
 }

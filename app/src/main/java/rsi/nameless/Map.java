@@ -19,23 +19,22 @@ public class Map {
     private Character boss;
     private boolean battle; // is the player currently in a battle event
     private boolean shop; // is the player currently in a shop event
-
-    private float[] pathX; //X-coordinates of points 1,..,9 on the map
-    private float[] pathY; // Y-coordinates of points 1,..,9 on the map
+    private Conversation conv; //The starting conversation of the map
 
     /**
      * Basic constructor
      */
-    public Map(int level, Character player, EnemyLibrary enemies, ItemLibrary items){
+    public Map(int level, Character player, EnemyLibrary enemies, ItemLibrary items, ConversationLibrary convLib){
         this.level = level;
         mapEnemies = enemies.getEnemiesWithLevel(level);
         boss = enemies.getBoss(level-1);
+        conv = convLib.getConversation(level-1);
         this.items = items;
         this.events = new eventType[9];
         battle = false;
         shop = false;
         this.player = player;
-        generateEvents();
+        generateEventTypes();
         currentPoint = 8;
         previousPoint = 8;
     }
@@ -52,7 +51,7 @@ public class Map {
     private Event generateEvent(int index) {
         if (events[index] == eventType.SHOP) {
             return new Shop(level, items);
-        } else if (events[index] == eventType.BATTLE) {
+        } else if (events[index] == eventType.BATTLE && index!=0) {
             Random rand = new Random();
             int limit = mapEnemies.size();
             int randomInt = rand.nextInt(limit);
@@ -67,7 +66,7 @@ public class Map {
     /**
      * Fills the world with eventTypes (Shop, Battles, etc)
      */
-    private void generateEvents(){
+    private void generateEventTypes(){
         Random rand = new Random();
         int rdNR = rand.nextInt(3);
         events[rdNR+3] = eventType.SHOP;
@@ -100,13 +99,6 @@ public class Map {
         }
     }
 
-    /**
-     * Go back to the previous point
-     */
-    public void goBack() {
-        currentPoint = previousPoint;
-        previousPoint = 8;
-    }
 
     /**
      * Getter for battle
@@ -143,6 +135,14 @@ public class Map {
      */
     public Event getEvent(int index) {
         return generateEvent(index);
+    }
+
+    public void setEvent(int index, eventType type){
+        this.events[index] = type;
+    }
+
+    public Conversation getConversation(){
+        return conv;
     }
     
 }

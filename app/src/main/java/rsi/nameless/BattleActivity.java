@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -79,7 +78,7 @@ public class BattleActivity extends AppCompatActivity {
         battle.resetBoosts();
         AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
         helpBuilder.setTitle("Rewards");
-        helpBuilder.setMessage("You won:\n\t-Lots of items\n\t-Plenty of XP");
+        helpBuilder.setMessage(battle.getRewardString());
         helpBuilder.setPositiveButton("Ok",
                 new DialogInterface.OnClickListener() {
 
@@ -149,6 +148,10 @@ public class BattleActivity extends AppCompatActivity {
             afterInput();
             startRound();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 
 }
