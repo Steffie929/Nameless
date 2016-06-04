@@ -167,7 +167,7 @@ public class CanvasMap extends View  {
         x= Math.round(pathX[p]);
         y = Math.round(pathY[p]);
         //d.setBounds(left, top, right, bottom);
-        playerIcon.setBounds(x-50, y-75, x+50, y+75);//100 breed 150 hoog
+        playerIcon.setBounds(x-75, y-75, x+75, y+75);//100 breed 150 hoog
         playerIcon.draw(canvas);
     }
 

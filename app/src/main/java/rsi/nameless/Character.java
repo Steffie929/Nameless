@@ -28,9 +28,9 @@ public class Character implements Serializable {
     /**
      * Default constructor
      */
-    public Character (String playerName) {
+    public Character (String playerName, ItemLibrary items) {
         name = playerName;
-        imgID = R.drawable.char_icon;
+        imgID = R.drawable.ci_1_nosw_nosh;
         strength = 10;
         defense = 10;
         skill = 10;
@@ -42,7 +42,7 @@ public class Character implements Serializable {
         backpack = new ArrayList<>();
         currentXP = 0;
         maxXP = 10;
-        weapon = new Weapon ("No weapon","No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.empty);
+        weapon = items.getWeapon(1);
         armour = new Armour ("No armour","No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.empty);
     }
 
@@ -60,9 +60,9 @@ public class Character implements Serializable {
         this.maxXP = maxExp;
         this.level = level;
         this.backpack = new ArrayList<>();
-        this.weapon = new Weapon ("No weapon","No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.item1);
+        this.weapon = new Weapon ("No weapon","No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.empty);
         setWeapon(weapon);
-        this.armour = new Armour ("No armour","No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.item3);
+        this.armour = new Armour ("No armour","No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.empty);
         setArmour(armour);
         currentXP = 0;
     }
@@ -364,13 +364,27 @@ public class Character implements Serializable {
     }
 
     public void changeCharIcon (int imgID){
-        if (weapon.getName().contains("Sword") && !armour.getName().contains("Shield"))
-            this.imgID = R.drawable.char_training_sword;
-        else if (!weapon.getName().contains("Sword") && armour.getName().contains("Shield"))
-            this.imgID = R.drawable.char_shield;
-        else if (!weapon.getName().contains("Sword") && !armour.getName().contains("Shield"))
-            this.imgID = R.drawable.char_icon;
+        if (weapon.getName().contains("sword") && !armour.getName().contains("shield") && level <2)
+            this.imgID = R.drawable.ci_1_sw_nosh;
+        else if (!weapon.getName().contains("sword") && armour.getName().contains("shield")&& level <2)
+            this.imgID = R.drawable.ci_1_nosw_sh;
+        else if (!weapon.getName().contains("sword") && !armour.getName().contains("shield")&& level <2)
+            this.imgID = R.drawable.ci_1_nosw_nosh;
+        else if (weapon.getName().contains("sword") && !armour.getName().contains("shield") && level <4)
+            this.imgID = R.drawable.ci_2_sw_nosh;
+        else if (!weapon.getName().contains("sword") && armour.getName().contains("shield")&& level <4)
+            this.imgID = R.drawable.ci_2_nosw_sh;
+        else if (!weapon.getName().contains("sword") && !armour.getName().contains("shield")&& level <4)
+            this.imgID = R.drawable.ci_2_nosw_nosh;
+        if (weapon.getName().contains("sword") && !armour.getName().contains("shield"))
+            this.imgID = R.drawable.ci_3_sw_nosh_nohlm;
+        else if (!weapon.getName().contains("sword") && armour.getName().contains("shield"))
+            this.imgID = R.drawable.ci_3_nosw_sh_nohlm;
+        else if (!weapon.getName().contains("sword") && !armour.getName().contains("shield"))
+            this.imgID = R.drawable.ci_3_nosw_nosh_nohlm;
     }
+
+
 
     public int getMaxXP(){
         return maxXP;

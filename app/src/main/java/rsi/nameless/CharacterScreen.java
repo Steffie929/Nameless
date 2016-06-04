@@ -1,7 +1,11 @@
 package rsi.nameless;
 
+import android.graphics.drawable.Drawable;
+import android.media.Image;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -10,6 +14,7 @@ public class CharacterScreen extends AppCompatActivity {
     private Character player;
     private ArrayList<Item> backpack;
     private TextView statTitle, playerStats, weapon, armor;
+    private ImageView imgView;
 
 
     @Override
@@ -22,6 +27,12 @@ public class CharacterScreen extends AppCompatActivity {
         playerStats =  (TextView) findViewById(R.id.playerStatsTV);
         weapon =  (TextView) findViewById(R.id.weaponEquipped);
         armor =  (TextView) findViewById(R.id.armorEquipped);
+        imgView = (ImageView) findViewById(R.id.characterImage);
+
+
+        int imgID = player.getImgID();
+        Drawable d = ResourcesCompat.getDrawable(getResources(), imgID, null);
+        imgView.setImageDrawable(d);
 
         statTitle.setText(player.getName() + "'s statistics");
         String stats = "";
