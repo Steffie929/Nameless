@@ -55,9 +55,10 @@ public class ShopActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 if(player.getGold()< clickedItem.getPrice()){
                                     extraMessage("You don't have enough gold");
-                                }
-                                else{
-                                    if(shop.getItemsInShop().remove(clickedItem)){
+                                } else if (player.backpackIsFull()) {
+                                    extraMessage("There is no space in your backpack!\nA backpack can hold a maximum of 30 items");
+                                } else {
+                                    if(shop.getItemsInShop().remove(clickedItem)) {
                                         player.addItemToBackpack(clickedItem);
                                         player.setGold(0-clickedItem.getPrice());
                                         iaShop.removeItem(position);
@@ -119,7 +120,7 @@ public class ShopActivity extends AppCompatActivity {
         helpBuilder.setTitle("");
         helpBuilder.setMessage(s);
 
-        helpBuilder.setPositiveButton("ok",
+        helpBuilder.setPositiveButton("Ok",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                     }
@@ -145,7 +146,10 @@ public class ShopActivity extends AppCompatActivity {
         playerGold.setText("" + player.getGold());
     }
 
-    public void exitShop(View v){
+    public void exitShop(View v) {
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("Character_Key", player);
+        setResult(RESULT_OK, returnIntent);
         finish();
     }
 

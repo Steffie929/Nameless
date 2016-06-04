@@ -414,8 +414,13 @@ public class Battle extends Event implements Serializable{
                 battleRewards += "\nItems found:\n";
             }
             Item reward = possibleRewards.get(i);
-            player.addItemToBackpack(reward);
-            battleRewards += "-" + reward.getName() + "\n";
+            int positition = player.addItemToBackpack(reward);
+            if (positition == -1) {
+                battleRewards += "There was no space in your backpack for: ";
+            } else {
+                battleRewards += "-";
+            }
+            battleRewards += reward.getName() + "\n";
             first = false;
         }
     }

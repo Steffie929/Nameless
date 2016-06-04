@@ -23,6 +23,7 @@ public class Character implements Serializable {
     private Armour armour;
     private Weapon weapon;
     private ArrayList<Item> backpack;
+    private final int maxBackpackSize = 30;
 
     /**
      * Default constructor
@@ -110,6 +111,14 @@ public class Character implements Serializable {
     }
 
     /**
+     * Check if the backpack is full (Backpack contains 30 items
+     * @return true if the backpack is full
+     */
+    public boolean backpackIsFull() {
+        return backpack.size() >= 30;
+    }
+
+    /**
      * Get item from backpack at index
      * @param index The index of the item in the backpack
      * @return The item
@@ -124,11 +133,14 @@ public class Character implements Serializable {
     /**
      * Add item to the backpack
      * @param item The item to add
-     * @return the new index of the item in the backpack
+     * @return the new index of the item in the backpack, -1 if adding failed
      */
     public int addItemToBackpack (Item item) {
-        backpack.add(item);
-        return backpack.indexOf(item);
+        if (backpack.size() < 30) {
+            backpack.add(item);
+            return backpack.indexOf(item);
+        }
+        return -1;
     }
 
     public int getImgID(){
