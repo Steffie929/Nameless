@@ -19,7 +19,8 @@
         <activity android:name=".BattleActivity" />
         <activity android:name=".ShopActivity" />
         <activity android:name=".npcActivity" />
-        <activity android:name=".BackpackActivity"></activity>
+        <activity android:name=".BackpackActivity" />
+        <activity android:name=".CharacterScreen"></activity>
     </application>
 
 </manifest>
