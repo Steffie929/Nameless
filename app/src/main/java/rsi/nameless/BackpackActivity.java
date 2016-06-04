@@ -1,16 +1,19 @@
 package rsi.nameless;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -18,7 +21,8 @@ public class BackpackActivity extends AppCompatActivity {
     private Character player;
     private ArrayList<Item> backpack;
     private final int maxBackpackSize = 30;
-    private GridLayout gridLayout;
+    private int[] boosts;
+    private TableLayout table;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,167 +30,140 @@ public class BackpackActivity extends AppCompatActivity {
         setContentView(R.layout.activity_backpack);
         player = (Character) getIntent().getSerializableExtra("CURRENT_PLAYER");
         backpack = player.getBackpack();
-        gridLayout = (GridLayout) findViewById(R.id.Backpack_Grid);
+        boosts = new int[5];
+        table = (TableLayout) findViewById(R.id.backpack_table);
         fillBackpack();
     }
 
     private void fillBackpack() {
-        int nrOfItems = backpack.size();
-        if (nrOfItems > 0) {
-            for (int i = 0; i < nrOfItems; i++) {
-                ImageView image = getImageView(i);
-                if (image != null) {
-                    Drawable draw = ResourcesCompat.getDrawable(getResources(), backpack.get(i).getImgID(), null);
-                    image.setImageDrawable(draw);
-                }
-                TextView text = getTextView(i);
-                if (text != null) {
-                    text.setText(backpack.get(i).getName());
-                }
-            }
-            for (int i = nrOfItems; i < 30; i++) {
-                ImageView image = getImageView(i);
-                if (image != null) {
-                    image.setImageDrawable(null);
-                }
-                TextView text = getTextView(i);
-                if (text != null) {
-                    text.setText("There is no item here!");
-                }
-            }
-        }
-    }
+        table.removeAllViews();
+        TableRow tr_head = new TableRow(this);
+        tr_head.setLayoutParams(new TableRow.LayoutParams(
+                TableRow.LayoutParams.MATCH_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT));
 
-    private TextView getTextView(int i) {
-        switch(i) {
-            case 0:
-                return (TextView) findViewById(R.id.backpackTV1);
-            case 1:
-                return (TextView) findViewById(R.id.backpackTV2);
-            case 2:
-                return (TextView) findViewById(R.id.backpackTV3);
-            case 3:
-                return (TextView) findViewById(R.id.backpackTV4);
-            case 4:
-                return (TextView) findViewById(R.id.backpackTV5);
-            case 5:
-                return (TextView) findViewById(R.id.backpackTV6);
-            case 6:
-                return (TextView) findViewById(R.id.backpackTV7);
-            case 7:
-                return (TextView) findViewById(R.id.backpackTV8);
-            case 8:
-                return (TextView) findViewById(R.id.backpackTV9);
-            case 9:
-                return (TextView) findViewById(R.id.backpackTV10);
-            case 10:
-                return (TextView) findViewById(R.id.backpackTV11);
-            case 11:
-                return (TextView) findViewById(R.id.backpackTV12);
-            case 12:
-                return (TextView) findViewById(R.id.backpackTV13);
-            case 13:
-                return (TextView) findViewById(R.id.backpackTV14);
-            case 14:
-                return (TextView) findViewById(R.id.backpackTV15);
-            case 15:
-                return (TextView) findViewById(R.id.backpackTV16);
-            case 16:
-                return (TextView) findViewById(R.id.backpackTV17);
-            case 17:
-                return (TextView) findViewById(R.id.backpackTV18);
-            case 18:
-                return (TextView) findViewById(R.id.backpackTV19);
-            case 19:
-                return (TextView) findViewById(R.id.backpackTV20);
-            case 20:
-                return (TextView) findViewById(R.id.backpackTV21);
-            case 21:
-                return (TextView) findViewById(R.id.backpackTV22);
-            case 22:
-                return (TextView) findViewById(R.id.backpackTV23);
-            case 23:
-                return (TextView) findViewById(R.id.backpackTV24);
-            case 24:
-                return (TextView) findViewById(R.id.backpackTV25);
-            case 25:
-                return (TextView) findViewById(R.id.backpackTV26);
-            case 26:
-                return (TextView) findViewById(R.id.backpackTV27);
-            case 27:
-                return (TextView) findViewById(R.id.backpackTV28);
-            case 28:
-                return (TextView) findViewById(R.id.backpackTV29);
-            case 29:
-                return (TextView) findViewById(R.id.backpackTV30);
+        TextView label_hello = new TextView(this);
+        String playerName = player.getName();
+        if (playerName != null && !playerName.equals("") & playerName.charAt(playerName.length() - 1) == 's') {
+            playerName += "'";
+        } else {
+            playerName += "'s";
         }
-        return null;
-    }
+        label_hello.setText(playerName);
+        label_hello.setTextColor(Color.WHITE);
+        label_hello.setPadding(5, 5, 5, 5);
+        tr_head.addView(label_hello);
 
-    private ImageView getImageView(int i) {
-        switch(i) {
-            case 0:
-                return (ImageView) findViewById(R.id.backpackIcon1);
-            case 1:
-                return (ImageView) findViewById(R.id.backpackIcon2);
-            case 2:
-                return (ImageView) findViewById(R.id.backpackIcon3);
-            case 3:
-                return (ImageView) findViewById(R.id.backpackIcon4);
-            case 4:
-                return (ImageView) findViewById(R.id.backpackIcon5);
-            case 5:
-                return (ImageView) findViewById(R.id.backpackIcon6);
-            case 6:
-                return (ImageView) findViewById(R.id.backpackIcon7);
-            case 7:
-                return (ImageView) findViewById(R.id.backpackIcon8);
-            case 8:
-                return (ImageView) findViewById(R.id.backpackIcon9);
-            case 9:
-                return (ImageView) findViewById(R.id.backpackIcon10);
-            case 10:
-                return (ImageView) findViewById(R.id.backpackIcon11);
-            case 11:
-                return (ImageView) findViewById(R.id.backpackIcon12);
-            case 12:
-                return (ImageView) findViewById(R.id.backpackIcon13);
-            case 13:
-                return (ImageView) findViewById(R.id.backpackIcon14);
-            case 14:
-                return (ImageView) findViewById(R.id.backpackIcon15);
-            case 15:
-                return (ImageView) findViewById(R.id.backpackIcon16);
-            case 16:
-                return (ImageView) findViewById(R.id.backpackIcon17);
-            case 17:
-                return (ImageView) findViewById(R.id.backpackIcon18);
-            case 18:
-                return (ImageView) findViewById(R.id.backpackIcon19);
-            case 19:
-                return (ImageView) findViewById(R.id.backpackIcon20);
-            case 20:
-                return (ImageView) findViewById(R.id.backpackIcon21);
-            case 21:
-                return (ImageView) findViewById(R.id.backpackIcon22);
-            case 22:
-                return (ImageView) findViewById(R.id.backpackIcon23);
-            case 23:
-                return (ImageView) findViewById(R.id.backpackIcon24);
-            case 24:
-                return (ImageView) findViewById(R.id.backpackIcon25);
-            case 25:
-                return (ImageView) findViewById(R.id.backpackIcon26);
-            case 26:
-                return (ImageView) findViewById(R.id.backpackIcon27);
-            case 27:
-                return (ImageView) findViewById(R.id.backpackIcon28);
-            case 28:
-                return (ImageView) findViewById(R.id.backpackIcon29);
-            case 29:
-                return (ImageView) findViewById(R.id.backpackIcon30);
+        TextView label_android = new TextView(this);
+        label_android.setText("Backpack");
+        label_android.setTextColor(Color.WHITE);
+        label_android.setPadding(5, 5, 5, 5);
+        tr_head.addView(label_android);
+
+        table.addView(tr_head, new TableLayout.LayoutParams(
+                TableLayout.LayoutParams.MATCH_PARENT,
+                TableLayout.LayoutParams.WRAP_CONTENT));
+
+        final BackpackActivity backpackactivity = this;
+        int size = backpack.size();
+        for (int i = 0; i < size; i++) {
+            final int itemIndex = i;
+            TableRow row = new TableRow(this);
+            row.setLayoutParams(new TableRow.LayoutParams(
+                    TableRow.LayoutParams.MATCH_PARENT,
+                    TableRow.LayoutParams.WRAP_CONTENT));
+            final Item item = backpack.get(i);
+            ImageView image = new ImageView(this);
+            Drawable draw = ResourcesCompat.getDrawable(getResources(), item.getImgID(), null);
+            image.setImageDrawable(draw);
+            image.setPadding(5, 5, 5, 5);
+            row.addView(image);
+
+            TextView text = new TextView(this);
+            text.setText(getItemInformation(item));
+            text.setTextColor(Color.WHITE);
+            text.setPadding(5, 5, 5, 5);
+            text.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("Backpack", item.getName() + " was clicked");
+                    final ItemType itemType = item.getType();
+                    String positiveAction;
+                    String message;
+                    if (itemType == ItemType.POTION) {
+                        positiveAction = "Use";
+                        message = backpackactivity.getItemInformation(item);
+                    }  else {
+                        positiveAction = "Equip";
+                        message = "Equid the following item:\n" + backpackactivity.getItemInformation(item);
+                        message += "\n\n";
+                        if (itemType == ItemType.WEAPON) {
+                            if (!player.getWeapon().getName().equals("No weapon"))
+                                message += "Current weapon:\n" + backpackactivity.getItemInformation(player.getWeapon());
+                            else {
+                                message += "You currently have no weapon!";
+                            }
+                        } else if (itemType == ItemType.ARMOUR){
+                            if (!player.getArmour().getName().equals("No armour"))
+                                message += "Current armour:\n" + backpackactivity.getItemInformation(player.getArmour());
+                            else {
+                                message += "You currently have no armour!";
+                            }
+                        }
+                    }
+                    final AlertDialog.Builder helpBuilder = new AlertDialog.Builder(backpackactivity);
+                    helpBuilder.setTitle(item.getName());
+                    helpBuilder.setMessage(message);
+                    helpBuilder.setPositiveButton(positiveAction,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    if (itemType == ItemType.POTION) {
+                                        Potion potion = (Potion) item;
+                                        if (potion.canBeUsed()) {
+                                            player.changeCurrentHP(potion.getHPRestore());
+                                            player.changeStrength(potion.getStrengthBonus());
+                                            boosts[0] += potion.getStrengthBonus();
+                                            player.changeDefense(potion.getDefenseBonus());
+                                            boosts[1] += potion.getDefenseBonus();
+                                            player.changeSkill(potion.getSkillBonus());
+                                            boosts[2] += potion.getSkillBonus();
+                                            player.changeSpeed(potion.getSpeedBonus());
+                                            boosts[3] += potion.getSpeedBonus();
+                                            player.changeMaxHP(potion.getHPBonus());
+                                            boosts[4] += potion.getHPBonus();
+                                            if (!potion.afterUsing()) {
+                                                player.getBackpack().remove(potion);
+                                                backpack = player.getBackpack();
+                                                fillBackpack();
+                                            }
+                                        }
+                                    } else if (itemType == ItemType.WEAPON) {
+                                        player.setWeapon(itemIndex);
+                                        backpack = player.getBackpack();
+                                        fillBackpack();
+                                    } else if (itemType == ItemType.ARMOUR) {
+                                        player.setArmour(itemIndex);
+                                        backpack = player.getBackpack();
+                                        fillBackpack();
+                                    }
+                                }
+                            });
+                    helpBuilder.setNegativeButton("Cancel",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            });
+                    AlertDialog helpDialog = helpBuilder.create();
+                    helpDialog.setCancelable(false);
+                    helpDialog.show();
+                }
+            });
+            row.addView(text);
+
+            table.addView(row, new TableLayout.LayoutParams(
+                    TableLayout.LayoutParams.MATCH_PARENT,
+                    TableLayout.LayoutParams.WRAP_CONTENT));
         }
-        return null;
     }
 
     /**
@@ -203,5 +180,47 @@ public class BackpackActivity extends AppCompatActivity {
      */
     public void backpackCharacterButton (View v) {
         //TODO Character screen
+    }
+
+    /**
+     * Makes a String with all information about the Item neatly organized
+     * @return The String that contains all information about the Item
+     */
+    public String getItemInformation(Item item) {
+        String result = new String("");
+        result += item.getName() + "\n";
+        int strTabNumber = getTabNumber(item.getStrengthBonus(), 12);
+        int defTabNumber = getTabNumber(item.getDefenseBonus(), 12);
+        int sklTabNumber = getTabNumber(item.getSkillBonus(), 15);
+        result += "Strength: " + item.getStrengthBonus() + getTabs(strTabNumber) + "Speed: " + item.getSpeedBonus() + "\n";
+        result += "Defense: " + item.getDefenseBonus() + getTabs(defTabNumber) + "HP: " + item.getHPBonus() + "\n";
+        result += "Skill: " + item.getSkillBonus() + getTabs(sklTabNumber) + "Level: " + item.getLevel() + "\n";
+        return result;
+    }
+
+    /**
+     * @param number The number of tabs
+     * @return A string that contains the specified number of tabs
+     */
+    private String getTabs(int number) {
+        String result = new String("");
+        for (int i = 0; i < number; i++) {
+            result += getString(R.string.tab);
+        }
+        return result;
+    }
+
+    /**
+     * Calculates the number of tabs needed to perfectly align the next column
+     * @param stat The number of the stat after which the tabs are needed
+     * @param base The base number of tabs
+     * @return The number of tabs that should be used
+     */
+    private int getTabNumber(int stat, int base) {
+        if (stat < 0 || stat >= 10) {
+            return base - 1;
+        } else {
+            return base;
+        }
     }
 }
