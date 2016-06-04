@@ -146,6 +146,11 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
             return false;
         }
 
+        move();
+        return false;
+    }
+
+    public void move(){
         drawView.invalidate();
 
         if(map.inBattle()){
@@ -158,7 +163,6 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
             startShopActivity(currentShop);
         }
         map.setEvent(map.getCurrentPoint(), Map.eventType.EMPTY);
-        return false;
     }
 
     @Override
@@ -194,6 +198,30 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         //ignore
         //TODO Add fling/swipe possibility
+        Log.d("DEBUG", "velX: " + velocityX + " velY: " + velocityY + "\ne1: " + e1.toString() + "\ne2: " + e2.toString());
+        float orX,orY,newX,newY,deltaX,deltaY;
+        orX = e1.getX();
+        orY = e1.getY();
+        newX = e2.getX();
+        newY = e2.getY();
+        Log.d("DEBUG", "orX: " + orX + " orY: " + orY + " newX: " + newX + "newY: " + newY);
+
+        Move move = new Move(map, drawView);
+        if(orY-newY > 200 && newX-orX >50){
+        //swiped up and right
+            Log.d("DEBUG", "first if");
+            Log.d("DEBUG", "orX: " + orX + " orY: " + orY + " newX: " + newX + "newY: " + newY);
+            move.swipedRight(map.getCurrentPoint());
+            move();
+        }
+        else if(orY-newY >200 && orX-newX >50){
+            //swiped up and left
+            Log.d("DEBUG", "second if");
+            Log.d("DEBUG", "orX: " + orX + " orY: " + orY + " newX: " + newX + "newY: " + newY);
+            move.swipedLeft(map.getCurrentPoint());
+            move();
+        }
+
         return false;
     }
 }

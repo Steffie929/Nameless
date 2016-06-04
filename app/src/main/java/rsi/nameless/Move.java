@@ -18,6 +18,12 @@ public class Move {
         succes = false;
     }
 
+    public Move(Map map, CanvasMap sc){
+        this.map = map;
+        this.sc = sc;
+        succes = false;
+    }
+
     public boolean tryMove(){
         int currentPoint = map.getCurrentPoint();
 
@@ -58,5 +64,80 @@ public class Move {
             map.setCurrentPoint(nextP);
             succes = true;
         }
+    }
+
+    public boolean swipedLeft(int currentPoint){
+        switch(currentPoint){
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                map.setCurrentPoint(0);
+                succes = true;
+                break;
+            case 3:
+                break;
+            case 4:
+                map.setCurrentPoint(1);
+                succes = true;
+                break;
+            case 5:
+                map.setCurrentPoint(2);
+                succes = true;
+                break;
+            case 6:
+                map.setCurrentPoint(3);
+                succes = true;
+                break;
+            case 7:
+                map.setCurrentPoint(4);
+                succes = true;
+                break;
+            case 8:
+                map.setCurrentPoint(6);
+                succes = true;
+                break;
+
+        }
+
+        return succes;
+    }
+
+    public boolean swipedRight(int currentPoint){
+        switch(currentPoint){
+            case 0:
+                break;
+            case 1:
+                map.setCurrentPoint(0);
+                succes = true;
+                break;
+            case 2:
+                break;
+            case 3:
+                map.setCurrentPoint(1);
+                succes = true;
+                break;
+            case 4:
+                map.setCurrentPoint(2);
+                succes = true;
+                break;
+            case 5:
+                break;
+            case 6:
+                map.setCurrentPoint(4);
+                succes = true;
+                break;
+            case 7:
+                map.setCurrentPoint(5);
+                succes = true;
+                break;
+            case 8:
+                map.setCurrentPoint(7);
+                succes = true;
+                break;
+        }
+        return succes;
+
     }
 }
