@@ -70,6 +70,7 @@ public class BattleActivity extends AppCompatActivity {
         player.revertBoosts();
         Intent returnIntent = new Intent();
         returnIntent.putExtra("Character_Key", player);
+        returnIntent.putExtra("Enemy_Name", enemy.getName());
         setResult(RESULT_OK, returnIntent);
         finish();
     }

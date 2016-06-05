@@ -28,14 +28,14 @@ public class Highscores implements Serializable{
         }
     }
 
-    public void addScore(int result, Character player){
+    public void addScore(int result, Character player, String enemyName){
         String text = "empty";
 
         for(int i =0; i< scores.length; i++){
             if(result> scores[i]){
-                text = (i+1) + ":  " + player.getName() + "  " + result + "points\n";
-                text+= "level: " + player.getLevel() + "\tgold: " + player.getGold() + "\n";
-                text += "killed by .... not yet implemented\n";
+                text = (i+1) + ": " + player.getName() + "  " + result + " points\n";
+                text+= "Level: " + player.getLevel() + "\t\t\t\tGold: " + player.getGold() + "\n";
+                text += "Killed by " + enemyName;
                 insertInArrays(result, text, i);
                 break;
             }

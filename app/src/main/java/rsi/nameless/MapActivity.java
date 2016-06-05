@@ -79,6 +79,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
                 Character player = (Character) data.getSerializableExtra("Character_Key");
                 map.setPlayer(player);
                 if (player.getCurrentHP() <= 0) {
+                    final String enemyName = data.getStringExtra("Enemy_Name");
                     AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
                     helpBuilder.setTitle("You died");
                     helpBuilder.setMessage("");
@@ -90,6 +91,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
                                     Intent returnIntent = new Intent();
                                     returnIntent.putExtra("PLAYER_SCORE",score);
                                     returnIntent.putExtra("PLAYER_CHARACTER", map.getPlayer());
+                                    returnIntent.putExtra("ENEMY_NAME", enemyName);
                                     setResult(Activity.RESULT_OK,returnIntent);
                                     finish();
                                 }

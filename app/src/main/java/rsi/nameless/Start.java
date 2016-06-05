@@ -40,7 +40,8 @@ public class Start extends AppCompatActivity {
         if(requestCode == NEW_GAME_CODE && resultCode == RESULT_OK){
             int result = data.getIntExtra("PLAYER_SCORE",0);
             Character player = (Character)data.getSerializableExtra("PLAYER_CHARACTER");
-            highscores.addScore(result, player);
+            String enemyName = data.getStringExtra("ENEMY_NAME");
+            highscores.addScore(result, player, enemyName);
             Log.d("DEBUG", "ended game, score: " + result);
         }
     }
