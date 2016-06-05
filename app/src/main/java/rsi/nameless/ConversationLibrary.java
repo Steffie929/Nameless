@@ -106,6 +106,7 @@ public class ConversationLibrary {
                 "the desert a little west of here who is supposedly an expert in weird stuff. \nLet's go talk to him.";
         Link end3 = new Link(text,false, false);
 
+        links = new Link[3];
         text = "If there really is something going on here I want to know exactly what it is, why it's happening and maybe\n" +
                 "I can do something about it. \n" +
                 "Let's see, that wolf was the strangest monster yet, so if the artefact exists, it has to be somewhere around here.\n" +
@@ -140,6 +141,7 @@ public class ConversationLibrary {
         links[2] = end3;
         Link a3 = new Link(text, options, links);
 
+        links = new Link[3];
         options = new String[3];
         text = "Whew, that was one tough fight. And one really weird wolf. Wolves aren't supposed to act that way right? \n" +
                 "It seems the whole world has gone crazy. Maybe that floating skeleton was actually telling the truth. \n" +

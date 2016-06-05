@@ -42,7 +42,7 @@ public class Map {
                 bgImgID = R.drawable.achtergrond1;
                 break;
             case 2:
-                bgImgID = R.drawable.desertbackground;
+                bgImgID = R.drawable.desert_background;
                 break;
         }
     }

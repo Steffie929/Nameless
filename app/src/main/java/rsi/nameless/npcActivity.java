@@ -62,6 +62,9 @@ public class npcActivity extends AppCompatActivity {
         if(o1.getVisibility() ==View.GONE)
             return;
 
+
+        Log.d("CONVERSATION", "isLast? " + currentLink.isLast());
+
         currentLink = currentLink.getNext(0);
         if(currentLink.isLast()) {
             tV.setText(currentLink.getText());
@@ -78,6 +81,7 @@ public class npcActivity extends AppCompatActivity {
         if(o2.getVisibility() ==View.GONE)
             return;
 
+        Log.d("CONVERSATION", "isLast? " + currentLink.isLast());
         currentLink = currentLink.getNext(1);
         if(currentLink.isLast()) {
             tV.setText(currentLink.getText());
@@ -93,6 +97,9 @@ public class npcActivity extends AppCompatActivity {
     public void option3(View v) {
         if(o3.getVisibility() ==View.GONE)
             return;
+
+
+        Log.d("CONVERSATION", "isLast? " + currentLink.isLast());
 
         currentLink = currentLink.getNext(2);
         if(currentLink.isLast()) {
