@@ -36,16 +36,24 @@ public class CharacterScreen extends AppCompatActivity {
 
         statTitle.setText(player.getName() + "'s statistics");
         String stats = "";
-        stats += "Strength: " + player.getStrength() + "\n";
-        stats += "Defence: " + player.getDefense() + "\n";
-        stats += "Skill: " + player.getSkill() + "\n";
-        stats += "Speed: " + player.getSpeed() + "\n";
-        stats += "HP: " + player.getCurrentHP() + " / " +player.getMaxHP()+ "\n";
-        stats += "XP: " +  player.getCurrentXP() + " / " +player.getMaxXP()+ "\n";
+        int[] boosts = player.getBoosts();
+        int strength = player.getStrength() - boosts[0];
+        int defense = player.getDefense() - boosts[1];
+        int skill = player.getSkill() - boosts[2];
+        int speed = player.getSpeed() - boosts[3];
+        int hp = player.getMaxHP() - boosts[4];
+        stats += "Level: " + player.getLevel() + "\n";
+        stats += "Maximum HP: " + hp + " (+" + boosts[4] + ")\n";
+        stats += "Current HP: " + player.getCurrentHP() + " / " + player.getMaxHP()+ "\n";
+        stats += "Strength: " + strength + " (+" + boosts[0] + ")\n";
+        stats += "Defense: " + defense + " (+" + boosts[1] + ")\n";
+        stats += "Skill: " + skill + " (+" + boosts[2] + ")\n";
+        stats += "Speed: " + speed + " (+" + boosts[3] + ")\n";
+        stats += "XP: " +  player.getCurrentXP() + " / " + player.getMaxXP()+ "\n";
         stats += "Gold: " + player.getGold();
         playerStats.setText(stats);
 
-        weapon.setText(player.getWeapon().getName());
-        armor.setText(player.getArmour().getName());
+        weapon.setText("Weapon: " + player.getWeapon().getName());
+        armor.setText("Armour: " + player.getArmour().getName());
     }
 }
