@@ -1,5 +1,6 @@
 package rsi.nameless;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,6 +18,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
     private CanvasMap drawView;
     private GestureDetectorCompat gDetector;
     private Map map;
+    private MainModel m;
 
     private final int SHOP_KEY = 4;
     private final int BATTLE_KEY = 7;
@@ -31,7 +33,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
 
 
         String playerName = getIntent().getStringExtra("PLAYER_NAME");
-        MainModel m = new MainModel(playerName);
+        this.m = new MainModel(playerName);
         drawView = (CanvasMap) findViewById(R.id.view);
         map = m.getCurrentMap();
         drawView.setMap(map);
@@ -83,6 +85,12 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
                     helpBuilder.setPositiveButton("Return to Main Menu",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
+                                    m.updateScore();
+                                    int score = m.getPlayerScore();
+                                    Intent returnIntent = new Intent();
+                                    returnIntent.putExtra("PLAYER_SCORE",score);
+                                    returnIntent.putExtra("PLAYER_CHARACTER", map.getPlayer());
+                                    setResult(Activity.RESULT_OK,returnIntent);
                                     finish();
                                 }
                             });

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/hs_background"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="rsi.nameless.HighscoreActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Highscores"
+        android:textSize="50dp"
+        android:background="#aaFFFFFF"
+        android:padding="20dp"
+        android:id="@+id/textView" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView2"
+        android:layout_below="@+id/textView"
+        android:layout_above="@+id/resetbutton"
+        android:padding="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#aaFFFFFF"
+                android:padding="3dp"
+                android:text="1:\t"
+                android:textSize="25dp"
+                android:id="@+id/score_nr1"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#aaFFFFFF"
+                android:padding="3dp"
+                android:text="2:\t"
+                android:textSize="25dp"
+                android:id="@+id/score_nr2"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#aaFFFFFF"
+                android:padding="3dp"
+                android:text="3:\t"
+                android:textSize="25dp"
+                android:id="@+id/score_nr3"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#aaFFFFFF"
+                android:padding="3dp"
+                android:text="4:\t"
+                android:textSize="25dp"
+                android:id="@+id/score_nr4"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#aaFFFFFF"
+                android:padding="3dp"
+                android:text="5:\t"
+                android:textSize="25dp"
+                android:id="@+id/score_nr5"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#aaFFFFFF"
+                android:padding="3dp"
+                android:text="6:\t"
+                android:textSize="25dp"
+                android:id="@+id/score_nr6"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#aaFFFFFF"
+                android:padding="3dp"
+                android:text="7:\t"
+                android:textSize="25dp"
+                android:id="@+id/score_nr7"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#aaFFFFFF"
+                android:padding="3dp"
+                android:text="8:\t"
+                android:textSize="25dp"
+                android:id="@+id/score_nr8"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#aaFFFFFF"
+                android:padding="3dp"
+                android:text="9:\t"
+                android:textSize="25dp"
+                android:id="@+id/score_nr9"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#aaFFFFFF"
+                android:padding="3dp"
+                android:text="10:\t"
+                android:textSize="25dp"
+                android:id="@+id/score_nr10"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#aaFFFFFF"
+                android:padding="3dp"
+                android:text="11:\t"
+                android:textSize="25dp"
+                android:id="@+id/score_nr11"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#aaFFFFFF"
+                android:padding="3dp"
+                android:text="12:\t"
+                android:textSize="25dp"
+                android:id="@+id/score_nr12"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#aaFFFFFF"
+                android:padding="3dp"
+                android:text="13:\t"
+                android:textSize="25dp"
+                android:id="@+id/score_nr13"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#aaFFFFFF"
+                android:padding="3dp"
+                android:text="14:\t"
+                android:textSize="25dp"
+                android:id="@+id/score_nr14"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#aaFFFFFF"
+                android:padding="3dp"
+                android:text="15:\t"
+                android:textSize="25dp"
+                android:id="@+id/score_nr15"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#aaFFFFFF"
+                android:padding="3dp"
+                android:text="example\nname:\t points: \nlvl: \tgold:\nkilled by: monster"
+                android:textSize="25dp"
+                android:id="@+id/score_ex"/>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="reset all scores"
+        android:onClick="resetHighscores"
+        android:padding="10dp"
+        android:background="#b5cce3"
+        android:id="@+id/resetbutton"
+        android:layout_alignParentRight="true" />
+
+
+</RelativeLayout>

@@ -322,6 +322,15 @@ public class Character implements Serializable {
         changeCurrentHP(hpDelta);
     }
 
+    public int getBackpackValue(){
+        int result = 0;
+        for(int i=0; i<backpack.size(); i++){
+            result += backpack.get(i).getPrice();
+        }
+
+        return result;
+    }
+
     /**
      * @return the level
      */
