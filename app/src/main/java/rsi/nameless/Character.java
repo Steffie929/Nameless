@@ -1,5 +1,7 @@
 package rsi.nameless;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -376,6 +378,8 @@ public class Character implements Serializable {
             this.imgID = R.drawable.ci_1_nosw_sh;
         else if (!w.contains("Sword") && !a.contains("Shield")&& level <2)
             this.imgID = R.drawable.ci_1_nosw_nosh;
+        else if (w.contains("Sword") && a.contains("Shield")&& level <2)
+            this.imgID = R.drawable.ci_1_sw_sh;
         else if (w.contains("Sword") && !a.contains("Shield") && level <4)
             this.imgID = R.drawable.ci_2_sw_nosh;
         else if (!w.contains("Sword") && a.contains("Shield")&& level <4)

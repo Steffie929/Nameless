@@ -159,13 +159,15 @@ public class CanvasMap extends View  {
     /**
      * Draws an icon 'd' with a height of 150 and width of 100 at location 'p' on the map.
      * Used for the player icon
-     * @param d The icon to draw
      * @param p The location on the map
      */
     public void drawPlayerIcon(int p){
         int x,y;
         x= Math.round(pathX[p]);
         y = Math.round(pathY[p]);
+        int imID = map.getPlayer().getImgID();
+        playerIcon = ResourcesCompat.getDrawable(getResources(), imID, null);
+        Log.d("DEBUG", "plIcon id: " + imID);
         //d.setBounds(left, top, right, bottom);
         playerIcon.setBounds(x-75, y-75, x+75, y+75);//100 breed 150 hoog
         playerIcon.draw(canvas);
