@@ -88,12 +88,12 @@ public class BackpackActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Log.d("Backpack", item.getName() + " was clicked");
                     final ItemType itemType = item.getType();
-                    String positiveAction;
-                    String message;
+                    String positiveAction = "";
+                    String message = "";
                     if (itemType == ItemType.POTION) {
                         positiveAction = "Use";
                         message = backpackactivity.getItemInformation(item, true);
-                    }  else {
+                    }  else if (itemType == ItemType.WEAPON || itemType == ItemType.ARMOUR){
                         positiveAction = "Equip";
                         message = "Equid the following item:\n" + backpackactivity.getItemInformation(item, true);
                         message += "\n\n";

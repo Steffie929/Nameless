@@ -174,7 +174,7 @@ public class Battle extends Event implements Serializable{
                 } else if (ptype == ItemType.WEAPON) {
                     player.setWeapon(inventoryNumber);
                     battleInfo += player.getName() + " equiped " + player.getWeapon().getName() + "\n";
-                } else {
+                } else if (ptype == ItemType.ARMOUR) {
                     player.setArmour(inventoryNumber);
                     battleInfo += player.getName() + " equiped " + player.getArmour().getName() + "\n";
                 }
@@ -252,7 +252,7 @@ public class Battle extends Event implements Serializable{
                     } else if (ptype == ItemType.WEAPON) {
                         enemy.setWeapon(inventoryNumber);
                         battleInfo += enemy.getName() + " equiped " + enemy.getWeapon().getName() + "\n";
-                    } else {
+                    } else if (ptype == ItemType.ARMOUR) {
                         enemy.setArmour(inventoryNumber);
                         battleInfo += enemy.getName() + " equiped " + enemy.getArmour().getName() + "\n";
                     }
