@@ -95,7 +95,7 @@ public class BackpackActivity extends AppCompatActivity {
                         message = backpackactivity.getItemInformation(item, true);
                     }  else if (itemType == ItemType.WEAPON || itemType == ItemType.ARMOUR){
                         positiveAction = "Equip";
-                        message = "Equid the following item:\n" + backpackactivity.getItemInformation(item, true);
+                        message = "Equip the following item:\n" + backpackactivity.getItemInformation(item, true);
                         message += "\n\n";
                         if (itemType == ItemType.WEAPON) {
                             if (!player.getWeapon().getName().equals("No weapon"))
