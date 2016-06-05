@@ -1,5 +1,7 @@
 package rsi.nameless;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -17,14 +19,14 @@ public class Highscores implements Serializable{
 
         for(int i=0;i<15;i++){
             scores[i] = 0;
-            highscores[i] = (i+1) + ": ";
+            highscores[i] ="";
         }
     }
 
     public void resetHighscores(){
         for(int i=0;i<15;i++){
             scores[i] = 0;
-            highscores[i] = (i+1) + ": ";
+            highscores[i] = "";
         }
     }
 
@@ -33,7 +35,7 @@ public class Highscores implements Serializable{
 
         for(int i =0; i< scores.length; i++){
             if(result> scores[i]){
-                text = (i+1) + ": " + player.getName() + "  " + result + " points\n";
+                text = player.getName() + "  " + result + " points\n";
                 text+= "Level: " + player.getLevel() + "\t\t\t\tGold: " + player.getGold() + "\n";
                 text += "Killed by " + enemyName;
                 insertInArrays(result, text, i);
@@ -44,6 +46,7 @@ public class Highscores implements Serializable{
 
     private void insertInArrays(int result, String text, int index){
         for(int i= 14;i> index; i--){
+            if(highscores[i] == i + "")
             scores[i] = scores[i-1];
             highscores[i] = highscores[i-1];
         }

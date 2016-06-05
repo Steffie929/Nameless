@@ -35,7 +35,7 @@ public class HighscoreActivity extends AppCompatActivity {
 
         strArray = highscores.getHighscores();
         for(int i=0; i<15;i++){
-            tvArray[i].setText(strArray[i]);
+            tvArray[i].setText( (i+1) +". " + strArray[i]);
         }
 
     }
