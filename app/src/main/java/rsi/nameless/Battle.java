@@ -103,13 +103,13 @@ public class Battle extends Event implements Serializable{
             do {
                 performPlayerAction();
                 speedTier--;
-            } while (playerAction.repeatable() && speedTier >= 0);
+            } while (playerAction.repeatable() && speedTier >= 0 && !battleFinished());
             performEnemyAction();
         } else if (speedDifference < 0) {
             do {
                 performEnemyAction();
                 speedTier++;
-            } while (enemyAction.repeatable() && speedTier <= 0);
+            } while (enemyAction.repeatable() && speedTier <= 0 && !battleFinished());
             performPlayerAction();
         } else {
             if (random.nextBoolean()) {
