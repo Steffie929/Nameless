@@ -236,4 +236,13 @@ public class BackpackActivity extends AppCompatActivity {
             return base;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("Character_Key", player);
+        returnIntent.putExtra("Item_Index", -1);
+        setResult(RESULT_OK, returnIntent);
+        finish();
+    }
 }
