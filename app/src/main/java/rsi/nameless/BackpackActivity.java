@@ -22,12 +22,14 @@ public class BackpackActivity extends AppCompatActivity {
     private ArrayList<Item> backpack;
     private final int maxBackpackSize = 30;
     private TableLayout table;
+    private boolean fromBattle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_backpack);
         player = (Character) getIntent().getSerializableExtra("CURRENT_PLAYER");
+        fromBattle = (boolean) getIntent().getSerializableExtra("FROM_BATTLE_BOOLEAN");
         backpack = player.getBackpack();
         table = (TableLayout) findViewById(R.id.backpack_table);
         fillBackpack();
@@ -115,31 +117,38 @@ public class BackpackActivity extends AppCompatActivity {
                     helpBuilder.setPositiveButton(positiveAction,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    if (itemType == ItemType.POTION) {
-                                        Potion potion = (Potion) item;
-                                        if (potion.canBeUsed()) {
-                                            player.changeCurrentHP(potion.getHPRestore());
-                                            player.boostStrength(potion.getStrengthBonus());
-                                            player.boostDefense(potion.getDefenseBonus());
-                                            player.boostSkill(potion.getSkillBonus());
-                                            player.boostSpeed(potion.getSpeedBonus());
-                                            player.boostMaxHP(potion.getHPBonus());
-                                            if (!potion.afterUsing()) {
-                                                player.getBackpack().remove(potion);
-                                                backpack = player.getBackpack();
-                                                fillBackpack();
+                                    if (!fromBattle) {
+                                        if (itemType == ItemType.POTION) {
+                                            Potion potion = (Potion) item;
+                                            if (potion.canBeUsed()) {
+                                                player.changeCurrentHP(potion.getHPRestore());
+                                                player.boostStrength(potion.getStrengthBonus());
+                                                player.boostDefense(potion.getDefenseBonus());
+                                                player.boostSkill(potion.getSkillBonus());
+                                                player.boostSpeed(potion.getSpeedBonus());
+                                                player.boostMaxHP(potion.getHPBonus());
+                                                if (!potion.afterUsing()) {
+                                                    player.getBackpack().remove(potion);
+                                                    backpack = player.getBackpack();
+                                                    fillBackpack();
+                                                }
                                             }
+                                        } else if (itemType == ItemType.WEAPON) {
+                                            player.setWeapon(itemIndex);
+                                            player.changeCharIcon();
+                                            backpack = player.getBackpack();
+                                            fillBackpack();
+                                        } else if (itemType == ItemType.ARMOUR) {
+                                            player.setArmour(itemIndex);
+                                            player.changeCharIcon();
+                                            backpack = player.getBackpack();
+                                            fillBackpack();
                                         }
-                                    } else if (itemType == ItemType.WEAPON) {
-                                        player.setWeapon(itemIndex);
-                                        player.changeCharIcon();
-                                        backpack = player.getBackpack();
-                                        fillBackpack();
-                                    } else if (itemType == ItemType.ARMOUR) {
-                                        player.setArmour(itemIndex);
-                                        player.changeCharIcon();
-                                        backpack = player.getBackpack();
-                                        fillBackpack();
+                                    } else {
+                                        Intent returnIntent = new Intent();
+                                        returnIntent.putExtra("Item_Index", itemIndex);
+                                        setResult(RESULT_OK, returnIntent);
+                                        finish();
                                     }
                                 }
                             });
@@ -168,6 +177,7 @@ public class BackpackActivity extends AppCompatActivity {
     public void backpackBackButton (View v) {
         Intent returnIntent = new Intent();
         returnIntent.putExtra("Character_Key", player);
+        returnIntent.putExtra("Item_Index", -1);
         setResult(RESULT_OK, returnIntent);
         finish();
     }

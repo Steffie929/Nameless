@@ -152,7 +152,6 @@ public class Battle extends Event implements Serializable{
                 battleInfo += player.getName() + " defends\n";
                 break;
             case USE_ITEM:
-                battleInfo += player.getName() + " uses an item\n";
                 Item pitem = player.getItemFromBackPack(inventoryNumber);
                 if (pitem == null) {
                     battleInfo += "Using item failed\n";
@@ -162,6 +161,7 @@ public class Battle extends Event implements Serializable{
                 if (ptype == ItemType.POTION) {
                     Potion potion = (Potion) pitem;
                     if (potion.canBeUsed()) {
+                        battleInfo += player.getName() + " used " + potion.getName() + "\n";
                         player.changeCurrentHP(potion.getHPRestore());
                         player.boostStrength(potion.getStrengthBonus());
                         player.boostDefense(potion.getDefenseBonus());
@@ -171,6 +171,12 @@ public class Battle extends Event implements Serializable{
                         if (!potion.afterUsing())
                             player.getBackpack().remove(potion);
                     }
+                } else if (ptype == ItemType.WEAPON) {
+                    player.setWeapon(inventoryNumber);
+                    battleInfo += player.getName() + " equiped " + player.getWeapon().getName() + "\n";
+                } else {
+                    player.setArmour(inventoryNumber);
+                    battleInfo += player.getName() + " equiped " + player.getArmour().getName() + "\n";
                 }
                 break;
             case CHANGE_WEAPON:
@@ -190,6 +196,7 @@ public class Battle extends Event implements Serializable{
                     battleInfo += enemy.getName() + " was too fast to escape!\n";
                 break;
             default:
+                battleInfo += player.getName() + " did nothing";
                 break;
         }
     }
@@ -233,6 +240,7 @@ public class Battle extends Event implements Serializable{
                 if (ptype == ItemType.POTION) {
                     Potion potion = (Potion) pitem;
                     if (potion.canBeUsed()) {
+                        battleInfo += enemy.getName() + " used " + potion.getName() + "\n";
                         enemy.changeCurrentHP(potion.getHPRestore());
                         enemy.changeStrength(potion.getStrengthBonus());
                         enemy.changeDefense(potion.getDefenseBonus());
@@ -241,6 +249,12 @@ public class Battle extends Event implements Serializable{
                         enemy.changeMaxHP(potion.getHPBonus());
                         if (!potion.afterUsing())
                             enemy.getBackpack().remove(potion);
+                    } else if (ptype == ItemType.WEAPON) {
+                        enemy.setWeapon(inventoryNumber);
+                        battleInfo += enemy.getName() + " equiped " + enemy.getWeapon().getName() + "\n";
+                    } else {
+                        enemy.setArmour(inventoryNumber);
+                        battleInfo += enemy.getName() + " equiped " + enemy.getArmour().getName() + "\n";
                     }
                 }
                 break;
@@ -261,6 +275,7 @@ public class Battle extends Event implements Serializable{
                     battleInfo += "You kept it from escaping\n";
                 break;
             default:
+                battleInfo += enemy.getName() + " did nothing";
                 break;
         }
     }

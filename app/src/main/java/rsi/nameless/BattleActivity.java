@@ -15,6 +15,7 @@ public class BattleActivity extends AppCompatActivity {
     private Character player, enemy;
     private TextView HP_player, HP_enemy, playerName, enemyName, info, messages;
     private boolean playerTurn; // is true when the user can click a button to set their next action.
+    private final int BACKPACK_KEY = 37;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,10 +136,10 @@ public class BattleActivity extends AppCompatActivity {
 
     public void useItemButton(View v){
         if(playerTurn){
-            battle.setPlayerAction(BattleAction.USE_ITEM, 1);
-            playerTurn = false;
-            afterInput();
-            startRound();
+            Intent intent = new Intent(this, BackpackActivity.class);
+            intent.putExtra("CURRENT_PLAYER", player);
+            intent.putExtra("FROM_BATTLE_BOOLEAN", true);
+            startActivityForResult(intent, BACKPACK_KEY);
         }
     }
 
@@ -156,6 +157,25 @@ public class BattleActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+    }
+
+    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+        if (requestCode == BACKPACK_KEY) {
+            if (resultCode == RESULT_OK) {
+                int index = (int) data.getSerializableExtra("Item_Index");
+                Log.d("Item index: ", Integer.toString(index));
+                Log.d("Current weapon: ", player.getWeapon().getName());
+                Log.d("Current armour: ", player.getArmour().getName());
+                if (index >= 0) {
+                    battle.setPlayerAction(BattleAction.USE_ITEM, index);
+                    playerTurn = false;
+                    afterInput();
+                    startRound();
+                    Log.d("Current weapon: ", player.getWeapon().getName());
+                    Log.d("Current armour: ", player.getArmour().getName());
+                }
+            }
+        }
     }
 
 }

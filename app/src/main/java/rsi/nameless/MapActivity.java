@@ -137,6 +137,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         if(openBackpack(x,y)){
             Intent intent = new Intent(this, BackpackActivity.class);
             intent.putExtra("CURRENT_PLAYER", map.getPlayer());
+            intent.putExtra("FROM_BATTLE_BOOLEAN", false);
             startActivityForResult(intent, BACKPACK_KEY);
             return false;
         }
