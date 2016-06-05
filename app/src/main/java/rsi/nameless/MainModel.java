@@ -2,6 +2,8 @@ package rsi.nameless;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+
 /**
  * Created by Stéphanie on 20-5-2016.
  */
@@ -9,6 +11,7 @@ public class MainModel {
     private Character player;
     private int currentLevel;
     private Map currentMap;
+    private ArrayList<Map> maps;
     private EnemyLibrary enemies;
     private ItemLibrary items;
     private ConversationLibrary convLib;
@@ -20,10 +23,16 @@ public class MainModel {
         this.player = new Character(playerName, items);
         convLib = new ConversationLibrary(enemies);
         currentLevel = 1;
-        currentMap = new Map(currentLevel, player, enemies, items, convLib);
         playerScore = 0;
+        maps = new ArrayList<>();
+
+        maps.add(new Map(1, player, enemies, items, convLib));
+        maps.add(new Map(2, player, enemies, items, convLib));
+        //maps.add(new Map(3, player, enemies, items, convLib));
+        currentMap = maps.get(0);
 
     }
+
 
     public void updateScore(){
         int mapLevelBonus = currentLevel*100;
@@ -41,8 +50,16 @@ public class MainModel {
         return currentMap;
     }
 
+    public void levelTwo(){
+        currentMap = maps.get(1);
+    }
+
     public int getPlayerScore(){
         return playerScore;
+    }
+
+    public ItemLibrary getItemLibrary(){
+        return items;
     }
 
 }

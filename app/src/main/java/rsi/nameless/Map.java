@@ -11,8 +11,7 @@ public class Map {
     public enum eventType { BATTLE, SHOP, EMPTY }
     private eventType[] events; //Array of events at point 0, ..., 8
     private Character player;
-    private int currentPoint; //Current location of player
-    private int previousPoint; // Previous location of player
+    private int currentPoint, bgImgID; //Current location of player
     private int level; //Level of the map
     private ItemLibrary items;
     private ArrayList<Character> mapEnemies;
@@ -20,6 +19,7 @@ public class Map {
     private boolean battle; // is the player currently in a battle event
     private boolean shop; // is the player currently in a shop event
     private Conversation conv; //The starting conversation of the map
+
 
     /**
      * Basic constructor
@@ -36,7 +36,15 @@ public class Map {
         this.player = player;
         generateEventTypes();
         currentPoint = 8;
-        previousPoint = 8;
+
+        switch(level){
+            case 1:
+                bgImgID = R.drawable.achtergrond1;
+                break;
+            case 2:
+                bgImgID = R.drawable.desertbackground;
+                break;
+        }
     }
 
     /**
@@ -83,7 +91,6 @@ public class Map {
      * @param point the point to inspect for a battle or shop
      */
     public void setCurrentPoint(int point) {
-        previousPoint = currentPoint;
         currentPoint = point;
         if(events[currentPoint] == eventType.BATTLE) { //Hier stond currentPoint-1, waarom?
             shop = false;
@@ -143,6 +150,10 @@ public class Map {
 
     public Conversation getConversation(){
         return conv;
+    }
+
+    public int getBgImgID(){
+        return bgImgID;
     }
     
 }

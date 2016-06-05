@@ -13,7 +13,7 @@ public class ConversationLibrary {
         this.enemyLib = enemyLib;
         conversations = new ArrayList<>();
         conversations.add(new Conversation ("Stranger", R.drawable.stranger ,firstConversation(), enemyLib.getBoss(1)));
-        //conversations.add(secondConversation());
+        conversations.add(new Conversation ("Yourself", R.drawable.ci_1_nosw_nosh ,secondConversation(), enemyLib.getBoss(1)));
     }
 
     public Link firstConversation(){
@@ -90,9 +90,70 @@ public class ConversationLibrary {
         return start;
     }
 
-    /*public Conversation secondConversation(){
-        return new Link("", false, false);
-    }*/
+    public Link secondConversation(){
+        String text;
+        String[] options = new String[3];
+        Link[] links = new Link[3];
+        text = "One problem, I don't know where that skeleton went. But I believe there is an old hermit in " +
+                "the desert a little west of here who is supposedly an expert in weird stuff. \nLet's go talk to him.";
+        Link end1 = new Link(text,false, false);
+
+        text = "I believe there is an old hermit in " +
+                "the desert a little west of here who is supposedly an expert in weird stuff. \nLet's go talk to him.";
+        Link end2 = new Link(text,false, false);
+
+        text = "To sell it, I first have to know what it is. I believe there is an old hermit in " +
+                "the desert a little west of here who is supposedly an expert in weird stuff. \nLet's go talk to him.";
+        Link end3 = new Link(text,false, false);
+
+        text = "If there really is something going on here I want to know exactly what it is, why it's happening and maybe\n" +
+                "I can do something about it. \n" +
+                "Let's see, that wolf was the strangest monster yet, so if the artefact exists, it has to be somewhere around here.\n" +
+                "*Got something* This must be it!\nOkay, I found the artefact. Now what do I do?";
+        options[0] = "I should find that skeleton and give it to him, he seemed like he knew what he was talking about.";
+        options[1] = "I'll keep it with me for now, but i really should find someone who knows more about this thing.";
+        options[2] = "This might be worth something. Time to find a buyer.";
+        links[0] = end1;
+        links[1] = end2;
+        links[2] = end3;
+        Link a1 = new Link(text, options, links);
+
+        text = "If there really is something going on here I should probable find out what it is. I can always walk away later.\n" +
+                "Let's see, that wolf was the strangest monster yet, so if the artefact exists, it has to be somewhere around here.\n" +
+                "*Got something* This must be it!\nOkay, I found the artefact. Now what do I do?";
+        options[0] = "I should find that skeleton and give it to him, he seemed like he knew what he was talking about.";
+        options[1] = "I'll keep it with me for now, but i really should find someone who knows more about this thing.";
+        options[2] = "This might be worth something. Time to find a buyer.";
+        links[0] = end1;
+        links[1] = end2;
+        links[2] = end3;
+        Link a2 = new Link(text, options, links);
+
+        text = "This is all way too weird and too dangerous! I'm going to forget anything happend, it's time to go home!\n" +
+                "*BAM* Ouch, stupid forest. I'm outside for 5 minutes and already tripping over things. Hey, wait a second.\n" +
+                "This must be that artefact the skeleton was talking about!\nOkay, I found the artefact. Now what do I do?";
+        options[0] = "I should find that skeleton and give it to him, he seemed like he knew what he was talking about.";
+        options[1] = "I'll keep it with me for now, but i really should find someone who knows more about this thing.";
+        options[2] = "This might be worth something. Time to find a buyer.";
+        links[0] = end1;
+        links[1] = end2;
+        links[2] = end3;
+        Link a3 = new Link(text, options, links);
+
+        options = new String[3];
+        text = "Whew, that was one tough fight. And one really weird wolf. Wolves aren't supposed to act that way right? \n" +
+                "It seems the whole world has gone crazy. Maybe that floating skeleton was actually telling the truth. \n" +
+                "Maybe all these weird events aren't random, they could be caused by something. But do I really want to get involved with this?";
+        options[0] = "Hell yes!";
+        options[1] = "It can't hurt to find out more.";
+        options[2] = "No way, I'm out of here.";
+        links[0] = a1;
+        links[1] = a2;
+        links[2] = a3;
+        Link start = new Link(text, options, links);
+
+        return start;
+    }
 
     public Conversation getConversation(int index){
         return conversations.get(index);

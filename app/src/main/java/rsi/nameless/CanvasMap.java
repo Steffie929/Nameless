@@ -196,7 +196,8 @@ public class CanvasMap extends View  {
     }
 
     public void drawBackground(){
-        Drawable d = ResourcesCompat.getDrawable(getResources(), R.drawable.achtergrond1, null);
+        int bgImgID = map.getBgImgID();
+        Drawable d = ResourcesCompat.getDrawable(getResources(), bgImgID, null);
         d.setBounds(0, 0, mapWidth, mapHeight);
         d.draw(canvas);
 

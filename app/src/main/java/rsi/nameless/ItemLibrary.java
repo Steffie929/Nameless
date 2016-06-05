@@ -10,6 +10,7 @@ public class ItemLibrary implements Serializable{
     private ArrayList<Weapon> weapons;
     private ArrayList<Armour> armour;
     private ArrayList<Potion> potions;
+    private ArrayList<Item> quest;
 
     /**
      * Constructor
@@ -18,17 +19,23 @@ public class ItemLibrary implements Serializable{
         weapons = new ArrayList<>();
         potions = new ArrayList<>();
         armour = new ArrayList<>();
+        quest = new ArrayList<>();
         addWeapons();
         addPotions();
         addArmour();
+
+
+
+        Item artefact = new Item("Strange Jewel", "I really don't know what this is", 0,0,0,0,0,0,0,ItemType.QUEST,R.drawable.jewel);
+        quest.add(artefact);
     }
 
     private void addWeapons () {
         weapons.add( new Weapon ("No weapon", "No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.item1) ); //Name, description, str, def, skl, spd, HP, level, price, imgId
         weapons.add( new Weapon ("Stick", "A simple stick, it is better than nothing.", 1, 0, 1, 0, 0, 1, 0, R.drawable.stick) );
         weapons.add( new Weapon ("Training Sword", "A simple and worn training sword. Not very sharp, but it does more damage than a stick.", 4, -1, 1, 1, 0, 1, 5, R.drawable.training_sword) );
-        weapons.add( new Weapon ("Bunny Teeth","A bunny's weapon of choice." , 1, 0, 0, 0, 0, 1, 2, R.drawable.bunny_teeth) );
-        weapons.add( new Weapon ("Wolf Teeth","A wolf's weapon of choice." , 1, 0, 0, 1, 0, 1, 3, R.drawable.bunny_teeth) );
+        weapons.add( new Weapon ("Bunny Teeth","A bunny's weapon of choice." , 1, 0, 0, 0, 0, -1, 2, R.drawable.bunny_teeth) );
+        weapons.add( new Weapon ("Claws","Sharp and dangerous" , 1, 0, 0, 1, 0, 1, 3, R.drawable.claws) );
     }
 
     private void addPotions () {
@@ -43,6 +50,7 @@ public class ItemLibrary implements Serializable{
         armour.add( new Armour ("No armour","No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.item3));
         armour.add( new Armour ("Snail Shell", "A snails protection and home.", 0, 2, 0, -1, 0, 1, 2,R.drawable.snailshell));
         armour.add( new Armour ("Small Shield","Easy to carry but only adds a little to defence." ,0, 3, 0, 1, 4, 1, 3,R.drawable.small_shield));
+        armour.add( new Armour ("Flames","Scares away wild animals" ,0, 3, 1, 1, 0, -1, 5,R.drawable.flames));
     }
 
     public Weapon getWeapon (int index) {
@@ -55,6 +63,10 @@ public class ItemLibrary implements Serializable{
 
     public Armour getArmour (int index) {
         return armour.get(index);
+    }
+
+    public Item getQuestItem(int index){
+        return quest.get(index);
     }
 
     public int getNrWeapons(){

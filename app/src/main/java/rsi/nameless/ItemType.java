@@ -5,5 +5,6 @@ package rsi.nameless;
 public enum ItemType {
     WEAPON,
     POTION,
-    ARMOUR;
+    ARMOUR,
+    QUEST;
 }

@@ -100,6 +100,17 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
                     helpDialog.setCancelable(false);
                     helpDialog.show();
                 }
+                else if(map.getCurrentPoint() ==0){
+                    m.levelTwo();
+                    map = m.getCurrentMap();
+                    map.setCurrentPoint(8);
+                    Item questItem = m.getItemLibrary().getQuestItem(0);
+                    map.getPlayer().addItemToBackpack(questItem);
+                    drawView.setMap(map);
+                    drawView.invalidate();
+                    Conversation conv = map.getConversation();
+                    startConversation(conv);
+                }
             }
         }
         if (requestCode == SHOP_KEY || requestCode == BACKPACK_KEY) {
