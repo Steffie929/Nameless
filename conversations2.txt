@@ -1,0 +1,40 @@
+Whew, that was one tough fight. And one really weird wolf. Wolves arent suppose dto act that way right? 
+It seems the whole world has gone crazy. Maybe that floating skeleton was actually telling the truth. 
+Maybe all these weird events aren't random, they could be caused by something. But do I really want to get involved with this?
+
+-1 Hell yes! 
+-2 It can't hurt to find out more.
+-3 No way, I'm out of here.
+
+1: 
+If there really is something going on here I want to know exactly what it is, why it's happening and maybe
+I can do something about it. 
+Let's see, that wolf was the strangest monster yet, so if the artefact exists, it has to be somewhere around here.
+*Got something* This must be it!
+2:
+If there really is something going on here I should probable find out what it is. I can always walk away later.
+Let's see, that wolf was the strangest monster yet, so if the artefact exists, it has to be somewhere around here.
+*Got something* This must be it!
+3:
+This is all way too weird and too dangerous! I'm going to forget anything happend, it's time to go home!
+*BAM* Ouch, stupid forest. I'm outside for 5 minutes and already tripping over things. Hey, wait a second.
+This must be that artefact the skeleton was talking about!
+
+==========================================================================================
+Okay, I found the artefact. Now what do I do?
+
+-1 I should find that skeleton and give it to him, he seemed like he knew what he was talking about
+-2 I'll keep it with me for now, but i really should find someone who knows more about this thing.
+-3 This might be worth something. Time to find a buyer.
+
+1:
+One problem, I don't know where that skeleton went. But I believe there is an old hermit in 
+the desert a little west of here who is supposedly an expert in weird stuff. Let's go talk to him.
+
+2:
+I believe there is an old hermit in 
+the desert a little west of here who is supposedly an expert in weird stuff. Let's go talk to him.
+
+3:
+To sell it, I first have to know what it is. I believe there is an old hermit in 
+the desert a little west of here who is supposedly an expert in weird stuff. Let's go talk to him.
