@@ -24,7 +24,7 @@ public class Map {
     /**
      * Basic constructor
      */
-    public Map(int level, Character player, EnemyLibrary enemies, ItemLibrary items, ConversationLibrary convLib){
+    public Map(int level, EnemyLibrary enemies, ItemLibrary items, ConversationLibrary convLib){
         this.level = level;
         mapEnemies = enemies.getEnemiesWithLevel(level);
         boss = enemies.getBoss(level-1);

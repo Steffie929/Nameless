@@ -10,7 +10,6 @@ import java.util.ArrayList;
 public class MainModel {
     private Character player;
     private int currentLevel;
-    private Map currentMap;
     private ArrayList<Map> maps;
     private EnemyLibrary enemies;
     private ItemLibrary items;
@@ -26,10 +25,9 @@ public class MainModel {
         playerScore = 0;
         maps = new ArrayList<>();
 
-        maps.add(new Map(1, player, enemies, items, convLib));
-        maps.add(new Map(2, player, enemies, items, convLib));
+        maps.add(new Map(1, enemies, items, convLib));
+        maps.add(new Map(2, enemies, items, convLib));
         //maps.add(new Map(3, player, enemies, items, convLib));
-        currentMap = maps.get(0);
 
     }
 
@@ -46,12 +44,8 @@ public class MainModel {
 
     }
 
-    public Map getCurrentMap(){
-        return currentMap;
-    }
-
-    public void levelTwo(){
-        currentMap = maps.get(1);
+    public Map getMap(int lvl){
+        return maps.get(lvl-1);
     }
 
     public int getPlayerScore(){
@@ -60,6 +54,10 @@ public class MainModel {
 
     public ItemLibrary getItemLibrary(){
         return items;
+    }
+
+    public Character getPlayer(){
+        return player;
     }
 
 }

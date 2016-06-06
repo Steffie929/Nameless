@@ -19,6 +19,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
     private GestureDetectorCompat gDetector;
     private Map map;
     private MainModel m;
+    private Character player;
 
     private final int SHOP_KEY = 4;
     private final int BATTLE_KEY = 7;
@@ -30,24 +31,31 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-
-
         String playerName = getIntent().getStringExtra("PLAYER_NAME");
         this.m = new MainModel(playerName);
         drawView = (CanvasMap) findViewById(R.id.view);
-        map = m.getCurrentMap();
+        this.gDetector = new GestureDetectorCompat(this,this);
+        map = m.getMap(1);
+        player = m.getPlayer();
+        map.setPlayer(player);
+
+        startLevel();
+
+
+
+
+    }
+
+    public void startLevel(){
         drawView.setMap(map);
         Conversation conv = map.getConversation();
         startConversation(conv);
-
-
-        this.gDetector = new GestureDetectorCompat(this,this);
     }
 
     public void startConversation(Conversation conv){
         Intent intent = new Intent(this, npcActivity.class);
         intent.putExtra("CURRENT_CONVERSATION", conv);
-        intent.putExtra("CURRENT_PLAYER", map.getPlayer());
+        intent.putExtra("CURRENT_PLAYER", player);
         startActivityForResult(intent, CONVERSATION_KEY);
         drawView.invalidate();
     }
@@ -62,6 +70,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
     public void startShopActivity(Shop shop){
         Intent intent = new Intent(this, ShopActivity.class);
         intent.putExtra("CURRENT_SHOP", shop);
+        intent.putExtra("CURRENT_PLAYER", player);
         startActivityForResult(intent, SHOP_KEY);
         drawView.invalidate();
     }
@@ -76,7 +85,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
         if (requestCode == BATTLE_KEY || requestCode == CONVERSATION_KEY) {
             if (resultCode == RESULT_OK) {
-                Character player = (Character) data.getSerializableExtra("Character_Key");
+                this.player = (Character) data.getSerializableExtra("Character_Key");
                 map.setPlayer(player);
                 if (player.getCurrentHP() <= 0) {
                     final String enemyName = data.getStringExtra("Enemy_Name");
@@ -90,7 +99,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
                                     int score = m.getPlayerScore();
                                     Intent returnIntent = new Intent();
                                     returnIntent.putExtra("PLAYER_SCORE",score);
-                                    returnIntent.putExtra("PLAYER_CHARACTER", map.getPlayer());
+                                    returnIntent.putExtra("PLAYER_CHARACTER", player);
                                     returnIntent.putExtra("ENEMY_NAME", enemyName);
                                     setResult(Activity.RESULT_OK,returnIntent);
                                     finish();
@@ -101,21 +110,18 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
                     helpDialog.show();
                 }
                 else if(map.getCurrentPoint() ==0){
-                    m.levelTwo();
-                    map = m.getCurrentMap();
+                    map = m.getMap(2);
                     map.setCurrentPoint(8);
                     Item questItem = m.getItemLibrary().getQuestItem(0);
-                    map.getPlayer().addItemToBackpack(questItem);
-                    drawView.setMap(map);
-                    drawView.invalidate();
-                    Conversation conv = map.getConversation();
-                    startConversation(conv);
+                    player.addItemToBackpack(questItem);
+                    map.setPlayer(player);
+                    startLevel();
                 }
             }
         }
         if (requestCode == SHOP_KEY || requestCode == BACKPACK_KEY) {
             if (resultCode == RESULT_OK) {
-                Character player = (Character) data.getSerializableExtra("Character_Key");
+                player = (Character) data.getSerializableExtra("Character_Key");
                 map.setPlayer(player);
             }
         }
