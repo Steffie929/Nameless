@@ -40,7 +40,7 @@ public class Character implements Serializable {
         speed = 10;
         maxHP = 15;
         currentHP = maxHP;
-        gold = 100;
+        gold = 10;
         level = 1;
         backpack = new ArrayList<>();
         currentXP = 0;
