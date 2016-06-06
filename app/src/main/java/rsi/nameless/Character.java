@@ -40,7 +40,7 @@ public class Character implements Serializable {
         speed = 10;
         maxHP = 15;
         currentHP = maxHP;
-        gold = 10;
+        gold = 100;
         level = 1;
         backpack = new ArrayList<>();
         currentXP = 0;
@@ -88,6 +88,9 @@ public class Character implements Serializable {
             level++;
             currentXP -= maxXP;
             maxXP = level*10;
+            if (currentXP > maxXP) {
+                levelUp();
+            }
         }
     }
     public void giveBonusXP(int delta){
@@ -234,8 +237,15 @@ public class Character implements Serializable {
         return gold;
     }
 
-    public void setGold(int difference) {
+    /**
+     * Change the gold of the character according to a difference
+     * @param difference
+     */
+    public void changeGold(int difference) {
         gold += difference;
+        if (gold < 0) {
+            gold = 0;
+        }
     }
 
     /**

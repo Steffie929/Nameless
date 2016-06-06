@@ -388,6 +388,10 @@ public class Battle extends Event implements Serializable{
     }
 
     public void getRewards() {
+        int goldReward = enemy.getGold();
+        player.changeGold(goldReward);
+        battleRewards += "Gold earned: " + goldReward + "\n";
+
         int bonusXP = enemy.getMaxXP();
         player.giveBonusXP(bonusXP);
         battleRewards += "XP earned: " + bonusXP + "\n";

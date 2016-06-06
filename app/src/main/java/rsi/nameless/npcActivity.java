@@ -117,7 +117,7 @@ public class npcActivity extends AppCompatActivity {
             startActivityForResult(intent, BATTLE_KEY);             // Niet hier alsnog finish() neerzetten
         }
         else if(currentLink.isReward()) {
-            player.setGold(player.getLevel()*5);
+            player.changeGold(player.getLevel()*5);
             Intent returnIntent = new Intent();
             setResult(RESULT_CANCELED, returnIntent);
             finish();

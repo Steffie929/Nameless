@@ -46,13 +46,13 @@ public class EnemyLibrary {
         duneCrawlerBackpack.add(itemLibrary.getPotion(5));
         duneCrawlerBackpack.add(itemLibrary.getPotion(6));
         duneCrawlerBackpack.add(itemLibrary.getPotion(9));
-        enemies.add(new Character("Dune Crawler", 12, 8, 10, 10, 12, 7, 7, 2, duneCrawlerBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.dune_crawler));
+        enemies.add(new Character("Dune Crawler", 12, 8, 10, 10, 12, 8, 7, 2, duneCrawlerBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.dune_crawler));
 
         ArrayList<Item> scorpionBackpack = new ArrayList<>();
         scorpionBackpack.add(itemLibrary.getPotion(5));
         scorpionBackpack.add(itemLibrary.getPotion(7));
         scorpionBackpack.add(itemLibrary.getPotion(9));
-        enemies.add(new Character("Scorpion", 12, 8, 10, 10, 12, 7, 7, 2, scorpionBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.scorpion));
+        enemies.add(new Character("Scorpion", 12, 8, 10, 10, 12, 6, 7, 2, scorpionBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.scorpion));
 
         ArrayList<Item> angryTreeBackpack = new ArrayList<>();
         angryTreeBackpack.add(itemLibrary.getPotion(5));
@@ -69,7 +69,7 @@ public class EnemyLibrary {
         wolfBackpack.add(itemLibrary.getPotion(5));
         wolfBackpack.add(itemLibrary.getPotion(6));
         wolfBackpack.add(itemLibrary.getWeapon(2));
-        bosses.add(new Character ("Wolf", 11, 10, 10, 10, 15, 5, 10, 1, wolfBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.wolf));//0
+        bosses.add(new Character ("Wolf", 11, 10, 10, 10, 15, 10, 10, 1, wolfBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.wolf));//0
 
         ArrayList<Item> desertBossBackpack = new ArrayList<>();
         desertBossBackpack.add(itemLibrary.getWeapon(5));

@@ -60,7 +60,7 @@ public class ShopActivity extends AppCompatActivity {
                                 } else {
                                     if(shop.getItemsInShop().remove(clickedItem)) {
                                         player.addItemToBackpack(clickedItem);
-                                        player.setGold(0-clickedItem.getPrice());
+                                        player.changeGold(-clickedItem.getPrice());
                                         iaShop.removeItem(position);
                                     }
                                     updateGridviews();
@@ -93,7 +93,7 @@ public class ShopActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
 
                             public void onClick(DialogInterface dialog, int which) {
-                                player.setGold((clickedItem.getPrice()/2));
+                                player.changeGold((clickedItem.getPrice()/2));
                                 player.removeItemFromBackpack(position);
                                 shop.getItemsInShop().add(clickedItem);
                                 updateGridviews();
