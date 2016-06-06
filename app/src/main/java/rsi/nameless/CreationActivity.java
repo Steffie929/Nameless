@@ -1,5 +1,7 @@
 package rsi.nameless;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -146,5 +148,47 @@ public class CreationActivity extends AppCompatActivity {
         returnIntent.putExtra("PLAYER_NAME", playerName);
         setResult(RESULT_OK, returnIntent);
         finish();
+    }
+
+    public void hpQuestion(View v) {
+        String information = "Your hit points (HP).\nEnemy attacks lower your HP.\n"
+                + "You die when your HP reaches 0.";
+        showMessage("HP Information", information);
+    }
+
+    public void strQuestion(View v) {
+        String information = "Your strength (STR).\nDetermines how much damage you do.\n";
+        showMessage("Strength Information", information);
+    }
+
+    public void defQuestion(View v) {
+        String information = "Your defense (DEF).\nReduces the damage done by opponents.\n";
+        showMessage("Defense Information", information);
+    }
+
+    public void sklQuestion(View v) {
+        String information = "Your skill (SKL).\nIncreases the chance you\n   successfully hit your opponent.\n"
+                + "Also decreases the chance\n   your opponent hits you.\n";
+        showMessage("Skill Information", information);
+    }
+
+    public void spdQuestion(View v) {
+        String information = "Your speed (SPD).\nDetermines who attacks first.\n"
+                + "If the speed difference is great enough," +
+                "\nyou can attack multiple times!";
+        showMessage("Speed Information", information);
+    }
+
+    public void showMessage(String title, String information) {
+        AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
+        helpBuilder.setTitle(title);
+        helpBuilder.setMessage(information);
+        helpBuilder.setNegativeButton("Close",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        AlertDialog helpDialog = helpBuilder.create();
+        helpDialog.show();
     }
 }
