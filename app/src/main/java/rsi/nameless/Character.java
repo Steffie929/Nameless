@@ -11,17 +11,18 @@ import java.util.ArrayList;
 public class Character implements Serializable {
     private final String name;
     private int imgID;
-    private int strength;
-    private int defense;
-    private int skill;
-    private int speed;
-    private int maxHP;
+    private int strength, strGrowth;
+    private int defense, defGrowth;
+    private int skill, sklGrowth;
+    private int speed, spdGrowth;
+    private int maxHP, hpGrowth;
     private int currentHP;
     private int gold;
     private int level;
     private int currentXP;
     private int maxXP;
     private int boosts[]; //0 str, 1 def, 2 skl, 3 spd, 4 maxHP
+    private boolean defaultGrowth;
 
     private Armour armour;
     private Weapon weapon;
@@ -48,8 +49,40 @@ public class Character implements Serializable {
         weapon = items.getWeapon(1);
         boosts = new int[5];
         armour = new Armour ("No armour","No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.empty);
+        defaultGrowth = true;
     }
 
+    /**
+     * Constructor used for creation of the player
+     */
+    public Character (String playerName, int hpMod, int strMod, int defMod, int sklMod, int spdMod, ItemLibrary items) {
+        name = playerName;
+        imgID = R.drawable.ci_1_nosw_nosh;
+        strength = 7 + strMod;
+        defense = 7 + defMod;
+        skill = 7 + sklMod;
+        speed = 7 + spdMod;
+        maxHP = 12 + hpMod;
+        strGrowth = strMod;
+        defGrowth = defMod;
+        sklGrowth = sklMod;
+        spdGrowth = spdMod;
+        hpGrowth = hpMod;
+        defaultGrowth = false;
+        currentHP = maxHP;
+        gold = 10;
+        level = 1;
+        backpack = new ArrayList<>();
+        currentXP = 0;
+        maxXP = 10;
+        weapon = items.getWeapon(1);
+        boosts = new int[5];
+        armour = new Armour ("No armour","No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.empty);
+    }
+
+    /**
+     * Constructor used for enemies
+     */
     public Character (String name, int str, int def, int skl, int spd, int maxHP,
                       int gold, int maxExp, int level, ArrayList<Item> backpack, Weapon weapon, Armour armour, int imgID) {
         this.imgID = imgID;
@@ -75,16 +108,23 @@ public class Character implements Serializable {
 
     /**
      * Level up!
-     * Change attributes according to current level
+     * Change attributes according to current level/growth stats
      */
     public void levelUp () {
         if (currentXP > maxXP) {
-            strength += level;
-            defense += level;
-            skill += level;
-            speed += level;
-            maxHP += level;
-            setCurrentHP(getCurrentHP() + level);
+            if (defaultGrowth) {
+                strength += level + 2;
+                defense += level + 2;
+                skill += level + 2;
+                speed += level + 2;
+                changeMaxHP(level + 2);
+            } else {
+                strength += strGrowth;
+                defense += defGrowth;
+                skill += sklGrowth;
+                speed += spdGrowth;
+                changeMaxHP(hpGrowth);
+            }
             level++;
             currentXP -= maxXP;
             maxXP = level*10;

@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 public class Start extends AppCompatActivity {
     private final int NEW_GAME_CODE = 1;
+    private final int CREATION_KEY = 4;
     private Highscores highscores;
 
 
@@ -20,12 +21,9 @@ public class Start extends AppCompatActivity {
     }
 
 
-    public void startNewGame(View v){
-        Intent intent = new Intent(this, MapActivity.class);
-        EditText editText = (EditText) findViewById(R.id.choosePlayerName);
-        String message = editText.getText().toString();
-        intent.putExtra("PLAYER_NAME", message);
-        startActivityForResult(intent, NEW_GAME_CODE);
+    public void startNewGame(View v) {
+        Intent intent = new Intent(this, CreationActivity.class);
+        startActivityForResult(intent, CREATION_KEY);
     }
 
     public void goToHighscores(View v){
@@ -39,10 +37,26 @@ public class Start extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode == NEW_GAME_CODE && resultCode == RESULT_OK){
             int result = data.getIntExtra("PLAYER_SCORE",0);
-            Character player = (Character)data.getSerializableExtra("PLAYER_CHARACTER");
+            Character player = (Character) data.getSerializableExtra("PLAYER_CHARACTER");
             String enemyName = data.getStringExtra("ENEMY_NAME");
             highscores.addScore(result, player, enemyName);
             Log.d("DEBUG", "ended game, score: " + result);
+        }
+        else if (requestCode == CREATION_KEY && resultCode == RESULT_OK) {
+            Intent intent = new Intent(this, MapActivity.class);
+            int hpMod = data.getIntExtra("HP_MOD", 3);
+            int strMod = data.getIntExtra("STR_MOD", 3);
+            int defMod = data.getIntExtra("DEF_MOD", 3);
+            int sklMod = data.getIntExtra("SKL_MOD", 3);
+            int spdMod = data.getIntExtra("SPD_MOD", 3);
+            String playerName = data.getStringExtra("PLAYER_NAME");
+            intent.putExtra("HP_MOD", hpMod);
+            intent.putExtra("STR_MOD", strMod);
+            intent.putExtra("DEF_MOD", defMod);
+            intent.putExtra("SKL_MOD", sklMod);
+            intent.putExtra("SPD_MOD", spdMod);
+            intent.putExtra("PLAYER_NAME", playerName);
+            startActivityForResult(intent, NEW_GAME_CODE);
         }
     }
 

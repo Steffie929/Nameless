@@ -16,10 +16,10 @@ public class MainModel {
     private ConversationLibrary convLib;
     private int playerScore;
 
-    public MainModel(String playerName){
+    public MainModel(String playerName, int hpMod, int strMod, int defMod, int sklMod, int spdMod){
         this.items = new ItemLibrary();
         this.enemies = new EnemyLibrary(items);
-        this.player = new Character(playerName, items);
+        this.player = new Character(playerName, hpMod, strMod, defMod, sklMod, spdMod, items);
         convLib = new ConversationLibrary(enemies);
         currentLevel = 1;
         playerScore = 0;

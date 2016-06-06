@@ -31,8 +31,14 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        String playerName = getIntent().getStringExtra("PLAYER_NAME");
-        this.m = new MainModel(playerName);
+        Intent intent = getIntent();
+        String playerName = intent.getStringExtra("PLAYER_NAME");
+        int hpMod = intent.getIntExtra("HP_MOD", 3);
+        int strMod = intent.getIntExtra("STR_MOD", 3);
+        int defMod = intent.getIntExtra("DEF_MOD", 3);
+        int sklMod = intent.getIntExtra("SKL_MOD", 3);
+        int spdMod = intent.getIntExtra("SPD_MOD", 3);
+        this.m = new MainModel(playerName, hpMod, strMod, defMod, sklMod, spdMod);
         drawView = (CanvasMap) findViewById(R.id.view);
         this.gDetector = new GestureDetectorCompat(this,this);
         map = m.getMap(1);

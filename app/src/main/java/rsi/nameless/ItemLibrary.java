@@ -44,13 +44,13 @@ public class ItemLibrary implements Serializable{
 
     private void addPotions () {
         //Name, description str, def, skl, spd, MaxHP, lvl, price, HPRes, nrUses, imgId
-        potions.add( new Potion ("Refreshment Potion","Heals minor wounds." , 0, 0, 0, 0, 0, 1, 6, 5, 3, R.drawable.hp_pot1) ); //0
+        potions.add( new Potion ("Refreshment Potion","Heals minor wounds." , 0, 0, 0, 0, 0, 1, 5, 5, 3, R.drawable.hp_pot1) ); //0
         potions.add( new Potion ("Potion of Fortitude","Makes you a little stronger" , 2, 0, 0, 0, 0, 1, 5, 0, 1, R.drawable.str_pot1) );//1
         potions.add( new Potion ("Potion of Protection","Increases your defensive skills a little." , 0, 2, 0, 0, 0, 1, 5, 0, 1, R.drawable.def_pot1) );//2
         potions.add( new Potion ("Potion of Talent", "Increases your level of skill a little.", 0, 0, 2, 0, 0, 1, 5, 0, 1, R.drawable.skill_pot1) );//3
         potions.add( new Potion ("Potion of Agility", "Makes you a little faster.", 0, 0, 0, 2, 0, 1, 5, 0, 1, R.drawable.spd_pot1) );//4
 
-        potions.add( new Potion ("Strong Refreshment Potion","Heals  wounds." , 0, 0, 0, 0, 0, 2, 11, 10, 3, R.drawable.hp_pot2) ); //5
+        potions.add( new Potion ("Strong Refreshment Potion","Heals  wounds." , 0, 0, 0, 0, 0, 2, 10, 10, 3, R.drawable.hp_pot2) ); //5
         potions.add( new Potion ("Strong potion of Fortitude","Makes you stronger." , 4, 0, 0, 0, 0, 2, 8, 0, 1, R.drawable.str_pot2) );//6
         potions.add( new Potion ("Strong Potion of Protection","Increases your defensive skills." , 0, 4, 0, 0, 0, 2, 8, 0, 1, R.drawable.def_pot2) );//7
         potions.add( new Potion ("Strong Potion of Talent", "Increases your level of skill.", 0, 0, 4, 0, 0, 2, 8, 0, 1, R.drawable.skill_pot2) );//8
