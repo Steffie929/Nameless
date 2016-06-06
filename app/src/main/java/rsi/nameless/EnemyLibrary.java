@@ -63,15 +63,23 @@ public class EnemyLibrary {
     }
 
     private void fillBossList() {
+        //Name, str, def, skl, spd, maxHP, gold, maxXP, level, backpack, weapon
         ArrayList<Item> wolfBackpack = new ArrayList<>();
         wolfBackpack.add(itemLibrary.getPotion(0));
         wolfBackpack.add(itemLibrary.getPotion(5));
         wolfBackpack.add(itemLibrary.getPotion(6));
         wolfBackpack.add(itemLibrary.getWeapon(2));
-        bosses.add(new Character ("Wolf", 11, 10, 10, 10, 15, 5, 10, 1, wolfBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.wolf));
+        bosses.add(new Character ("Wolf", 11, 10, 10, 10, 15, 5, 10, 1, wolfBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.wolf));//0
+
+        ArrayList<Item> desertBossBackpack = new ArrayList<>();
+        desertBossBackpack.add(itemLibrary.getWeapon(5));
+        desertBossBackpack.add(itemLibrary.getWeapon(6));
+        desertBossBackpack.add(itemLibrary.getPotion(5));
+        desertBossBackpack.add(itemLibrary.getPotion(6));
+        bosses.add(new Character ("Nagaruda", 14, 10, 14, 10, 20, 15, 20, 2, desertBossBackpack, itemLibrary.getWeapon(0), itemLibrary.getArmour(0), R.drawable.desert_boss));//1
 
         ArrayList<Item> endBossBackpack = new ArrayList<>();
-        bosses.add(new Character ("Stranger", 30, 30, 30, 30, 45, 50, 50, 10, endBossBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.stranger_battle));
+        bosses.add(new Character ("Stranger", 30, 30, 30, 30, 45, 50, 50, 10, endBossBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.stranger_battle));//2
     }
 
     public Character getEnemy (int index) {

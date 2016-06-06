@@ -12,8 +12,8 @@ public class ConversationLibrary {
     public ConversationLibrary(EnemyLibrary enemyLib){
         this.enemyLib = enemyLib;
         conversations = new ArrayList<>();
-        conversations.add(new Conversation ("Stranger", R.drawable.stranger ,firstConversation(), enemyLib.getBoss(1)));
-        conversations.add(new Conversation ("Yourself", R.drawable.ci_1_nosw_nosh ,secondConversation(), enemyLib.getBoss(1)));
+        conversations.add(new Conversation ("Stranger", R.drawable.stranger ,firstConversation(), enemyLib.getBoss(2)));
+        conversations.add(new Conversation ("Yourself", R.drawable.ci_1_nosw_nosh ,secondConversation(), enemyLib.getBoss(0)));
     }
 
     public Link firstConversation(){
