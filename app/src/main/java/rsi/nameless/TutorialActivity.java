@@ -20,7 +20,9 @@ public class TutorialActivity extends AppCompatActivity {
     }
 
     public void playerInfo(View v) {
-
+        int imgID = R.drawable.char_icon_small;
+        String information = "";
+        displayInformationScreen(imgID, information);
     }
 
     public void battleInfo(View v) {
@@ -52,19 +54,27 @@ public class TutorialActivity extends AppCompatActivity {
     }
 
     public void movingInfo(View v) {
-
+        int imgID = R.drawable.roadpattern;
+        String information = "";
+        displayInformationScreen(imgID, information);
     }
 
     public void backpackInfo(View v) {
-
+        int imgID = R.drawable.backpack;
+        String information = "";
+        displayInformationScreen(imgID, information);
     }
 
     public void conversationInfo(View v) {
-
+        int imgID = R.drawable.textbubble;
+        String information = "";
+        displayInformationScreen(imgID, information);
     }
 
     public void shopInfo(View v) {
-
+        int imgID = R.drawable.shop_small;
+        String information = "";
+        displayInformationScreen(imgID, information);
     }
 
     public void characterInfo(View v) {
@@ -79,7 +89,9 @@ public class TutorialActivity extends AppCompatActivity {
     }
 
     public void savedInfo(View v) {
-
+        int imgID = R.drawable.save_icon_larger;
+        String information = "";
+        displayInformationScreen(imgID, information);
     }
 
     private void displayInformationScreen(int imgID, String information) {
