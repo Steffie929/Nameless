@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Toast;
 
 import java.io.Serializable;
@@ -133,23 +134,17 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         }
     }
 
-    public boolean openBackpack(float x, float y){
-        Log.d("DEBUG", "BACKPACK?       width: " + drawView.getWidth() + "\theight " + drawView.getHeight());
-        if(Math.abs(x-drawView.getWidth()) < 200 && Math.abs(y-drawView.getHeight()) < 400){
-            return true;
-        }
-        else
-            return false;
+    public void openBackpack(View v){
+        Intent intent = new Intent(this, BackpackActivity.class);
+        intent.putExtra("CURRENT_PLAYER", map.getPlayer());
+        intent.putExtra("FROM_BATTLE_BOOLEAN", false);
+        startActivityForResult(intent, BACKPACK_KEY);
     }
 
-    public boolean openStatScreen(float x, float y){
-        Log.d("DEBUG", "StatScreen?       width: " + drawView.getWidth() + "\theight " + drawView.getHeight());
-        if(x < 200 && Math.abs(y-drawView.getHeight()) < 400){
-            return true;
-        }
-        else
-            return false;
-
+    public void openStatScreen(View v){
+        Intent intent = new Intent(this, CharacterScreen.class);
+        intent.putExtra("CURRENT_PLAYER", map.getPlayer());
+        startActivity(intent);
     }
 
     @Override
@@ -158,21 +153,6 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         x = e.getX()-40;
         y = e.getY()-250;
         Log.d("DEBUG", "MapActivity, onSingleTap\n\t\tclicked on:\tgetX() " + x + " " + y);
-
-        if(openBackpack(x,y)){
-            Intent intent = new Intent(this, BackpackActivity.class);
-            intent.putExtra("CURRENT_PLAYER", map.getPlayer());
-            intent.putExtra("FROM_BATTLE_BOOLEAN", false);
-            startActivityForResult(intent, BACKPACK_KEY);
-            return false;
-        }
-
-        if(openStatScreen(x,y)){
-            Intent intent = new Intent(this, CharacterScreen.class);
-            intent.putExtra("CURRENT_PLAYER", map.getPlayer());
-            startActivity(intent);
-            return false;
-        }
 
 
         Move move = new Move(map, drawView, x, y);
@@ -197,6 +177,10 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
             startShopActivity(currentShop);
         }
         map.setEvent(map.getCurrentPoint(), Map.eventType.EMPTY);
+    }
+
+    public void saveCurrentGame(View v){
+
     }
 
     @Override

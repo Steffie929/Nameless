@@ -17,4 +17,43 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:text="Save Game"
+        android:src="@drawable/save_icon"
+        android:scaleType="centerCrop"
+        android:onClick="saveCurrentGame"
+        android:id="@+id/save_button"
+        android:background="@android:color/transparent"
+        android:layout_alignParentRight="true"/>
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:text="Save Game"
+        android:src="@drawable/backpack"
+        android:scaleType="centerCrop"
+        android:id="@+id/backpack_button"
+        android:onClick="openBackpack"
+        android:background="@android:color/transparent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"/>
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:text="Save Game"
+        android:src="@drawable/stat_icon"
+        android:scaleType="centerCrop"
+        android:onClick="openStatScreen"
+        android:id="@+id/statscreen_button"
+        android:background="@android:color/transparent"
+        android:layout_alignParentBottom="true"/>
+
+
+
+
+
 </RelativeLayout>

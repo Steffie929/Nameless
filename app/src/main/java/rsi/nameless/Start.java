@@ -25,7 +25,7 @@ public class Start extends AppCompatActivity{
     private Animation jwlAnimation, charAnimation, bossAnimation;
     private SharedPreferences savedHighscores;
     private SharedPreferences.Editor savedHighscoresEditor;
-    private Button newGame,goToHighscores;
+    private Button newGame,goToHighscores, loadGame;
 
 
     @Override
@@ -39,8 +39,10 @@ public class Start extends AppCompatActivity{
 
         newGame = (Button) findViewById(R.id.newgame_button);
         goToHighscores = (Button) findViewById(R.id.go_tohighscore);
+        loadGame = (Button) findViewById(R.id.loadgame1_button);
         newGame.setVisibility(View.GONE);
         goToHighscores.setVisibility(View.GONE);
+        loadGame.setVisibility(View.GONE);
         introAnimation();
 
     }
@@ -103,6 +105,7 @@ public class Start extends AppCompatActivity{
         if(action == MotionEvent.ACTION_UP) {
             newGame.setVisibility(View.VISIBLE);
             goToHighscores.setVisibility(View.VISIBLE);
+            loadGame.setVisibility(View.VISIBLE);
             introAnimation();
         }
         return false;
