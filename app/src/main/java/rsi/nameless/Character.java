@@ -429,8 +429,8 @@ public class Character implements Serializable {
     public void changeCharIcon (){
         if(weapon == null || armour == null)
             return;
-        String w = "" + weapon.getName();
-        String a = "" + armour.getName();
+        String w = "" + weapon.getDescription();
+        String a = "" + armour.getDescription();
         if (w.contains("Sword") && !a.contains("Shield") && level <2)
             this.imgID = R.drawable.ci_1_sw_nosh;
         else if (!w.contains("Sword") && a.contains("Shield")&& level <2)
