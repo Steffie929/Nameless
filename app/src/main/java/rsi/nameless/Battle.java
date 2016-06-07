@@ -405,7 +405,7 @@ public class Battle extends Event implements Serializable{
         if (enemyArmour != null && !enemyArmour.getName().equals("No armour")) {
             possibleRewards.add(enemyArmour);
         }
-        int nrOfRewards = random.nextInt(3) + 1;
+        int nrOfRewards = random.nextInt(2) + 1;
         if (nrOfRewards > possibleRewards.size()) {
             nrOfRewards = possibleRewards.size();
         }

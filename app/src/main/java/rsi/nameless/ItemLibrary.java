@@ -44,7 +44,7 @@ public class ItemLibrary implements Serializable{
 
     private void addPotions () {
         //Name, description str, def, skl, spd, MaxHP, lvl, price, HPRes, nrUses, imgId
-        potions.add( new Potion ("Refreshment Potion","Heals minor wounds." , 0, 0, 0, 0, 0, 1, 5, 5, 3, R.drawable.hp_pot1) ); //0
+        potions.add( new Potion ("Refreshment Potion","Heals minor wounds." , 0, 0, 0, 0, 0, 1, 5, 5, 2, R.drawable.hp_pot1) ); //0
         potions.add( new Potion ("Potion of Fortitude","Makes you a little stronger" , 2, 0, 0, 0, 0, 1, 5, 0, 1, R.drawable.str_pot1) );//1
         potions.add( new Potion ("Potion of Protection","Increases your defensive skills a little." , 0, 2, 0, 0, 0, 1, 5, 0, 1, R.drawable.def_pot1) );//2
         potions.add( new Potion ("Potion of Talent", "Increases your level of skill a little.", 0, 0, 2, 0, 0, 1, 5, 0, 1, R.drawable.skill_pot1) );//3

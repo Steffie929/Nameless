@@ -1,5 +1,7 @@
 package rsi.nameless;
 
+import android.util.Log;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -22,21 +24,22 @@ public class EnemyLibrary {
     private void fillEnemyList() { //Name, str, def, skl, spd, maxHP, gold, maxXP, level, backpack, weapon
         //================LEVEL1 Forest/grass =================================================================
         ArrayList<Item> bunnyBackpack = new ArrayList<>();
+        bunnyBackpack.add(itemLibrary.getPotion(4));
         bunnyBackpack.add(itemLibrary.getPotion(0));
         bunnyBackpack.add(itemLibrary.getPotion(3));
-        enemies.add(new Character ("Cute Bunny", 8, 8, 12, 12, 7, 2, 2, 1, bunnyBackpack, itemLibrary.getWeapon(3), itemLibrary.getArmour(0), R.drawable.bunny));
+        enemies.add(new Character ("Bunny", 6, 8, 10, 15, 10, 2, 2, 1, bunnyBackpack, itemLibrary.getWeapon(3), itemLibrary.getArmour(0), R.drawable.bunny));
 
 
         ArrayList<Item> snailBackpack = new ArrayList<>();
-        snailBackpack.add(itemLibrary.getPotion(0));
         snailBackpack.add(itemLibrary.getPotion(2));
-        enemies.add(new Character ("Snail", 8, 9, 9, 7, 9, 3, 4, 1, snailBackpack, itemLibrary.getWeapon(0), itemLibrary.getArmour(1), R.drawable.snail));
+        snailBackpack.add(itemLibrary.getPotion(0));
+        enemies.add(new Character ("Snail", 9, 11, 9, 6, 9, 3, 4, 1, snailBackpack, itemLibrary.getWeapon(0), itemLibrary.getArmour(1), R.drawable.snail));
 
         ArrayList<Item> batBackpack = new ArrayList<>();
-        batBackpack.add(itemLibrary.getPotion(0));
         batBackpack.add(itemLibrary.getPotion(3));
-        batBackpack.add(itemLibrary.getPotion(4));
-        enemies.add(new Character("Bat", 7, 8, 10, 11, 9, 3, 3, 1, batBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.bat)       );
+        batBackpack.add(itemLibrary.getPotion(1));
+        batBackpack.add(itemLibrary.getPotion(0));
+        enemies.add(new Character("Bat", 7, 8, 12, 10, 9, 3, 3, 1, batBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.bat));
 
 
 
@@ -65,21 +68,21 @@ public class EnemyLibrary {
     private void fillBossList() {
         //Name, str, def, skl, spd, maxHP, gold, maxXP, level, backpack, weapon
         ArrayList<Item> wolfBackpack = new ArrayList<>();
-        wolfBackpack.add(itemLibrary.getPotion(0));
         wolfBackpack.add(itemLibrary.getPotion(5));
         wolfBackpack.add(itemLibrary.getPotion(6));
+        wolfBackpack.add(itemLibrary.getPotion(0));
         wolfBackpack.add(itemLibrary.getWeapon(2));
-        bosses.add(new Character ("Wolf", 11, 10, 10, 10, 15, 10, 10, 1, wolfBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.wolf));//0
+        bosses.add(new Character ("Wolf", 12, 12, 12, 12, 15, 10, 10, 1, wolfBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.wolf));//0
 
         ArrayList<Item> desertBossBackpack = new ArrayList<>();
         desertBossBackpack.add(itemLibrary.getWeapon(5));
         desertBossBackpack.add(itemLibrary.getWeapon(6));
         desertBossBackpack.add(itemLibrary.getPotion(5));
         desertBossBackpack.add(itemLibrary.getPotion(6));
-        bosses.add(new Character ("Nagaruda", 20, 14, 14, 10, 20, 15, 20, 2, desertBossBackpack, itemLibrary.getWeapon(0), itemLibrary.getArmour(0), R.drawable.desert_boss));//1
+        bosses.add(new Character ("Nagaruda", 20, 14, 14, 14, 20, 15, 20, 2, desertBossBackpack, itemLibrary.getWeapon(0), itemLibrary.getArmour(0), R.drawable.desert_boss));//1
 
         ArrayList<Item> endBossBackpack = new ArrayList<>();
-        bosses.add(new Character ("Stranger", 30, 30, 30, 30, 45, 50, 50, 10, endBossBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.stranger_battle));//2
+        bosses.add(new Character ("Nameless", 30, 30, 30, 30, 45, 50, 50, 10, endBossBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.stranger_battle));//2
     }
 
     public Character getEnemy (int index) {

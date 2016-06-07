@@ -101,7 +101,7 @@ public class Character implements Serializable {
         this.gold = gold;
         this.maxXP = maxExp;
         this.level = level;
-        this.backpack = new ArrayList<>();
+        this.backpack = backpack;
         this.weapon = new Weapon ("No weapon","No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.empty);
         setWeapon(weapon);
         this.armour = new Armour ("No armour","No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.empty);
