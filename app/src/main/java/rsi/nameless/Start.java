@@ -114,6 +114,8 @@ public class Start extends AppCompatActivity{
             int result = data.getIntExtra("PLAYER_SCORE",0);
             Character player = (Character) data.getSerializableExtra("PLAYER_CHARACTER");
             String enemyName = data.getStringExtra("ENEMY_NAME");
+            if(enemyName == null)
+                enemyName = "Stranger";
             Log.d("SAVE", "ended game, score: " + result);
             String text;
             text = player.getName() + "  " + result + " points\n";
