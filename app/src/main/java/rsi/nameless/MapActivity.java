@@ -290,4 +290,9 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
 
         return false;
     }
+
+    public void toTutorialscreen(View v) {
+        Intent intent = new Intent(this, TutorialActivity.class);
+        startActivity(intent);
+    }
 }
