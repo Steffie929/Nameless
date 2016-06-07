@@ -44,6 +44,9 @@ public class Map {
             case 2:
                 bgImgID = R.drawable.desert_background;
                 break;
+            case 3:
+                bgImgID = R.drawable.bglvl3;
+                break;
         }
     }
 
