@@ -146,6 +146,7 @@ public class CreationActivity extends AppCompatActivity {
         returnIntent.putExtra("SKL_MOD", sklMod);
         returnIntent.putExtra("SPD_MOD", spdMod);
         returnIntent.putExtra("PLAYER_NAME", playerName);
+        returnIntent.putExtra("NEW_GAME", true);
         setResult(RESULT_OK, returnIntent);
         finish();
     }

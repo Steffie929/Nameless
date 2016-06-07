@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:text="Load Game"
         android:layout_below="@id/newgame_button"
+        android:onClick="loadGame"
         android:id="@+id/loadgame1_button"
         android:layout_centerHorizontal="true"/>
 

@@ -11,11 +11,16 @@ import java.util.ArrayList;
 public class Character implements Serializable {
     private final String name;
     private int imgID;
-    private int strength, strGrowth;
-    private int defense, defGrowth;
-    private int skill, sklGrowth;
-    private int speed, spdGrowth;
-    private int maxHP, hpGrowth;
+    private int strength;
+    private int strGrowth;
+    private int defense;
+    private int defGrowth;
+    private int skill;
+    private int sklGrowth;
+    private int speed;
+    private int spdGrowth;
+    private int maxHP;
+    private int hpGrowth;
     private int currentHP;
     private int gold;
     private int level;
@@ -497,5 +502,25 @@ public class Character implements Serializable {
     public void boostMaxHP(int boost) {
         boosts[4] += boost;
         changeMaxHP(boost);
+    }
+
+    public int getStrGrowth() {
+        return strGrowth;
+    }
+
+    public int getDefGrowth() {
+        return defGrowth;
+    }
+
+    public int getSklGrowth() {
+        return sklGrowth;
+    }
+
+    public int getSpdGrowth() {
+        return spdGrowth;
+    }
+
+    public int getHpGrowth() {
+        return hpGrowth;
     }
 }

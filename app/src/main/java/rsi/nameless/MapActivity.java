@@ -2,8 +2,10 @@ package rsi.nameless;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,11 +15,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.io.Serializable;
 
 public class MapActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
     private CanvasMap drawView;
     private GestureDetectorCompat gDetector;
+    private SharedPreferences savedGame1;
+    private SharedPreferences.Editor savedGame1Editor;
     private Map map;
     private MainModel m;
     private Character player;
@@ -32,7 +38,16 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        Context context = this.getApplicationContext();
+        savedGame1= context.getSharedPreferences("rsi.nameless.savedGame1", Context.MODE_PRIVATE);
+        savedGame1Editor = savedGame1.edit();
         Intent intent = getIntent();
+
+        if(!intent.getBooleanExtra("NEW_GAME", true)) {
+            loadGame();
+            return;
+        }
+
         String playerName = intent.getStringExtra("PLAYER_NAME");
         int hpMod = intent.getIntExtra("HP_MOD", 3);
         int strMod = intent.getIntExtra("STR_MOD", 3);
@@ -180,6 +195,39 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
     }
 
     public void saveCurrentGame(View v){
+        Gson gson = new Gson();
+        String json = gson.toJson(player);
+        savedGame1Editor.putString("SAVED_PLAYER", json);
+        savedGame1Editor.commit();
+
+        Gson gson2 = new Gson();
+        String json2;
+        json2 = gson2.toJson(map);
+        savedGame1Editor.putString("SAVED_MAP", json2);
+        savedGame1Editor.commit();
+
+        savedGame1Editor.putBoolean("USED", true);
+        savedGame1Editor.commit();
+        Log.d("SAVE", "Game saved");
+    }
+
+    public void loadGame(){
+        Log.d("SAVE", "in loadGame()");
+        Gson gson = new Gson();
+        String json = savedGame1.getString("SAVED_PLAYER", "");
+        player = gson.fromJson(json, Character.class);
+
+        Gson gson2 = new Gson();
+        String json2 = savedGame1.getString("SAVED_MAP", "");
+        map = gson2.fromJson(json2, Map.class);
+
+
+        this.m = new MainModel(player.getName(), player.getHpGrowth(), player.getStrGrowth(), player.getDefGrowth(), player.getSklGrowth(), player.getSpdGrowth());
+        drawView = (CanvasMap) findViewById(R.id.view);
+        this.gDetector = new GestureDetectorCompat(this,this);
+        map.setPlayer(player);
+        drawView.setMap(map);
+
 
     }
 

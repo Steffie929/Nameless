@@ -1,6 +1,8 @@
 package rsi.nameless;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
@@ -23,9 +25,10 @@ public class Start extends AppCompatActivity{
     private final int CREATION_KEY = 4;
     private ImageView endboss, jwlImg, charImg;
     private Animation jwlAnimation, charAnimation, bossAnimation;
-    private SharedPreferences savedHighscores;
-    private SharedPreferences.Editor savedHighscoresEditor;
+    private SharedPreferences savedHighscores, savedGame1;
+    private SharedPreferences.Editor savedHighscoresEditor, savedGame1Editor;
     private Button newGame,goToHighscores, loadGame;
+    private boolean gameSaved1;
 
 
     @Override
@@ -35,7 +38,12 @@ public class Start extends AppCompatActivity{
 
         Context context = this.getApplicationContext();
         savedHighscores= context.getSharedPreferences("rsi.nameless.highscores", Context.MODE_PRIVATE);
+        savedGame1= context.getSharedPreferences("rsi.nameless.savedGame1", Context.MODE_PRIVATE);
+        savedGame1Editor = savedGame1.edit();
         savedHighscoresEditor = savedHighscores.edit();
+
+        gameSaved1 = savedGame1.getBoolean("USED", false);
+
 
         newGame = (Button) findViewById(R.id.newgame_button);
         goToHighscores = (Button) findViewById(R.id.go_tohighscore);
@@ -73,6 +81,7 @@ public class Start extends AppCompatActivity{
                 endboss.setVisibility(View.VISIBLE);
                 endboss.startAnimation(bossAnimation);
                 newGame.setVisibility(View.VISIBLE);
+                loadGame.setVisibility(View.VISIBLE);
                 goToHighscores.setVisibility(View.VISIBLE);
             }
 
@@ -90,6 +99,31 @@ public class Start extends AppCompatActivity{
             return;
         Intent intent = new Intent(this, CreationActivity.class);
         startActivityForResult(intent, CREATION_KEY);
+    }
+
+    public void loadGame(View v){
+        if(loadGame.getVisibility() == View.GONE)
+            return;
+
+        if(!gameSaved1){
+
+            AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
+            helpBuilder.setTitle("Failed to load game");
+            helpBuilder.setMessage("No saved game was found");
+            helpBuilder.setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+            AlertDialog helpDialog = helpBuilder.create();
+            helpDialog.setCancelable(false);
+            helpDialog.show();
+            return;
+        }
+
+        Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra("NEW_GAME", false);
+        startActivityForResult(intent, NEW_GAME_CODE);
     }
 
     public void goToHighscores(View v){
