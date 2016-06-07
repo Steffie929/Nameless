@@ -1,20 +1,24 @@
 package rsi.nameless;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 public class HighscoreActivity extends AppCompatActivity {
-    private Highscores highscores;
     private TextView[] tvArray;
     private String[] strArray;
+    private int[] scores;
+    private SharedPreferences savedHighscores;
+    private SharedPreferences.Editor savedHighscoresEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_highscore);
-        highscores = (Highscores) getIntent().getSerializableExtra("OLD_HIGHSCORES");
 
         tvArray = new TextView[15];
         tvArray[0] = (TextView) findViewById(R.id.score_nr1);
@@ -33,14 +37,71 @@ public class HighscoreActivity extends AppCompatActivity {
         tvArray[13] = (TextView) findViewById(R.id.score_nr14);
         tvArray[14] = (TextView) findViewById(R.id.score_nr15);
 
-        strArray = highscores.getHighscores();
+        Context context = this.getApplicationContext();
+        savedHighscores= context.getSharedPreferences("rsi.nameless.highscores", Context.MODE_PRIVATE);
+        savedHighscoresEditor = savedHighscores.edit();
+
+        getInfoFromPrefs();
+        setTVs();
+    }
+
+    public void getInfoFromPrefs(){
+        strArray = new String[15];
+        scores = new int[15];
+
+        for(int i=0;i<15;i++){
+            scores[i] = 0;
+            strArray[i] ="";
+        }
+
+        for(int i=1; i<=15; i++) {
+            String resultKey = "Result" + i;
+            String textKey = "Score" + i;
+            int result;
+            String text;
+            result = savedHighscores.getInt(resultKey, -20);
+            text = savedHighscores.getString(textKey, "");
+
+            if (result == -20) {
+                break;
+            }
+
+           insertInArrays(result, text, i - 1);
+        }
+    }
+
+    public void setTVs(){
         for(int i=0; i<15;i++){
             tvArray[i].setText( (i+1) +". " + strArray[i]);
         }
-
     }
 
+    public int getScoreIndex(int result){
+        int i=0;
+
+        for(i =0; i< scores.length; i++){
+            if(result> scores[i]){
+                break;
+            }
+        }
+        return i+1;
+    }
+
+    public void insertInArrays(int result, String text, int index){
+        for(int i= 14;i> index; i--){
+            if(strArray[i] == i + "")
+                scores[i] = scores[i-1];
+            strArray[i] = strArray[i-1];
+        }
+        scores[index] = result;
+        strArray[index] = text;
+    }
+
+
     public void resetHighscores(View v){
-        highscores.resetHighscores();
+        savedHighscoresEditor.clear();
+        savedHighscoresEditor.commit();
+        getInfoFromPrefs();
+        setTVs();
     }
 }
