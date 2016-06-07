@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg3"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="rsi.nameless.TutorialActivity">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:id="@+id/backTuturial"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="returnToMainMenu" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/AfternoonBlue"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="What do you want to learn about?"
+        android:textColor="@color/White"
+        android:id="@+id/headerTexty"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView3"
+        android:layout_below="@+id/headerTexty"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Player Statistics"
+                android:id="@+id/playerInfo"
+                android:onClick="playerInfo"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/playerInfo"
+                android:text="Battles"
+                android:id="@+id/battleInfo"
+                android:onClick="battleInfo"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/battleInfo"
+                android:text="Moving on the map"
+                android:id="@+id/movingInfo"
+                android:onClick="movingInfo"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/movingInfo"
+                android:text="Backpack"
+                android:id="@+id/backpackInfo"
+                android:onClick="backpackInfo"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/backpackInfo"
+                android:text="Conversations"
+                android:id="@+id/conversationInfo"
+                android:onClick="conversationInfo"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/conversationInfo"
+                android:text="Shopping"
+                android:id="@+id/shopInfo"
+                android:onClick="shopInfo"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/shopInfo"
+                android:text="Character Screen"
+                android:id="@+id/characterInfo"
+                android:onClick="characterInfo"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/characterInfo"
+                android:text="Saving the game"
+                android:id="@+id/saveInfo"
+                android:onClick="savedInfo"/>
+        </RelativeLayout>
+    </ScrollView>
+
+    <View android:id="@+id/middleView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>

@@ -198,5 +198,10 @@ public class Start extends AppCompatActivity{
         return i+1;
     }
 
+    public void openTutorial(View v) {
+        Intent intent = new Intent(this, TutorialActivity.class);
+        startActivity(intent);
+    }
+
 
 }
