@@ -78,11 +78,15 @@ public class Start extends AppCompatActivity{
 
 
     public void startNewGame(View v) {
+        if(newGame.getVisibility() == View.GONE)
+            return;
         Intent intent = new Intent(this, CreationActivity.class);
         startActivityForResult(intent, CREATION_KEY);
     }
 
     public void goToHighscores(View v){
+        if(goToHighscores.getVisibility() == View.GONE)
+            return;
         Intent intent = new Intent(this, HighscoreActivity.class);
         intent.putExtra("OLD_HIGHSCORES", highscores);
         startActivity(intent);
