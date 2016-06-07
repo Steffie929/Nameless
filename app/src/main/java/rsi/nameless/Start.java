@@ -1,16 +1,28 @@
 package rsi.nameless;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
-public class Start extends AppCompatActivity {
+public class Start extends AppCompatActivity{
     private final int NEW_GAME_CODE = 1;
     private final int CREATION_KEY = 4;
+    private ImageView endboss, jwlImg, charImg;
+    private Animation jwlAnimation, charAnimation, bossAnimation;
     private Highscores highscores;
+    private Button newGame,goToHighscores;
 
 
     @Override
@@ -18,6 +30,50 @@ public class Start extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         highscores = new Highscores();
+
+        newGame = (Button) findViewById(R.id.newgame_button);
+        goToHighscores = (Button) findViewById(R.id.go_tohighscore);
+        newGame.setVisibility(View.GONE);
+        goToHighscores.setVisibility(View.GONE);
+        introAnimation();
+
+    }
+
+    public void introAnimation(){
+        endboss = (ImageView) findViewById(R.id.skl_animation);
+        bossAnimation = AnimationUtils.loadAnimation(this, R.anim.skl_anim);
+        bossAnimation.setFillAfter(true);
+        endboss.setVisibility(View.GONE);
+
+
+        jwlImg = (ImageView) findViewById(R.id.jwl_animation);
+        jwlAnimation = AnimationUtils.loadAnimation(this, R.anim.jwl_anim);
+        jwlAnimation.setFillAfter(true);
+        jwlImg.startAnimation(jwlAnimation);
+
+        charImg = (ImageView) findViewById(R.id.char_imageView);
+        charAnimation = AnimationUtils.loadAnimation(this, R.anim.char_anim);
+        charAnimation.setFillAfter(true);
+        charAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                endboss.setVisibility(View.VISIBLE);
+                endboss.startAnimation(bossAnimation);
+                newGame.setVisibility(View.VISIBLE);
+                goToHighscores.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        charImg.startAnimation(charAnimation);
     }
 
 
@@ -32,6 +88,18 @@ public class Start extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int action = MotionEventCompat.getActionMasked(event);
+        if(action == MotionEvent.ACTION_UP) {
+            newGame.setVisibility(View.VISIBLE);
+            goToHighscores.setVisibility(View.VISIBLE);
+            introAnimation();
+        }
+
+
+        return false;
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
@@ -59,7 +127,5 @@ public class Start extends AppCompatActivity {
             startActivityForResult(intent, NEW_GAME_CODE);
         }
     }
-
-
 
 }

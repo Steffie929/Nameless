@@ -12,6 +12,7 @@
     <Button
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
         android:text="start new game"
         android:id="@+id/newgame_button"
         android:layout_centerHorizontal="true"
@@ -27,6 +28,29 @@
         android:layout_marginBottom="105dp"
         android:onClick="goToHighscores"/>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/jwl_animation"
+        android:src="@drawable/jewel"
+        android:layout_centerHorizontal="true"/>
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="250dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/skl_anim6"
+        android:id="@+id/skl_animation"/>
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/ci_3_hm_sh_nohlm"
+        android:layout_marginBottom="100dp"
+        android:id="@+id/char_imageView"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
 
 
 </RelativeLayout>
