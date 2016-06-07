@@ -22,8 +22,8 @@ import java.io.Serializable;
 public class MapActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
     private CanvasMap drawView;
     private GestureDetectorCompat gDetector;
-    private SharedPreferences savedGame1;
-    private SharedPreferences.Editor savedGame1Editor;
+    private SharedPreferences savedGame1, savedGame2, savedGame3;
+    private SharedPreferences.Editor savedGame1Editor, savedGame2Editor, savedGame3Editor;
     private Map map;
     private MainModel m;
     private Character player;
@@ -41,10 +41,15 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         Context context = this.getApplicationContext();
         savedGame1= context.getSharedPreferences("rsi.nameless.savedGame1", Context.MODE_PRIVATE);
         savedGame1Editor = savedGame1.edit();
+        savedGame2= context.getSharedPreferences("rsi.nameless.savedGame2", Context.MODE_PRIVATE);
+        savedGame2Editor = savedGame2.edit();
+        savedGame3= context.getSharedPreferences("rsi.nameless.savedGame3", Context.MODE_PRIVATE);
+        savedGame3Editor = savedGame3.edit();
         Intent intent = getIntent();
 
         if(!intent.getBooleanExtra("NEW_GAME", true)) {
-            loadGame();
+                int nr = intent.getIntExtra("SELECTED_SLOT", 1);
+                loadGame(nr);
             return;
         }
 
@@ -195,33 +200,92 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
     }
 
     public void saveCurrentGame(View v){
-        Gson gson = new Gson();
-        String json = gson.toJson(player);
-        savedGame1Editor.putString("SAVED_PLAYER", json);
-        savedGame1Editor.commit();
 
-        Gson gson2 = new Gson();
-        String json2;
-        json2 = gson2.toJson(map);
-        savedGame1Editor.putString("SAVED_MAP", json2);
-        savedGame1Editor.commit();
+        String[] choices = {"Save Slot 1", "Save Slot 2", "Save Slot 3"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Save Game")
+                .setItems(choices, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Gson gson = new Gson();
+                        String json = "";
 
-        savedGame1Editor.putBoolean("USED", true);
-        savedGame1Editor.commit();
-        Log.d("SAVE", "Game saved");
+                        switch(which){
+                            case 0:
+                                json = gson.toJson(player);
+                                savedGame1Editor.putString("SAVED_PLAYER", json);
+                                savedGame1Editor.commit();
+
+                                json = gson.toJson(map);
+                                savedGame1Editor.putString("SAVED_MAP", json);
+                                savedGame1Editor.commit();
+
+                                savedGame1Editor.putBoolean("USED", true);
+                                savedGame1Editor.commit();
+                                break;
+                            case 1:
+                                json = gson.toJson(player);
+                                savedGame2Editor.putString("SAVED_PLAYER", json);
+                                savedGame2Editor.commit();
+
+                                json = gson.toJson(map);
+                                savedGame2Editor.putString("SAVED_MAP", json);
+                                savedGame2Editor.commit();
+
+                                savedGame2Editor.putBoolean("USED", true);
+                                savedGame2Editor.commit();
+                                break;
+                            case 2:
+                                json = gson.toJson(player);
+                                savedGame3Editor.putString("SAVED_PLAYER", json);
+                                savedGame3Editor.commit();
+
+                                json = gson.toJson(map);
+                                savedGame3Editor.putString("SAVED_MAP", json);
+                                savedGame3Editor.commit();
+
+                                savedGame3Editor.putBoolean("USED", true);
+                                savedGame3Editor.commit();
+                                break;
+                        }
+                        Toast.makeText(getApplicationContext(), "Game Saved to save slot " + (which+1), Toast.LENGTH_SHORT).show();
+                    }
+                });
+        AlertDialog saveDialog = builder.create();
+        saveDialog.show();
+
+
     }
 
-    public void loadGame(){
-        Log.d("SAVE", "in loadGame()");
+
+
+    public void loadGame(int nr){
+        Log.d("SAVE", "in loadGame() nr: " + nr);
         Gson gson = new Gson();
-        String json = savedGame1.getString("SAVED_PLAYER", "");
-        player = gson.fromJson(json, Character.class);
+        String json;
 
-        Gson gson2 = new Gson();
-        String json2 = savedGame1.getString("SAVED_MAP", "");
-        map = gson2.fromJson(json2, Map.class);
+        switch(nr){
+            case 1:
+                json= savedGame1.getString("SAVED_PLAYER", "");
+                player = gson.fromJson(json, Character.class);
 
+                json = savedGame1.getString("SAVED_MAP", "");
+                map = gson.fromJson(json, Map.class);
+                break;
+            case 2:
+                json= savedGame2.getString("SAVED_PLAYER", "");
+                player = gson.fromJson(json, Character.class);
 
+                json = savedGame2.getString("SAVED_MAP", "");
+                map = gson.fromJson(json, Map.class);
+                break;
+            case 3:
+                json= savedGame3.getString("SAVED_PLAYER", "");
+                player = gson.fromJson(json, Character.class);
+
+                json = savedGame3.getString("SAVED_MAP", "");
+                map = gson.fromJson(json, Map.class);
+                break;
+        }
         this.m = new MainModel(player.getName(), player.getHpGrowth(), player.getStrGrowth(), player.getDefGrowth(), player.getSklGrowth(), player.getSpdGrowth());
         drawView = (CanvasMap) findViewById(R.id.view);
         this.gDetector = new GestureDetectorCompat(this,this);

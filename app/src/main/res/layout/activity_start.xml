@@ -31,9 +31,36 @@
     <Button
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:text="Slot 1: Empty"
+        android:layout_below="@id/loadgame1_button"
+        android:onClick="clickedSaveSlot1"
+        android:id="@+id/saveslot1_button"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Slot 2: Empty"
+        android:layout_below="@id/saveslot1_button"
+        android:onClick="clickedSaveSlot2"
+        android:id="@+id/saveslot2_button"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Slot 3: Empty"
+        android:layout_below="@id/saveslot2_button"
+        android:onClick="clickedSaveSlot3"
+        android:id="@+id/saveslot3_button"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
         android:text="Highscores"
         android:id="@+id/go_tohighscore"
-        android:layout_below="@+id/loadgame1_button"
+        android:layout_below="@+id/saveslot3_button"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="105dp"
         android:onClick="goToHighscores"/>

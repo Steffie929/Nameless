@@ -19,16 +19,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 public class Start extends AppCompatActivity{
     private final int NEW_GAME_CODE = 1;
     private final int CREATION_KEY = 4;
     private ImageView endboss, jwlImg, charImg;
     private Animation jwlAnimation, charAnimation, bossAnimation;
-    private SharedPreferences savedHighscores, savedGame1;
-    private SharedPreferences.Editor savedHighscoresEditor, savedGame1Editor;
-    private Button newGame,goToHighscores, loadGame;
-    private boolean gameSaved1;
+    private SharedPreferences savedHighscores, savedGame1, savedGame2, savedGame3;
+    private SharedPreferences.Editor savedHighscoresEditor, savedGame1Editor, savedGame2Editor, savedGame3Editor;
+    private Button newGame,goToHighscores, loadGame, saveSlot1, saveSlot2, saveSlot3;
+    private boolean gameSaved1, gameSaved2, gameSaved3;
 
 
     @Override
@@ -40,17 +41,30 @@ public class Start extends AppCompatActivity{
         savedHighscores= context.getSharedPreferences("rsi.nameless.highscores", Context.MODE_PRIVATE);
         savedGame1= context.getSharedPreferences("rsi.nameless.savedGame1", Context.MODE_PRIVATE);
         savedGame1Editor = savedGame1.edit();
+        savedGame2= context.getSharedPreferences("rsi.nameless.savedGame2", Context.MODE_PRIVATE);
+        savedGame2Editor = savedGame2.edit();
+        savedGame3= context.getSharedPreferences("rsi.nameless.savedGame3", Context.MODE_PRIVATE);
+        savedGame3Editor = savedGame3.edit();
         savedHighscoresEditor = savedHighscores.edit();
 
         gameSaved1 = savedGame1.getBoolean("USED", false);
+        gameSaved2 = savedGame2.getBoolean("USED", false);
+        gameSaved3 = savedGame3.getBoolean("USED", false);
 
 
         newGame = (Button) findViewById(R.id.newgame_button);
         goToHighscores = (Button) findViewById(R.id.go_tohighscore);
         loadGame = (Button) findViewById(R.id.loadgame1_button);
+        saveSlot1 = (Button) findViewById(R.id.saveslot1_button);
+        saveSlot2 = (Button) findViewById(R.id.saveslot2_button);
+        saveSlot3 = (Button) findViewById(R.id.saveslot3_button);
         newGame.setVisibility(View.GONE);
         goToHighscores.setVisibility(View.GONE);
         loadGame.setVisibility(View.GONE);
+        saveSlot1.setVisibility(View.GONE);
+        saveSlot2.setVisibility(View.GONE);
+        saveSlot3.setVisibility(View.GONE);
+
         introAnimation();
 
     }
@@ -105,24 +119,46 @@ public class Start extends AppCompatActivity{
         if(loadGame.getVisibility() == View.GONE)
             return;
 
-        if(!gameSaved1){
+        saveSlot1.setVisibility(View.VISIBLE);
+        saveSlot2.setVisibility(View.VISIBLE);
+        saveSlot3.setVisibility(View.VISIBLE);
 
-            AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
-            helpBuilder.setTitle("Failed to load game");
-            helpBuilder.setMessage("No saved game was found");
-            helpBuilder.setPositiveButton("Ok",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    });
-            AlertDialog helpDialog = helpBuilder.create();
-            helpDialog.setCancelable(false);
-            helpDialog.show();
+
+    }
+
+    public void clickedSaveSlot1(View v){
+        if(!gameSaved1){
+            Toast.makeText(getApplicationContext(), "There is no saved game in this slot ", Toast.LENGTH_SHORT).show();
             return;
         }
 
         Intent intent = new Intent(this, MapActivity.class);
         intent.putExtra("NEW_GAME", false);
+        intent.putExtra("SELECTED_SLOT", 1);
+        startActivityForResult(intent, NEW_GAME_CODE);
+    }
+
+    public void clickedSaveSlot2(View v){
+        if(!gameSaved2){
+            Toast.makeText(getApplicationContext(), "There is no saved game in this slot ", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra("NEW_GAME", false);
+        intent.putExtra("SELECTED_SLOT", 2);
+        startActivityForResult(intent, NEW_GAME_CODE);
+    }
+
+    public void clickedSaveSlot3(View v){
+        if(!gameSaved3){
+            Toast.makeText(getApplicationContext(), "There is no saved game in this slot ", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra("NEW_GAME", false);
+        intent.putExtra("SELECTED_SLOT", 3);
         startActivityForResult(intent, NEW_GAME_CODE);
     }
 
@@ -141,7 +177,15 @@ public class Start extends AppCompatActivity{
             goToHighscores.setVisibility(View.VISIBLE);
             loadGame.setVisibility(View.VISIBLE);
             introAnimation();
+
+            if(saveSlot1.getVisibility()== View.VISIBLE) {
+                saveSlot1.setVisibility(View.GONE);
+                saveSlot2.setVisibility(View.GONE);
+                saveSlot3.setVisibility(View.GONE);
+            }
+
         }
+
         return false;
     }
 
