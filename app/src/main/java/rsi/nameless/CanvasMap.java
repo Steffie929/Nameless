@@ -209,6 +209,9 @@ public class CanvasMap extends View  {
         d.setBounds(0, mapHeight-150,150,mapHeight);
         d.draw(canvas);
 
+        d = ResourcesCompat.getDrawable(getResources(), R.drawable.gold, null);
+        d.setBounds(mapWidth-200, mapHeight-150,mapWidth-150,mapHeight-100);
+        d.draw(canvas);
 
     }
 
