@@ -40,10 +40,12 @@ public class ShopActivity extends AppCompatActivity {
         startAct();
     }
 
+    /**
+     * Create the interactions that happen when an item is clicked in the inventory of the shop/player
+     */
     public void startAct(){
         gridShop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, final int position, long id) {
-                Log.d("SHOP", "playergold: " + player.getGold() + " pos: " + position);
                 final Item clickedItem = shop.getItemsInShop().get(position);
                 final AlertDialog.Builder helpBuilder = new AlertDialog.Builder(context);
                 helpBuilder.setTitle(clickedItem.getName());
@@ -70,11 +72,9 @@ public class ShopActivity extends AppCompatActivity {
                 helpBuilder.setNegativeButton("Back",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                //TODO back
                             }
                         });
 
-                // Remember, create doesn't show the dialog
                 AlertDialog helpDialog = helpBuilder.create();
                 helpDialog.show();
 
@@ -102,11 +102,9 @@ public class ShopActivity extends AppCompatActivity {
                 helpBuilder.setNegativeButton("Back",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                //TODO back
                             }
                         });
 
-                // Remember, create doesn't show the dialog
                 AlertDialog helpDialog = helpBuilder.create();
                 helpDialog.show();
 
@@ -115,6 +113,11 @@ public class ShopActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Display message s using a pop-up window (AlertDialog)
+     * Pop-up window is closed by clicking the OK button, no other interactions possible
+     * @param s The message to display
+     */
     public void extraMessage(String s){
         final AlertDialog.Builder helpBuilder = new AlertDialog.Builder(context);
         helpBuilder.setTitle("");
@@ -129,6 +132,10 @@ public class ShopActivity extends AppCompatActivity {
         helpDialog.show();
     }
 
+    /**
+     * Update the grids of the shop and the player
+     * The user will see this as the appearing/disappearing of items that were bought/sold
+     */
     public void updateGridviews(){
         iaShop.clearItems();
         ArrayList<Item> items = shop.getItemsInShop();
@@ -146,6 +153,11 @@ public class ShopActivity extends AppCompatActivity {
         playerGold.setText("" + player.getGold());
     }
 
+    /**
+     * Exit the shop
+     * Returns the player that was buying items in the shop to the previous activity,
+     * so the previous activity can handle the changed items/gold of the player
+     */
     public void exitShop(View v) {
         Intent returnIntent = new Intent();
         returnIntent.putExtra("Character_Key", player);

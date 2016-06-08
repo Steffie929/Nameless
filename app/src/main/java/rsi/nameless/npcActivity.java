@@ -50,6 +50,9 @@ public class npcActivity extends AppCompatActivity {
         update();
     }
 
+    /**
+     * Update what dialogue and what options are shown
+     */
     public void update() {
         Log.d("NPC", currentLink.getOption(0));
         o1.setText(currentLink.getOption(0));
@@ -58,6 +61,11 @@ public class npcActivity extends AppCompatActivity {
         tV.setText(currentLink.getText());
     }
 
+    /**
+     * User selected option one of the choices
+     * Change the course of the conversation to reflect this choice
+     * All methods "option[number]" do similar things
+     */
     public void option1(View v) {
         if(o1.getVisibility() ==View.GONE)
             return;
@@ -109,12 +117,17 @@ public class npcActivity extends AppCompatActivity {
             update();
     }
 
+    /**
+     * Ends the conversation
+     * Depending on the flow of the conversation, a battle could start,
+     * the player could get a reward, or nothing could happen
+     */
     public void endActivity() {
         if(currentLink.isBattle()) {
             possibleBattle = new Battle(player, conversation.getEnemy());
             Intent intent = new Intent(this, BattleActivity.class);
-            intent.putExtra("CURRENT_BATTLE", possibleBattle);      // finish() niet nodig, gebeurt in methode onActivityResult(int, int, Intent)
-            startActivityForResult(intent, BATTLE_KEY);             // Niet hier alsnog finish() neerzetten
+            intent.putExtra("CURRENT_BATTLE", possibleBattle);      // finish() not needed, happens in method onActivityResult(int, int, Intent)
+            startActivityForResult(intent, BATTLE_KEY);             // Do not put a finish() here anyway! This causes problems!
         }
         else if(currentLink.isReward()) {
             player.changeGold(player.getLevel()*5);
@@ -129,6 +142,9 @@ public class npcActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * After a conversation has run out of dialogue, touching the screen anywhere will end the conversation
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
@@ -140,6 +156,11 @@ public class npcActivity extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * Conversations can start a battle, this handles what happens after a battle
+     * Just passes all data from the battle onto the activity which called this one
+     * Ends the conversation
+     */
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
         if (requestCode == BATTLE_KEY) {
             if (resultCode == RESULT_OK) {
@@ -152,6 +173,10 @@ public class npcActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * To make the normal back button on the screen do nothing
+     * Prevents the user from (accidentally) escaping the conversation, which is not intended
+     */
     @Override
     public void onBackPressed() {
     }

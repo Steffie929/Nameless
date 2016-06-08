@@ -65,6 +65,10 @@ public class Start extends AppCompatActivity{
 
     }
 
+    /**
+     * Perform the introductory animation
+     * Make the invisible buttons visible after the animation ends
+     */
     public void introAnimation(){
         endboss = (ImageView) findViewById(R.id.skl_animation);
         bossAnimation = AnimationUtils.loadAnimation(this, R.anim.skl_anim);
@@ -104,7 +108,9 @@ public class Start extends AppCompatActivity{
         charImg.startAnimation(charAnimation);
     }
 
-
+    /**
+     * Starts a CreationActivity, which allows you to start a new game
+     */
     public void startNewGame(View v) {
         if(newGame.getVisibility() == View.GONE)
             return;
@@ -112,6 +118,9 @@ public class Start extends AppCompatActivity{
         startActivityForResult(intent, CREATION_KEY);
     }
 
+    /**
+     * Display the save slot buttons and the button that allows you to clear all save files
+     */
     public void loadGame(View v){
         if(loadGame.getVisibility() == View.GONE)
             return;
@@ -123,6 +132,9 @@ public class Start extends AppCompatActivity{
         clearSaves.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * Change the text on the save buttons to the most up to date version
+     */
     private void setSavedTexts() {
         gameSaved1 = savedGame1.getBoolean("USED", false);
         gameSaved2 = savedGame2.getBoolean("USED", false);
@@ -147,6 +159,9 @@ public class Start extends AppCompatActivity{
         }
     }
 
+    /**
+     * Delete all existing save data
+     */
     public void clearSaveslots (View v) {
         savedGame1Editor.clear();
         savedGame1Editor.commit();
@@ -157,6 +172,10 @@ public class Start extends AppCompatActivity{
         setSavedTexts();
     }
 
+    /**
+     * Load the game that is saved in save slot 1
+     * Starts a MapAcitivy, which is the activity in which the save data was made
+     */
     public void clickedSaveSlot1(View v){
         if(!gameSaved1){
             Toast.makeText(getApplicationContext(), "There is no saved game in this slot ", Toast.LENGTH_SHORT).show();
@@ -169,6 +188,10 @@ public class Start extends AppCompatActivity{
         startActivityForResult(intent, NEW_GAME_CODE);
     }
 
+    /**
+     * Load the game that is saved in save slot 2
+     * Starts a MapAcitivy, which is the activity in which the save data was made
+     */
     public void clickedSaveSlot2(View v){
         if(!gameSaved2){
             Toast.makeText(getApplicationContext(), "There is no saved game in this slot ", Toast.LENGTH_SHORT).show();
@@ -181,6 +204,10 @@ public class Start extends AppCompatActivity{
         startActivityForResult(intent, NEW_GAME_CODE);
     }
 
+    /**
+     * Load the game that is saved in save slot 3
+     * Starts a MapAcitivy, which is the activity in which the save data was made
+     */
     public void clickedSaveSlot3(View v){
         if(!gameSaved3){
             Toast.makeText(getApplicationContext(), "There is no saved game in this slot ", Toast.LENGTH_SHORT).show();
@@ -193,6 +220,9 @@ public class Start extends AppCompatActivity{
         startActivityForResult(intent, NEW_GAME_CODE);
     }
 
+    /**
+     * Open the High scores screen (Located in HighscoreActivity
+     */
     public void goToHighscores(View v){
         if(goToHighscores.getVisibility() == View.GONE)
             return;
@@ -200,6 +230,10 @@ public class Start extends AppCompatActivity{
         startActivity(intent);
     }
 
+    /**
+     * Make the buttons that were hidden because of the opening animation visible
+     * Hide the buttons that are related to loading save data
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = MotionEventCompat.getActionMasked(event);
@@ -218,10 +252,13 @@ public class Start extends AppCompatActivity{
             }
 
         }
-
         return false;
     }
 
+    /**
+     * If this method was called from a CreationActivty (CREATION_KEY), start a new game
+     * If this method was called from a MapActivity (NEW_GAME_CODE), save the highscore data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode == NEW_GAME_CODE && resultCode == RESULT_OK){
@@ -279,6 +316,9 @@ public class Start extends AppCompatActivity{
         return i+1;
     }
 
+    /**
+     * Open the tutorial, located under TutorialActivity
+     */
     public void openTutorial(View v) {
         Intent intent = new Intent(this, TutorialActivity.class);
         startActivity(intent);

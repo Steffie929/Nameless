@@ -19,6 +19,11 @@ public class TutorialActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Decides which drawable and string of information are appropriate for this part of the tutorial
+     * All methods ending in -Info do the same thing, but for different subjects
+     * Calls the method displayInformationScreen() to display the image and text
+     */
     public void playerInfo(View v) {
         int imgID = R.drawable.char_icon_small;
         String information = "Player statistics\n\n" +
@@ -149,6 +154,9 @@ public class TutorialActivity extends AppCompatActivity {
         displayInformationScreen(imgID, information);
     }
 
+    /**
+     * Displays the information string and image in the Information class
+     */
     private void displayInformationScreen(int imgID, String information) {
         Intent intent = new Intent(this, Information.class);
         intent.putExtra("IMAGE_ID", imgID);

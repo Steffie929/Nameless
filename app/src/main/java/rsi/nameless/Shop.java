@@ -16,6 +16,11 @@ public class Shop extends Event implements Serializable{
     private int level;
     private Character player;
 
+    /**
+     * Constructor, has a call to addLevelItems()
+     * @param level The level of the map the shop is in
+     * @param items An ItemLibrary
+     */
     public Shop(int level, ItemLibrary items){
         WeaponsInShop = new ArrayList<>();
         ArmourInShop = new ArrayList<>();
@@ -26,6 +31,9 @@ public class Shop extends Event implements Serializable{
         addLevelItems();
     }
 
+    /**
+     * Adds items from with the correct level from the ItemLibrary into the shop inventory
+     */
     public void addLevelItems(){
         WeaponsInShop.add(items.getWeapon(1));
         ItemsInShop.add(items.getWeapon(1));
@@ -71,6 +79,10 @@ public class Shop extends Event implements Serializable{
         }
     }
 
+    /**
+     * Setter for the player character in the shop
+     * @param player the new player character
+     */
     public void setPlayer(Character player){
         this.player = player;
     }
@@ -79,10 +91,17 @@ public class Shop extends Event implements Serializable{
         return ItemsInShop.size();
     }
 
+    /**
+     * @return the ArrayList of Items that are currently in the shop's inventory
+     */
     public ArrayList<Item> getItemsInShop(){
         return ItemsInShop;
     }
 
+    /**
+     * Getter for the player character in the shop
+     * @return the player
+     */
     public Character getPlayer(){
         return player;
     }

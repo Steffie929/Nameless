@@ -10,6 +10,9 @@ public class Move {
     private float clY;
     private boolean succes;
 
+    /**
+     * Constructor
+     */
     public Move(Map map, CanvasMap sc, float clickX, float clickY){
         this.map = map;
         this.sc = sc;
@@ -18,12 +21,19 @@ public class Move {
         succes = false;
     }
 
+    /**
+     * Second contructor
+     */
     public Move(Map map, CanvasMap sc){
         this.map = map;
         this.sc = sc;
         succes = false;
     }
 
+    /**
+     * Determines if the player can move depending on his current location
+     * @return true if the position clicked by the player allows him to move there
+     */
     public boolean tryMove(){
         int currentPoint = map.getCurrentPoint();
 
@@ -66,6 +76,12 @@ public class Move {
         }
     }
 
+    /**
+     * Moves the player to the position the his upper left if there was a possible position in that direction
+     * swipedRight does the same thing, but for the upper right instead
+     * @param currentPoint The current point of the player
+     * @return true if the player could move and has moved, false if moving to the left was not possible
+     */
     public boolean swipedLeft(int currentPoint){
         switch(currentPoint){
             case 0:
@@ -104,6 +120,9 @@ public class Move {
         return succes;
     }
 
+    /**
+     * See swipedLeft
+     */
     public boolean swipedRight(int currentPoint){
         switch(currentPoint){
             case 0:

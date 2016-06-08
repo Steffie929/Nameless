@@ -67,18 +67,21 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         map.setPlayer(player);
 
         startLevel();
-
-
-
-
     }
 
+    /**
+     * Start the conversation associated with the current map
+     */
     public void startLevel(){
         drawView.setMap(map);
         Conversation conv = map.getConversation();
         startConversation(conv);
     }
 
+    /**
+     * Start a conversation activity based on a Conversation object
+     * @param conv the conversation that should be started
+     */
     public void startConversation(Conversation conv){
         Intent intent = new Intent(this, npcActivity.class);
         intent.putExtra("CURRENT_CONVERSATION", conv);
@@ -87,6 +90,10 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         drawView.invalidate();
     }
 
+    /**
+     * Start a battle activity
+     * @param battle the battle that should be played out in a battle activity
+     */
     public void startBattleActivity(Battle battle){
         Intent intent = new Intent(this, BattleActivity.class);
         intent.putExtra("CURRENT_BATTLE", battle);
@@ -94,6 +101,10 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         drawView.invalidate();
     }
 
+    /**
+     * Start a shop activity
+     * @param shop the shop that sells stuff in the shop activity
+     */
     public void startShopActivity(Shop shop){
         Intent intent = new Intent(this, ShopActivity.class);
         intent.putExtra("CURRENT_SHOP", shop);
@@ -164,6 +175,9 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         }
     }
 
+    /**
+     * Open the players backpack in a BackpackActivity
+     */
     public void openBackpack(View v){
         Intent intent = new Intent(this, BackpackActivity.class);
         intent.putExtra("CURRENT_PLAYER", map.getPlayer());
@@ -171,12 +185,18 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         startActivityForResult(intent, BACKPACK_KEY);
     }
 
+    /**
+     * Open the characer stats screen
+     */
     public void openStatScreen(View v){
         Intent intent = new Intent(this, CharacterScreen.class);
         intent.putExtra("CURRENT_PLAYER", map.getPlayer());
         startActivity(intent);
     }
 
+    /**
+     * Try to move based on where the player tapped the screen
+     */
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
         float x,y;
@@ -194,6 +214,11 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         return false;
     }
 
+    /**
+     * Move the player, start an activity that takes place on the new point
+     * Change the possible activity that can take place in the new position of the player to empty
+     * after the player has completed the activity, so the player cannot do the same thing twice
+     */
     public void move(){
         drawView.invalidate();
 
@@ -209,6 +234,10 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         map.setEvent(map.getCurrentPoint(), Map.eventType.EMPTY);
     }
 
+    /**
+     * Prompt a pop-up window which lets the player choose the save slot
+     * Save the game to the specified save slot
+     */
     public void saveCurrentGame(View v){
 
         String[] choices = {"Save Slot 1", "Save Slot 2", "Save Slot 3"};
@@ -265,12 +294,12 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
                 });
         AlertDialog saveDialog = builder.create();
         saveDialog.show();
-
-
     }
 
-
-
+    /**
+     * Load a game from the specified save slot
+     * @param nr the save slot to load the game from
+     */
     public void loadGame(int nr){
         Log.d("SAVE", "in loadGame() nr: " + nr);
         Gson gson = new Gson();
@@ -310,12 +339,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
 
     @Override
     public void onLongPress(MotionEvent e) {
-        int x,y;
-        x= Math.round(e.getX());
-        y = Math.round(e.getY());
-        String toastText = "Long tap:\t (" + x + ", " + y + ")";
-        Toast.makeText(getApplicationContext(), toastText,
-                Toast.LENGTH_SHORT).show();
+        //ignore
     }
 
     @Override
@@ -337,10 +361,15 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         //ignore
         return false;
     }
+
+    /**
+     * Player swiped to a given direction on the screen
+     * Calculate which direction
+     * If possible, move the player based on the calculated direction
+     * Possible directions: Up and left / Up and right
+     */
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        //ignore
-        //TODO Add fling/swipe possibility
         Log.d("DEBUG", "velX: " + velocityX + " velY: " + velocityY + "\ne1: " + e1.toString() + "\ne2: " + e2.toString());
         float orX,orY,newX,newY,deltaX,deltaY;
         orX = e1.getX();
@@ -351,7 +380,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
 
         Move move = new Move(map, drawView);
         if(orY-newY > 200 && newX-orX >50){
-        //swiped up and right
+            //swiped up and right
             Log.d("DEBUG", "first if");
             Log.d("DEBUG", "orX: " + orX + " orY: " + orY + " newX: " + newX + "newY: " + newY);
             move.swipedRight(map.getCurrentPoint());
@@ -368,6 +397,9 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         return false;
     }
 
+    /**
+     * Start a tutorial activity
+     */
     public void toTutorialscreen(View v) {
         Intent intent = new Intent(this, TutorialActivity.class);
         startActivity(intent);
