@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableLayout;
@@ -99,7 +98,6 @@ public class BackpackActivity extends AppCompatActivity {
             text.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("Backpack", item.getName() + " was clicked\t itemtype: " + item.getClass());
                     final ItemType itemType = item.getType();
                     String positiveAction = "";
                     String message = "";
@@ -236,9 +234,7 @@ public class BackpackActivity extends AppCompatActivity {
         int defTabNumber = getTabNumber(item.getDefenseBonus(), 12);
         int sklTabNumber = getTabNumber(item.getSkillBonus(), 15);
         int useTabNumber = getTabNumber(item.getNrUses(), 10);
-        Log.d("Backpack", "getPotionInformation start");
         if (removeOneTabFromStrength) {
-            Log.d("Backpack", "getPotionInformation if");
             strTabNumber--;
             defTabNumber-=2;
             useTabNumber--;

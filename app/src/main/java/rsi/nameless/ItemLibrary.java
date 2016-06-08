@@ -25,8 +25,6 @@ public class ItemLibrary implements Serializable{
         addPotions();
         addArmour();
 
-
-
         Item artefact = new Item("Strange Jewel", "I really don't know what this is", 0,0,0,0,0,0,0,ItemType.QUEST,R.drawable.jewel);
         quest.add(artefact);
     }

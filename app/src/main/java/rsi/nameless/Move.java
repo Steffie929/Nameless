@@ -114,9 +114,7 @@ public class Move {
                 map.setCurrentPoint(6);
                 succes = true;
                 break;
-
         }
-
         return succes;
     }
 

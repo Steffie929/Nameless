@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -267,7 +266,6 @@ public class Start extends AppCompatActivity{
             String enemyName = data.getStringExtra("ENEMY_NAME");
             if(enemyName == null)
                 enemyName = "Nameless";
-            Log.d("SAVE", "ended game, score: " + result);
             String text;
             text = player.getName() + "  " + result + " points\n";
             text+= "Level: " + player.getLevel() + "\t\t\t\tGold: " + player.getGold() + "\n";
@@ -280,7 +278,6 @@ public class Start extends AppCompatActivity{
 
             String key1 = "Score"+index;
             String key2 = "Result"+index;
-            Log.d("TAGGED", "stringkey: " + key1 + "   intKey: " + key2);
             savedHighscoresEditor.putString(key1, text);
             savedHighscoresEditor.putInt(key2, result);
             savedHighscoresEditor.commit();
@@ -309,7 +306,6 @@ public class Start extends AppCompatActivity{
 
         for(i=0; i<15;i++){
             int score =savedHighscores.getInt("Result"+(i+1), -20);
-            Log.d("TAGGED", "score: " + score);
             if(result>score)
                 break;
         }

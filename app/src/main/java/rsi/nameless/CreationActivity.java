@@ -9,8 +9,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class CreationActivity extends AppCompatActivity {
     private int maxChanges, hpMod, strMod, defMod, sklMod, spdMod;
     private TextView hpPoints, strPoints, defPoints, sklPoints, spdPoints, points;

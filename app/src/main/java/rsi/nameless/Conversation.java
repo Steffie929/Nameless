@@ -1,7 +1,6 @@
 package rsi.nameless;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * Created by Stéphanie on 30-5-2016.

@@ -2,7 +2,6 @@ package rsi.nameless;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Created by Stéphanie on 20-5-2016.
@@ -85,10 +84,6 @@ public class Shop extends Event implements Serializable{
      */
     public void setPlayer(Character player){
         this.player = player;
-    }
-
-    public int getNrOfItems(){
-        return ItemsInShop.size();
     }
 
     /**

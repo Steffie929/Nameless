@@ -1,7 +1,5 @@
 package rsi.nameless;
 
-import android.widget.TextView;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;

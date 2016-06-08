@@ -9,15 +9,12 @@ import android.content.SharedPreferences;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-
-import java.io.Serializable;
 
 public class MapActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
     private CanvasMap drawView;
@@ -202,8 +199,6 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
         float x,y;
         x = e.getX()-40;
         y = e.getY()-250;
-        Log.d("DEBUG", "MapActivity, onSingleTap\n\t\tclicked on:\tgetX() " + x + " " + y);
-
 
         Move move = new Move(map, drawView, x, y);
         if(!move.tryMove()){
@@ -301,7 +296,6 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
      * @param nr the save slot to load the game from
      */
     public void loadGame(int nr){
-        Log.d("SAVE", "in loadGame() nr: " + nr);
         Gson gson = new Gson();
         String json;
 
@@ -370,26 +364,20 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
      */
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        Log.d("DEBUG", "velX: " + velocityX + " velY: " + velocityY + "\ne1: " + e1.toString() + "\ne2: " + e2.toString());
         float orX,orY,newX,newY,deltaX,deltaY;
         orX = e1.getX();
         orY = e1.getY();
         newX = e2.getX();
         newY = e2.getY();
-        Log.d("DEBUG", "orX: " + orX + " orY: " + orY + " newX: " + newX + "newY: " + newY);
 
         Move move = new Move(map, drawView);
         if(orY-newY > 200 && newX-orX >50){
             //swiped up and right
-            Log.d("DEBUG", "first if");
-            Log.d("DEBUG", "orX: " + orX + " orY: " + orY + " newX: " + newX + "newY: " + newY);
             move.swipedRight(map.getCurrentPoint());
             move();
         }
         else if(orY-newY >200 && orX-newX >50){
             //swiped up and left
-            Log.d("DEBUG", "second if");
-            Log.d("DEBUG", "orX: " + orX + " orY: " + orY + " newX: " + newX + "newY: " + newY);
             move.swipedLeft(map.getCurrentPoint());
             move();
         }

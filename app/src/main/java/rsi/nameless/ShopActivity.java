@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -83,7 +82,6 @@ public class ShopActivity extends AppCompatActivity {
 
         gridPlayer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, final int position, long id) {
-                Log.d("SHOP", "playergold: " + player.getGold() + " pos: " + position);
                 final Item clickedItem = player.getItemFromBackPack(position);
                 final AlertDialog.Builder helpBuilder = new AlertDialog.Builder(context);
                 helpBuilder.setTitle(clickedItem.getName());

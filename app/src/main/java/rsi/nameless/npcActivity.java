@@ -7,7 +7,6 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -54,7 +53,6 @@ public class npcActivity extends AppCompatActivity {
      * Update what dialogue and what options are shown
      */
     public void update() {
-        Log.d("NPC", currentLink.getOption(0));
         o1.setText(currentLink.getOption(0));
         o2.setText(currentLink.getOption(1));
         o3.setText(currentLink.getOption(2));
@@ -101,9 +99,6 @@ public class npcActivity extends AppCompatActivity {
     public void option3(View v) {
         if(o3.getVisibility() ==View.GONE)
             return;
-
-
-        Log.d("CONVERSATION", "isLast? " + currentLink.isLast());
 
         currentLink = currentLink.getNext(2);
         if(currentLink.isLast()) {

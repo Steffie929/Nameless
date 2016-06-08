@@ -11,7 +11,6 @@ public class Link implements Serializable{
     private Link[] links;
     private boolean last;
     private boolean battle;
-    private boolean questAccepted;
     private boolean reward;
 
     /**
@@ -38,15 +37,10 @@ public class Link implements Serializable{
         this.options = options;
         last = false;
         battle = false;
-        questAccepted = false;
         reward = false;
 
         this.links = links;
     }
-
-
-
-
 
     public String getOption(int index){
         return options[index];

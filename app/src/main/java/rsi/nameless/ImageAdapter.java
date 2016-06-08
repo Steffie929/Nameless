@@ -59,15 +59,6 @@ public class ImageAdapter extends BaseAdapter {
         mThumbIds = new ArrayList<>();
     }
 
-    /**
-     *  Deze functie veranderd plaatje uit mThumbIds
-     * @param pos geeft aan waar je iets wilt veranderen
-     * @param c geeft aan welk plaatje je wilt gebruiken
-     */
-    public void setImage(int pos, int c){
-        mThumbIds.add(c, pos);
-    }
-
     // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;

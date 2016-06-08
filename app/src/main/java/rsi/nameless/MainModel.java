@@ -1,7 +1,5 @@
 package rsi.nameless;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 /**
@@ -9,7 +7,6 @@ import java.util.ArrayList;
  */
 public class MainModel {
     private Character player;
-    private int currentLevel;
     private ArrayList<Map> maps;
     private EnemyLibrary enemies;
     private ItemLibrary items;
@@ -29,7 +26,6 @@ public class MainModel {
         this.enemies = new EnemyLibrary(items);
         this.player = new Character(playerName, hpMod, strMod, defMod, sklMod, spdMod, items);
         convLib = new ConversationLibrary(enemies);
-        currentLevel = 1;
         maps = new ArrayList<>();
 
         maps.add(new Map(1, enemies, items, convLib));
@@ -38,12 +34,9 @@ public class MainModel {
 
     }
 
-
-
     public Map getMap(int lvl){
         return maps.get(lvl-1);
     }
-
 
     public ItemLibrary getItemLibrary(){
         return items;

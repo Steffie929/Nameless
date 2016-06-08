@@ -1,7 +1,5 @@
 package rsi.nameless;
 
-import android.util.Log;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 

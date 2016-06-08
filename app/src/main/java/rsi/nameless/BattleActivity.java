@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -122,7 +121,6 @@ public class BattleActivity extends AppCompatActivity {
      */
     public void afterInput(){
         info.setText("");
-        Log.d("BATTLE", "user-input received");
         battle.performActions();
         String battleInfo = battle.getBattleInfo();
         if (battleInfo != null && battleInfo.length() > 0 && battleInfo.charAt(battleInfo.length()-1)=='\n') {
@@ -194,16 +192,11 @@ public class BattleActivity extends AppCompatActivity {
         if (requestCode == BACKPACK_KEY) {
             if (resultCode == RESULT_OK) {
                 int index = (int) data.getSerializableExtra("Item_Index");
-                Log.d("Item index: ", Integer.toString(index));
-                Log.d("Current weapon: ", player.getWeapon().getName());
-                Log.d("Current armour: ", player.getArmour().getName());
                 if (index >= 0) {
                     battle.setPlayerAction(BattleAction.USE_ITEM, index);
                     playerTurn = false;
                     afterInput();
                     startRound();
-                    Log.d("Current weapon: ", player.getWeapon().getName());
-                    Log.d("Current armour: ", player.getArmour().getName());
                 }
             }
         }

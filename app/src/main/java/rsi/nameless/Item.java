@@ -106,8 +106,6 @@ public class Item implements Serializable {
         return name;
     }
 
-
-
     /**
      * Compares this Item with another Item. If they have the same name it returns true
      */

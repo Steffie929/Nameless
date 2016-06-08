@@ -1,8 +1,5 @@
 package rsi.nameless;
 
-import android.util.Log;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -108,16 +105,8 @@ public class EnemyLibrary {
         bosses.add(new Character ("Nameless", 30, 30, 30, 30, 45, 50, 50, 10, endBossBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.stranger_battle));//2
     }
 
-    public Character getEnemy (int index) {
-        return enemies.get(index);
-    }
-
     public Character getBoss (int index) {
         return bosses.get(index);
-    }
-
-    public int getNrEnemies(){
-        return enemies.size();
     }
 
     /**
@@ -132,18 +121,6 @@ public class EnemyLibrary {
             Character enemy = enemies.get(i);
             if (enemy.getLevel() == level) {
                 result.add(enemy);
-            }
-        }
-        return result;
-    }
-
-    public ArrayList<Character> getBossesWithLevel (int level) {
-        ArrayList<Character> result = new ArrayList<>();
-        int size = bosses.size();
-        for (int i = 0; i < size; i++) {
-            Character boss = bosses.get(i);
-            if (boss.getLevel() == level) {
-                result.add(boss);
             }
         }
         return result;

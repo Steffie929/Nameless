@@ -9,11 +9,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Shader;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 /**
@@ -53,7 +51,6 @@ public class CanvasMap extends View  {
         paint = new Paint();
         mapHeight=getResources().getDisplayMetrics().heightPixels;
         mapWidth=getResources().getDisplayMetrics().widthPixels;
-        Log.d("DEBUG", "CanvasMap, start()\n\t\tcanvas height and width: " + mapHeight + "  " + mapWidth);
         Bitmap bitmap = Bitmap.createBitmap(mapHeight, mapWidth, Bitmap.Config.RGB_565);
         canvas = new Canvas(bitmap);
     }
@@ -101,9 +98,6 @@ public class CanvasMap extends View  {
             pathX[i] = Xcoord[orderX[i]];
             pathY[i] = Ycoord[orderY[i]];
         }
-
-        Log.d("DEBUG", "CanvasMap, ondraw, \n\t\t "+ "canvasWidth: " + mapWidth + "  canvasHeight: " + mapHeight);
-
         drawBackground();
         drawRoads();
         drawEventIcons();
@@ -115,9 +109,7 @@ public class CanvasMap extends View  {
      * This function gets the event icon for each point on the map and draws them.
      */
     public void drawEventIcons(){
-        Log.d("DRAW", "started drawEventIcons");
         Drawable d;
-
         for(int i=0; i<8;i++){
             Event event = map.getEvent(i);
             if(event instanceof Battle && i != 0){
@@ -175,7 +167,6 @@ public class CanvasMap extends View  {
         y = Math.round(pathY[p]);
         int imID = map.getPlayer().getImgID();
         playerIcon = ResourcesCompat.getDrawable(getResources(), imID, null);
-        Log.d("DEBUG", "plIcon id: " + imID);
         //d.setBounds(left, top, right, bottom);
         playerIcon.setBounds(x-75, y-75, x+75, y+75);//100 breed 150 hoog
         playerIcon.draw(canvas);
@@ -222,9 +213,4 @@ public class CanvasMap extends View  {
     public float[] getPathY(){
         return pathY;
     }
-
-    public Map getMap(){
-        return map;
-    }
-    
 }
