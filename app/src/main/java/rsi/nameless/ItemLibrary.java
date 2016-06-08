@@ -40,6 +40,8 @@ public class ItemLibrary implements Serializable{
         weapons.add( new Weapon ("Iron Doomblade","An old an dangerous sword" , 5, -1, 5, 3, 0, 2, 10, R.drawable.sword) );//5
         weapons.add( new Weapon ("Sundering Axe","This axe will leave just about anything in pieces" , 7, -3, 4, 1, 0, 2, 10, R.drawable.axe) );//6
         weapons.add( new Weapon ("Iron Cleaver","A slow but very powerful axe" , 10, -4, 3, -2, 0, 2, 10, R.drawable.axe_double) );//7
+        weapons.add( new Weapon ("Sword of lightning","This sword is very fast and tends to leave enemies slightly crispy." , 8, -3, 12, 15, 0, 3, 20, R.drawable.upg_sword) );//8
+        weapons.add( new Weapon ("Axe of Silence","This axe can end a conversation before it starts" , 14, 4, 8, 6, 0, 3, 20, R.drawable.upg_axe) );//9
     }
 
     private void addPotions () {
