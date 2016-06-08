@@ -229,7 +229,7 @@ public class Start extends AppCompatActivity{
             Character player = (Character) data.getSerializableExtra("PLAYER_CHARACTER");
             String enemyName = data.getStringExtra("ENEMY_NAME");
             if(enemyName == null)
-                enemyName = "Stranger";
+                enemyName = "Nameless";
             Log.d("SAVE", "ended game, score: " + result);
             String text;
             text = player.getName() + "  " + result + " points\n";
