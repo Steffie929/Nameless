@@ -74,7 +74,8 @@ public class TutorialActivity extends AppCompatActivity {
                 "Your skill increases the chance you hit your opponent.\n" +
                 "If your speed is hy enough, you can attack first\nor even attack multiple times.\n" +
                 "2) Defend\n" +
-                "Stop your opponent from doing damage.\n" +
+                "Stop your opponent from doing damage. If your opponent attacks you, you do a small amount of damage to him instead. " +
+                "This damage is equal to your current level.\n" +
                 "3) Use an item\n" +
                 "Use a potion to restore HP or boost one of your stats.\n" +
                 "Alternatively, equip a different weapon or set of armour.\n" +

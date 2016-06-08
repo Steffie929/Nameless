@@ -100,24 +100,28 @@ public class Battle extends Event implements Serializable{
         int speedDifference = playerSpeed - enemySpeed;
         int speedTier = speedDifference / 5;
         if (speedDifference > 0) {
+            boolean repeated = false;
             do {
-                performPlayerAction();
+                performPlayerAction(repeated);
                 speedTier--;
+                repeated = true;
             } while (playerAction.repeatable() && speedTier >= 0 && !battleFinished());
-            performEnemyAction();
+            performEnemyAction(false);
         } else if (speedDifference < 0) {
+            boolean repeated = false;
             do {
-                performEnemyAction();
+                performEnemyAction(repeated);
                 speedTier++;
+                repeated = true;
             } while (enemyAction.repeatable() && speedTier <= 0 && !battleFinished());
-            performPlayerAction();
+            performPlayerAction(false);
         } else {
             if (random.nextBoolean()) {
-                performPlayerAction();
-                performEnemyAction();
+                performPlayerAction(false);
+                performEnemyAction(false);
             } else {
-                performEnemyAction();
-                performPlayerAction();
+                performEnemyAction(false);
+                performPlayerAction(false);
             }
         }
     }
@@ -125,7 +129,7 @@ public class Battle extends Event implements Serializable{
     /**
      * Perform the action of the player
      */
-    private void performPlayerAction () {
+    private void performPlayerAction (boolean repeated) {
         if (player.getCurrentHP() <= 0) {
             battleInfo += "You died";
             return;
@@ -136,6 +140,9 @@ public class Battle extends Event implements Serializable{
                 battleInfo += player.getName() + " attacks " + enemy.getName() + "\n";
                 if (hitSucces(true) && enemyAction != BattleAction.DEFEND) {
                     int damage = 5 + player.getStrength() - enemy.getDefense();
+                    if (repeated) {
+                        damage = damage/2;
+                    }
                     if (damage > 0) {
                         battleInfo += player.getName() + " does " + damage + " damage\n";
                         enemy.changeCurrentHP(-damage);
@@ -150,6 +157,11 @@ public class Battle extends Event implements Serializable{
                 break;
             case DEFEND:
                 battleInfo += player.getName() + " defends\n";
+                if (enemyAction == BattleAction.ATTACK) {
+                    enemy.changeCurrentHP(-player.getLevel());
+                    battleInfo += player.getName() + " inflicted " + player.getLevel() + " damage while defending\n";
+                }
+
                 break;
             case USE_ITEM:
                 Item pitem = player.getItemFromBackPack(inventoryNumber);
@@ -196,7 +208,7 @@ public class Battle extends Event implements Serializable{
                     battleInfo += enemy.getName() + " was too fast to escape!\n";
                 break;
             default:
-                battleInfo += player.getName() + " did nothing";
+                battleInfo += player.getName() + " did nothing\n";
                 break;
         }
     }
@@ -204,7 +216,7 @@ public class Battle extends Event implements Serializable{
     /**
      * Perform the action of the enemy
      */
-    private void performEnemyAction () {
+    private void performEnemyAction (boolean repeated) {
         if (enemy.getCurrentHP() <= 0) {
             battleInfo += enemy.getName() + " died.\n";
             return;
@@ -214,6 +226,9 @@ public class Battle extends Event implements Serializable{
                 battleInfo += enemy.getName() + " attacks " + player.getName() + "\n";
                 if (hitSucces(false) && playerAction != BattleAction.DEFEND) {
                     int damage = 5 + enemy.getStrength() - player.getDefense();
+                    if (repeated) {
+                        damage = damage/2;
+                    }
                     if (damage > 0) {
                         battleInfo += enemy.getName() + " does " + damage + " damage\n";
                         player.changeCurrentHP(-damage);
@@ -228,6 +243,10 @@ public class Battle extends Event implements Serializable{
                 break;
             case DEFEND:
                 battleInfo += enemy.getName() + " defends\n";
+                if (playerAction == BattleAction.ATTACK) {
+                    player.changeCurrentHP(-enemy.getLevel());
+                    battleInfo += enemy.getName() + " inflicted " + enemy.getLevel() + " damage while defending\n";
+                }
                 break;
             case USE_ITEM:
                 battleInfo += enemy.getName() + " uses an item\n";
@@ -275,7 +294,7 @@ public class Battle extends Event implements Serializable{
                     battleInfo += "You kept it from escaping\n";
                 break;
             default:
-                battleInfo += enemy.getName() + " did nothing";
+                battleInfo += enemy.getName() + " did nothing\n";
                 break;
         }
     }
@@ -333,10 +352,10 @@ public class Battle extends Event implements Serializable{
                 enemyAction = BattleAction.ATTACK;
             }
         } else {
-            if (rand < 20) {
+            if (rand < 25) {
                 enemyActionRepeats = 1;
                 enemyAction = BattleAction.DEFEND;
-            } else if (rand < 30 && enemy.checkBackPackForPotion()) {
+            } else if (rand < 40 && enemy.checkBackPackForPotion()) {
                 ArrayList<Item> backpack = enemy.getBackpack();
                 int size = backpack.size();
                 for (int i = 0; i < size; i++) {
@@ -414,9 +433,21 @@ public class Battle extends Event implements Serializable{
             if (first) {
                 battleRewards += "\nItems found:\n";
             }
+            int position;
             Item reward = possibleRewards.get(i);
-            int positition = player.addItemToBackpack(reward);
-            if (positition == -1) {
+            if (reward.getType() == ItemType.POTION) {
+                Potion potionReward = (Potion) reward;
+                position = player.addItemToBackpack(potionReward);
+            } else if (reward.getType() == ItemType.WEAPON) {
+                Weapon weaponReward = (Weapon) reward;
+                position = player.addItemToBackpack(weaponReward);
+            } else if (reward.getType() == ItemType.ARMOUR) {
+                Armour armourReward = (Armour) reward;
+                position = player.addItemToBackpack(armourReward);
+            } else {
+                position = player.addItemToBackpack(reward);
+            }
+            if (position == -1) {
                 battleRewards += "There was no space in your backpack for: ";
             } else {
                 battleRewards += "-";

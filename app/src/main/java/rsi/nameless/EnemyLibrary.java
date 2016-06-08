@@ -27,7 +27,7 @@ public class EnemyLibrary {
         bunnyBackpack.add(itemLibrary.getPotion(4));
         bunnyBackpack.add(itemLibrary.getPotion(0));
         bunnyBackpack.add(itemLibrary.getPotion(3));
-        enemies.add(new Character ("Bunny", 6, 8, 10, 15, 10, 2, 2, 1, bunnyBackpack, itemLibrary.getWeapon(3), itemLibrary.getArmour(0), R.drawable.bunny));
+        enemies.add(new Character ("Bunny", 7, 8, 10, 15, 10, 2, 2, 1, bunnyBackpack, itemLibrary.getWeapon(3), itemLibrary.getArmour(0), R.drawable.bunny));
 
 
         ArrayList<Item> snailBackpack = new ArrayList<>();
