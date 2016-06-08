@@ -177,20 +177,24 @@ public class ConversationLibrary {
         Link a3 = new Link(text, true, false);
 
         String[] options = new String[3];
-        Link[] linksA = {c2, a3};
+        Link[] linksA = {c2, a3, a3};
 
 
-        options = new String[1];
+        options = new String[3];
         text = "What you do or do not want doesn't matter. The Demon is here, and he won't stop until he has the artifact.\n You are our only hope.";
         options[0] = "Alright, here I go.";
+        options[1] = "Alright, here I go.";
+        options[2] = "Alright, here I go.";
         Link b1 = new Link(text, options, linksA);
 
-        options = new String[2];
-        Link[] linksB = {b1, c2};
+        options = new String[3];
+        Link[] linksB = {b1, c2,c2};
         text = "*Gasps* Oh no! That is the Demon!\nIf he gets his hands on it, he will be able to control the animals and enslave the country!"
                 + "You have beaten me. That means you might be able to defeat him.";
         options[0] = "To be honest, I really don't feel like battling an all-powerful demon....";
         options[1] = "Okay. I will try. Do you know where his lair is?";
+        options[2] = "Awesome! Which way?";
+
         Link a2 = new Link(text, options, linksB);
 
         options = new String[3];

@@ -146,15 +146,15 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
                     helpDialog.setCancelable(false);
                     helpDialog.show();
                 }
-                else if(map.getCurrentPoint() ==0){
-                    map = m.getMap(2);
+                else if(map.getCurrentPoint() ==0 && map.getLevel() !=3){
+                    map = m.getMap(map.getLevel()+1);
                     map.setCurrentPoint(8);
                     Item questItem = m.getItemLibrary().getQuestItem(0);
                     player.addItemToBackpack(questItem);
                     map.setPlayer(player);
                     startLevel();
                 }
-                else if(map.getCurrentPoint() ==0 && map.getLevel() ==1) {
+                else if(map.getCurrentPoint() ==0 && map.getLevel() ==3) {
                     int score = player.getScore();
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra("PLAYER_SCORE",score);

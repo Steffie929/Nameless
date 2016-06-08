@@ -34,7 +34,7 @@ public class MainModel {
 
         maps.add(new Map(1, enemies, items, convLib));
         maps.add(new Map(2, enemies, items, convLib));
-        //maps.add(new Map(3, player, enemies, items, convLib));
+        maps.add(new Map(3, enemies, items, convLib));
 
     }
 
