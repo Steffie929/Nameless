@@ -63,6 +63,26 @@ public class EnemyLibrary {
         angryTreeBackpack.add(itemLibrary.getPotion(8));
         enemies.add(new Character("Angry Tree", 12, 14, 10, 6, 18, 7, 7, 2, angryTreeBackpack, itemLibrary.getWeapon(0), itemLibrary.getArmour(0), R.drawable.tree1));
 
+        //====================lEVEL3=================================================================================================================================
+        //Name, str, def, skl, spd, maxHP, gold, maxXP, level, backpack, weapon
+        ArrayList<Item>dragonBackpack = new ArrayList<>();
+        dragonBackpack.add(itemLibrary.getWeapon(6));
+        dragonBackpack.add(itemLibrary.getPotion(6));
+        dragonBackpack.add(itemLibrary.getPotion(7));
+        enemies.add(new Character("Dragon", 14, 16, 12, 10, 25, 12, 12, 3, dragonBackpack, itemLibrary.getWeapon(0), itemLibrary.getArmour(0), R.drawable.dragon));
+
+        ArrayList<Item>axeBoarBackpack = new ArrayList<>();
+        axeBoarBackpack.add(itemLibrary.getWeapon(7));
+        axeBoarBackpack.add(itemLibrary.getPotion(6));
+        axeBoarBackpack.add(itemLibrary.getPotion(8));
+        enemies.add(new Character("Axe Boar", 18, 8, 10, 12, 22, 11, 11, 3, axeBoarBackpack, itemLibrary.getWeapon(0), itemLibrary.getArmour(0), R.drawable.monster1));
+
+        ArrayList<Item>skelebroBackpack = new ArrayList<>();
+        skelebroBackpack.add(itemLibrary.getWeapon(5));
+        skelebroBackpack.add(itemLibrary.getPotion(7));
+        skelebroBackpack.add(itemLibrary.getPotion(9));
+        enemies.add(new Character("Skelebro", 12, 14, 16, 16, 18, 7, 7, 3, skelebroBackpack, itemLibrary.getWeapon(0), itemLibrary.getArmour(0), R.drawable.monster2));
+
     }
 
     private void fillBossList() {
