@@ -169,16 +169,6 @@
                 android:textSize="25dp"
                 android:id="@+id/score_nr15"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#aaFFFFFF"
-                android:padding="3dp"
-                android:text="example\nname:\t points: \nlvl: \tgold:\nkilled by: monster"
-                android:textSize="25dp"
-                android:id="@+id/score_ex"/>
-
-
 
         </LinearLayout>
     </ScrollView>
@@ -192,7 +182,18 @@
         android:padding="10dp"
         android:background="#b5cce3"
         android:id="@+id/resetbutton"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentLeft="true" />
 
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Back"
+        android:onClick="back"
+        android:padding="10dp"
+        android:background="#b5cce3"
+        android:id="@+id/backButton_Highscore"
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>

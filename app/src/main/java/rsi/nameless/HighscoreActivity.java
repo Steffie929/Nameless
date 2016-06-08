@@ -76,6 +76,10 @@ public class HighscoreActivity extends AppCompatActivity {
         }
     }
 
+    public void back(View v){
+        finish();
+    }
+
     public int getScoreIndex(int result){
         int i=0;
 
