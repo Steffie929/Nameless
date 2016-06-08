@@ -15,6 +15,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+
+/**
+ * Made by RSI-arm:
+ * Rick Koenders, s4576519
+ * Stéphanie van Gogh, s4598830
+ * Ilse Arwert, s4592778
+ */
 public class Start extends AppCompatActivity{
     private final int NEW_GAME_CODE = 1;
     private final int CREATION_KEY = 4;
