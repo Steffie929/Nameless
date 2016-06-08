@@ -143,6 +143,17 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
                     map.setPlayer(player);
                     startLevel();
                 }
+                else if(map.getCurrentPoint() ==0 && map.getLevel() ==1) {
+                    int score = player.getScore();
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra("PLAYER_SCORE",score);
+                    returnIntent.putExtra("PLAYER_CHARACTER", player);
+                    returnIntent.putExtra("ENEMY_NAME", "");
+                    setResult(Activity.RESULT_OK,returnIntent);
+
+                    Intent intent = new Intent(this, EndActivity.class);
+                    startActivity(intent);
+                }
             }
         }
         if (requestCode == SHOP_KEY || requestCode == BACKPACK_KEY) {

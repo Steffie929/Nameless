@@ -92,7 +92,7 @@
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/ci_3_hm_sh_nohlm"
+        android:src="@drawable/ci_3_sw_sh_nohlm"
         android:layout_marginBottom="100dp"
         android:id="@+id/char_imageView"
         android:layout_alignParentBottom="true"
