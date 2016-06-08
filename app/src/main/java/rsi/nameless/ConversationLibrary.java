@@ -14,6 +14,7 @@ public class ConversationLibrary {
         conversations = new ArrayList<>();
         conversations.add(new Conversation ("Stranger", R.drawable.stranger ,firstConversation(), enemyLib.getBoss(2)));
         conversations.add(new Conversation ("Yourself", R.drawable.ci_1_nosw_nosh ,secondConversation(), enemyLib.getBoss(0)));
+        conversations.add(new Conversation ("Wise man", R.drawable.desert_boss ,thirdConversation(), enemyLib.getBoss(1)));
     }
 
     public Link firstConversation(){
@@ -153,6 +154,52 @@ public class ConversationLibrary {
         links[1] = a2;
         links[2] = a3;
         Link start = new Link(text, options, links);
+
+        return start;
+    }
+
+    public Link thirdConversation(){
+        String text;
+
+        text = "You have to go defeat the Demon. His lair is north of here. You are our only hope!";
+        Link c2 = new Link(text, false, false);
+
+        text = "That means the artifact is controlling them already! You must go and stop the Demon - he won't rest until he has the artifact.";
+        Link a3 = new Link(text, true, false);
+
+        String[] options = new String[3];
+        Link[] linksA = {c2, a3};
+
+
+        options = new String[1];
+        text = "What you do or do not want doesn't matter. The Demon is here, and he won't stop until he has the artifact.\n You are our only hope.";
+        options[0] = "Alright, here I go.";
+        Link b1 = new Link(text, options, linksA);
+
+        options = new String[2];
+        Link[] linksB = {b1, c2};
+        text = "*Gasps* Oh no! That is the Demon!\nIf he gets his hands on it, he will be able to control the animals and enslave the country!"
+                + "You have beaten me. That means you might be able to defeat him.";
+        options[0] = "To be honest, I really don't feel like battling an all-powerful demon....";
+        options[1] = "Okay. I will try. Do you know where his lair is?";
+        Link a2 = new Link(text, options, linksB);
+
+        options = new String[3];
+        Link[] linksC = {a3,a2,c2};
+        text = "This artifact is invaluable. Selling it will make you rich beyond belief - and possibly end life as you know it.\n"
+                + "If the Demon gets his hands on it, he will be able to control the animals and enslave the country!";
+        options[0] = "Well, now that you mention it, the animals here have become really aggressive lately.";
+        options[1] = "The Demon? Does he happen to look like a floating skeleton, by any chance?.";
+        options[2] = "We have to prevent that! What do I do?";
+        Link a1 = new Link(text, options, linksC);
+
+        options = new String[3];
+        Link[] linksD = {a1,a2,a3};
+        text = "Good, you've beaten me and earned the right to know what this jewel is and why you are here. \nWhat do you want to know first?";
+        options[0] = "I want to know the value of it! Can I sell it?";
+        options[1] = "Some floating skeleton was asking after it. Do you know anything about him?";
+        options[2] = "What does it do? Why are all the animals acting so crazy?";
+        Link start = new Link(text, options, linksD);
 
         return start;
     }
