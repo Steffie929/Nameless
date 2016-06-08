@@ -122,8 +122,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
                     helpBuilder.setPositiveButton("Return to Main Menu",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    m.updateScore();
-                                    int score = m.getPlayerScore();
+                                    int score = player.getScore();
                                     Intent returnIntent = new Intent();
                                     returnIntent.putExtra("PLAYER_SCORE",score);
                                     returnIntent.putExtra("PLAYER_CHARACTER", player);

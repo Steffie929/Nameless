@@ -14,7 +14,6 @@ public class MainModel {
     private EnemyLibrary enemies;
     private ItemLibrary items;
     private ConversationLibrary convLib;
-    private int playerScore;
 
     public MainModel(String playerName, int hpMod, int strMod, int defMod, int sklMod, int spdMod){
         this.items = new ItemLibrary();
@@ -22,7 +21,6 @@ public class MainModel {
         this.player = new Character(playerName, hpMod, strMod, defMod, sklMod, spdMod, items);
         convLib = new ConversationLibrary(enemies);
         currentLevel = 1;
-        playerScore = 0;
         maps = new ArrayList<>();
 
         maps.add(new Map(1, enemies, items, convLib));
@@ -32,25 +30,11 @@ public class MainModel {
     }
 
 
-    public void updateScore(){
-        int mapLevelBonus = currentLevel*100;
-        int playerLevelBonus = player.getLevel()*20;
-        int goldBonus = player.getGold()*2;
-        int xpBonus = player.getCurrentXP()*10;
-        int itemBonus = player.getBackpackValue();
-
-        playerScore = mapLevelBonus + playerLevelBonus + goldBonus + xpBonus + itemBonus;
-        Log.d("DEBUG", "current score: " + playerScore);
-
-    }
 
     public Map getMap(int lvl){
         return maps.get(lvl-1);
     }
 
-    public int getPlayerScore(){
-        return playerScore;
-    }
 
     public ItemLibrary getItemLibrary(){
         return items;

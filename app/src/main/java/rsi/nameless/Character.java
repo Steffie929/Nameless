@@ -28,6 +28,7 @@ public class Character implements Serializable {
     private int maxXP;
     private int boosts[]; //0 str, 1 def, 2 skl, 3 spd, 4 maxHP
     private boolean defaultGrowth;
+    private int score;
 
     private Armour armour;
     private Weapon weapon;
@@ -55,6 +56,7 @@ public class Character implements Serializable {
         boosts = new int[5];
         armour = new Armour ("No armour","No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.empty);
         defaultGrowth = true;
+        score = 10;
     }
 
     /**
@@ -83,6 +85,7 @@ public class Character implements Serializable {
         weapon = items.getWeapon(1);
         boosts = new int[5];
         armour = new Armour ("No armour","No bonusses, no penalties.", 0, 0, 0, 0, 0, 1, 0, R.drawable.empty);
+        score = 10;
     }
 
     /**
@@ -137,10 +140,12 @@ public class Character implements Serializable {
                 levelUp();
             }
         }
+        score+=50;
     }
     public void giveBonusXP(int delta){
         currentXP += delta;
         levelUp();
+        score +=(delta*2);
     }
 
     /**
@@ -194,6 +199,7 @@ public class Character implements Serializable {
     public int addItemToBackpack (Item item) {
         if (backpack.size() < 30) {
             backpack.add(item);
+            score+= item.getPrice();
             return backpack.indexOf(item);
         }
         return -1;
@@ -477,6 +483,10 @@ public class Character implements Serializable {
         for (int i = 0; i <= 4; i++) {
             boosts[i] = 0;
         }
+    }
+
+    public int getScore(){
+        return score;
     }
 
     public void boostStrength(int boost) {
