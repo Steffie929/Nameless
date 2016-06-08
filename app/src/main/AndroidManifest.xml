@@ -45,7 +45,8 @@
         <activity android:name=".HighscoreActivity" />
         <activity android:name=".CreationActivity" />
         <activity android:name=".TutorialActivity" />
-        <activity android:name=".Information"></activity>
+        <activity android:name=".Information" />
+        <activity android:name=".EndActivity"></activity>
     </application>
 
 </manifest>

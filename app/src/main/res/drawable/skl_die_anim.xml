@@ -1,0 +1,11 @@
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true">
+    <item android:drawable="@drawable/really_empty" android:duration="10"/>
+    <item android:drawable="@drawable/skldie1" android:duration="200" />
+    <item android:drawable="@drawable/skldie2" android:duration="200" />
+    <item android:drawable="@drawable/skldie3" android:duration="200" />
+    <item android:drawable="@drawable/skldie4" android:duration="200" />
+    <item android:drawable="@drawable/skldie5" android:duration="200" />
+    <item android:drawable="@drawable/skldie6" android:duration="200" />
+    <item android:drawable="@drawable/skldie7" android:duration="200" />
+</animation-list>
