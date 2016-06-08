@@ -234,7 +234,11 @@ public class Start extends AppCompatActivity{
             String text;
             text = player.getName() + "  " + result + " points\n";
             text+= "Level: " + player.getLevel() + "\t\t\t\tGold: " + player.getGold() + "\n";
-            text += "Killed by " + enemyName;
+            if (player.getCurrentHP() <= 0) {
+                text += "Killed by " + enemyName;
+            } else {
+                text += "Game Completed!";
+            }
             int index = getScoreIndex(result);
 
             String key1 = "Score"+index;
