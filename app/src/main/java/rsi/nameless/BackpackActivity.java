@@ -80,19 +80,23 @@ public class BackpackActivity extends AppCompatActivity {
             row.addView(image);
 
             TextView text = new TextView(this);
-            text.setText(getItemInformation(item, false));
+            if(item instanceof Potion)
+                text.setText(getPotionInformation((Potion) item, false));
+            else
+                text.setText(getItemInformation(item, false));
+
             text.setTextColor(Color.WHITE);
             text.setPadding(5, 5, 5, 5);
             text.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("Backpack", item.getName() + " was clicked");
+                    Log.d("Backpack", item.getName() + " was clicked\t itemtype: " + item.getClass());
                     final ItemType itemType = item.getType();
                     String positiveAction = "";
                     String message = "";
                     if (itemType == ItemType.POTION) {
                         positiveAction = "Use";
-                        message = backpackactivity.getItemInformation(item, true);
+                        message = backpackactivity.getPotionInformation((Potion) item, true);
                     }  else if (itemType == ItemType.WEAPON || itemType == ItemType.ARMOUR){
                         positiveAction = "Equip";
                         message = "Equip the following item:\n" + backpackactivity.getItemInformation(item, true);
@@ -199,15 +203,38 @@ public class BackpackActivity extends AppCompatActivity {
     public String getItemInformation(Item item, boolean removeOneTabFromStrength) {
         String result = new String("");
         result += item.getName() + "\n";
-        int strTabNumber = getTabNumber(item.getStrengthBonus(), 12);
-        if (removeOneTabFromStrength) {
-            strTabNumber--;
-        }
+        int strTabNumber = getTabNumber(item.getStrengthBonus(), 11);
         int defTabNumber = getTabNumber(item.getDefenseBonus(), 12);
         int sklTabNumber = getTabNumber(item.getSkillBonus(), 15);
+        if (removeOneTabFromStrength) {
+            strTabNumber--;
+            defTabNumber--;
+        }
         result += "Strength: " + item.getStrengthBonus() + getTabs(strTabNumber) + "Speed: " + item.getSpeedBonus() + "\n";
-        result += "Defense: " + item.getDefenseBonus() + getTabs(defTabNumber) + "HP: " + item.getHPBonus() + "\n";
+        result += "Defense: " + item.getDefenseBonus() + getTabs(defTabNumber) + "Max HP: " + item.getHPBonus() + "\n";
         result += "Skill: " + item.getSkillBonus() + getTabs(sklTabNumber) + "Level: " + item.getLevel() + "\n";
+        return result;
+    }
+
+    public String getPotionInformation(Potion item, boolean removeOneTabFromStrength) {
+        String result = new String("");
+        result += item.getName() + "\n";
+        int strTabNumber = getTabNumber(item.getStrengthBonus(), 11);
+        int defTabNumber = getTabNumber(item.getDefenseBonus(), 12);
+        int sklTabNumber = getTabNumber(item.getSkillBonus(), 15);
+        int useTabNumber = getTabNumber(item.getNrUses(), 10);
+        Log.d("Backpack", "getPotionInformation start");
+        if (removeOneTabFromStrength) {
+            Log.d("Backpack", "getPotionInformation if");
+            strTabNumber--;
+            defTabNumber-=2;
+            useTabNumber--;
+
+        }
+        result += "Strength: " + item.getStrengthBonus() + getTabs(strTabNumber) + "Speed: " + item.getSpeedBonus() + "\n";
+        result += "Defense: " + item.getDefenseBonus() + getTabs(defTabNumber) + "Max HP: " + item.getHPBonus() + "\n";
+        result += "Skill: " + item.getSkillBonus() + getTabs(sklTabNumber) + "HP Restore: " + item.getHPRestore() + "\n";
+        result += "Nr of uses " + item.getNrUses() + getTabs(useTabNumber) + "Level: " + item.getLevel() + "\n";
         return result;
     }
 
