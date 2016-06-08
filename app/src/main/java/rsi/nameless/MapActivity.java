@@ -219,6 +219,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
                                 savedGame1Editor.commit();
 
                                 savedGame1Editor.putBoolean("USED", true);
+                                savedGame1Editor.putString("PLAYER_NAME", player.getName());
                                 savedGame1Editor.commit();
                                 break;
                             case 1:
@@ -231,6 +232,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
                                 savedGame2Editor.commit();
 
                                 savedGame2Editor.putBoolean("USED", true);
+                                savedGame2Editor.putString("PLAYER_NAME", player.getName());
                                 savedGame2Editor.commit();
                                 break;
                             case 2:
@@ -243,6 +245,7 @@ public class MapActivity extends AppCompatActivity implements GestureDetector.On
                                 savedGame3Editor.commit();
 
                                 savedGame3Editor.putBoolean("USED", true);
+                                savedGame3Editor.putString("PLAYER_NAME", player.getName());
                                 savedGame3Editor.commit();
                                 break;
                         }

@@ -1,11 +1,8 @@
 package rsi.nameless;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.AnimationDrawable;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,11 +11,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class Start extends AppCompatActivity{
@@ -28,7 +23,8 @@ public class Start extends AppCompatActivity{
     private Animation jwlAnimation, charAnimation, bossAnimation;
     private SharedPreferences savedHighscores, savedGame1, savedGame2, savedGame3;
     private SharedPreferences.Editor savedHighscoresEditor, savedGame1Editor, savedGame2Editor, savedGame3Editor;
-    private Button newGame,goToHighscores, loadGame, saveSlot1, saveSlot2, saveSlot3;
+    private Button newGame,goToHighscores, loadGame, saveSlot1, saveSlot2, saveSlot3, clearSaves;
+    private ImageButton tutorialButton;
     private boolean gameSaved1, gameSaved2, gameSaved3;
 
 
@@ -47,24 +43,24 @@ public class Start extends AppCompatActivity{
         savedGame3Editor = savedGame3.edit();
         savedHighscoresEditor = savedHighscores.edit();
 
-        gameSaved1 = savedGame1.getBoolean("USED", false);
-        gameSaved2 = savedGame2.getBoolean("USED", false);
-        gameSaved3 = savedGame3.getBoolean("USED", false);
-
-
         newGame = (Button) findViewById(R.id.newgame_button);
         goToHighscores = (Button) findViewById(R.id.go_tohighscore);
         loadGame = (Button) findViewById(R.id.loadgame1_button);
         saveSlot1 = (Button) findViewById(R.id.saveslot1_button);
         saveSlot2 = (Button) findViewById(R.id.saveslot2_button);
         saveSlot3 = (Button) findViewById(R.id.saveslot3_button);
+        clearSaves = (Button) findViewById(R.id.clearSaveslots);
+        tutorialButton = (ImageButton) findViewById(R.id.imageButton);
         newGame.setVisibility(View.GONE);
         goToHighscores.setVisibility(View.GONE);
         loadGame.setVisibility(View.GONE);
         saveSlot1.setVisibility(View.GONE);
         saveSlot2.setVisibility(View.GONE);
         saveSlot3.setVisibility(View.GONE);
+        clearSaves.setVisibility(View.GONE);
+        tutorialButton.setVisibility(View.GONE);
 
+        setSavedTexts();
         introAnimation();
 
     }
@@ -97,6 +93,7 @@ public class Start extends AppCompatActivity{
                 newGame.setVisibility(View.VISIBLE);
                 loadGame.setVisibility(View.VISIBLE);
                 goToHighscores.setVisibility(View.VISIBLE);
+                tutorialButton.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -119,11 +116,45 @@ public class Start extends AppCompatActivity{
         if(loadGame.getVisibility() == View.GONE)
             return;
 
+        setSavedTexts();
         saveSlot1.setVisibility(View.VISIBLE);
         saveSlot2.setVisibility(View.VISIBLE);
         saveSlot3.setVisibility(View.VISIBLE);
+        clearSaves.setVisibility(View.VISIBLE);
+    }
 
+    private void setSavedTexts() {
+        gameSaved1 = savedGame1.getBoolean("USED", false);
+        gameSaved2 = savedGame2.getBoolean("USED", false);
+        gameSaved3 = savedGame3.getBoolean("USED", false);
+        if(gameSaved1) {
+            String playername1 = savedGame1.getString("PLAYER_NAME", "Game saved");
+            saveSlot1.setText("Slot 1: " + playername1);
+        } else {
+            saveSlot1.setText("Slot 1: Empty");
+        }
+        if(gameSaved2) {
+            String playername2 = savedGame2.getString("PLAYER_NAME", "Game saved");
+            saveSlot2.setText("Slot 2: " + playername2);
+        } else {
+            saveSlot2.setText("Slot 2: Empty");
+        }
+        if(gameSaved3) {
+            String playername3 = savedGame3.getString("PLAYER_NAME", "Game saved");
+            saveSlot3.setText("Slot 3: " + playername3);
+        } else {
+            saveSlot3.setText("Slot 3: Empty");
+        }
+    }
 
+    public void clearSaveslots (View v) {
+        savedGame1Editor.clear();
+        savedGame1Editor.commit();
+        savedGame2Editor.clear();
+        savedGame2Editor.commit();
+        savedGame3Editor.clear();
+        savedGame3Editor.commit();
+        setSavedTexts();
     }
 
     public void clickedSaveSlot1(View v){
@@ -176,12 +207,14 @@ public class Start extends AppCompatActivity{
             newGame.setVisibility(View.VISIBLE);
             goToHighscores.setVisibility(View.VISIBLE);
             loadGame.setVisibility(View.VISIBLE);
+            tutorialButton.setVisibility(View.VISIBLE);
             introAnimation();
 
             if(saveSlot1.getVisibility()== View.VISIBLE) {
                 saveSlot1.setVisibility(View.GONE);
                 saveSlot2.setVisibility(View.GONE);
                 saveSlot3.setVisibility(View.GONE);
+                clearSaves.setVisibility(View.GONE);
             }
 
         }
