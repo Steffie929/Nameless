@@ -13,6 +13,10 @@ public class EndActivity extends AppCompatActivity {
     private TextView tV;
     private ImageView sklImageView;
 
+    /**
+     * When this activity is created it makes the textview invisible and starts an animation.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +33,12 @@ public class EndActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * When the screen is tapped, the animation stops and the text shows.
+     * Or if the the text is already visible it hides the text and shows the animation again.
+     * @param event
+     * @return
+     */
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             if(tV.getVisibility() == View.VISIBLE) {

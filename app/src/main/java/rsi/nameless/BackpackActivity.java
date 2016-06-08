@@ -24,6 +24,10 @@ public class BackpackActivity extends AppCompatActivity {
     private TableLayout table;
     private boolean fromBattle;
 
+    /**
+     * When this activity is created, information is gathered from the intent and fillBackpack is called.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +39,11 @@ public class BackpackActivity extends AppCompatActivity {
         fillBackpack();
     }
 
+    /**
+     * This method fills a TableLayout with all of the items in the player's backpack. It shows an ImageView and
+     *  a TextView for each item and sets a listener for when that item is tapped. If an item is tapped, more information is shown
+     *   and the user can equip/use an item.
+     */
     private void fillBackpack() {
         table.removeAllViews();
         TableRow tr_head = new TableRow(this);
@@ -216,6 +225,10 @@ public class BackpackActivity extends AppCompatActivity {
         return result;
     }
 
+    /**
+     * Makes a String with all information about the Item neatly organized
+     * @return The String that contains all information about the Item
+     */
     public String getPotionInformation(Potion item, boolean removeOneTabFromStrength) {
         String result = new String("");
         result += item.getName() + "\n";

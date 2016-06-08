@@ -15,6 +15,11 @@ public class HighscoreActivity extends AppCompatActivity {
     private SharedPreferences savedHighscores;
     private SharedPreferences.Editor savedHighscoresEditor;
 
+    /**
+     * This method creates and fills tvArray with the TextViews on the screen and calls 2 other methods
+     * to fill them.     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +50,9 @@ public class HighscoreActivity extends AppCompatActivity {
         setTVs();
     }
 
+    /**
+     * This method gets information from SharedPreferences and stores it in a string array and an int array.
+     */
     public void getInfoFromPrefs(){
         strArray = new String[15];
         scores = new int[15];
@@ -70,6 +78,9 @@ public class HighscoreActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method uses the stringarray to change the text of the right textviews in the tVarray.
+     */
     public void setTVs(){
         for(int i=0; i<15;i++){
             tvArray[i].setText( (i+1) +". " + strArray[i]);
@@ -91,6 +102,13 @@ public class HighscoreActivity extends AppCompatActivity {
         return i+1;
     }
 
+    /**
+     * This method inserts a String and score into the array at position 'index'
+     * and moves the other values to make it fit.
+     * @param result
+     * @param text
+     * @param index
+     */
     public void insertInArrays(int result, String text, int index){
         for(int i= 14;i> index; i--){
             if(strArray[i] == i + "")
@@ -102,6 +120,10 @@ public class HighscoreActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Clears the sharedPreferences and thereby clears the highscores and updates the view.
+     * @param v
+     */
     public void resetHighscores(View v){
         savedHighscoresEditor.clear();
         savedHighscoresEditor.commit();

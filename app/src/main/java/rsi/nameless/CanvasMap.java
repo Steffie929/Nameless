@@ -47,7 +47,7 @@ public class CanvasMap extends View  {
 
     /**
      * This method is called when an instance of CanvasMap is created.
-     * It creates a canvas that fills the screen and sets the stage to START.
+     * It creates a canvas that fills the screen and gets the width and height of that canvas.
      */
     public void start() {
         paint = new Paint();
@@ -57,13 +57,18 @@ public class CanvasMap extends View  {
         Bitmap bitmap = Bitmap.createBitmap(mapHeight, mapWidth, Bitmap.Config.RGB_565);
         canvas = new Canvas(bitmap);
     }
-    
+
     public void setMap(Map map){
         this.map =map;
         playerIcon = ResourcesCompat.getDrawable(getResources(), this.map.getPlayer().getImgID(), null);
     }
 
 
+    /**
+     * This function draws the canvas. First all coordinates of the points of the map are calculated.
+     * Then functions are called to draw the background, roads, eventicons and the player icon.
+     * @param canvas
+     */
     @Override
     public void onDraw(Canvas canvas) {
         this.canvas = canvas;
@@ -106,6 +111,9 @@ public class CanvasMap extends View  {
         
     }
 
+    /**
+     * This function gets the event icon for each point on the map and draws them.
+     */
     public void drawEventIcons(){
         Log.d("DRAW", "started drawEventIcons");
         Drawable d;
@@ -157,7 +165,7 @@ public class CanvasMap extends View  {
     }
 
     /**
-     * Draws an icon 'd' with a height of 150 and width of 100 at location 'p' on the map.
+     * Draws an icon 'd' with a height of 150 and width of 150 at location 'p' on the map.
      * Used for the player icon
      * @param p The location on the map
      */
@@ -173,6 +181,9 @@ public class CanvasMap extends View  {
         playerIcon.draw(canvas);
     }
 
+    /**
+     * This function uses the coordinates calculated earlier to make draw a path across the map.
+     */
     public void drawRoads(){
         Path path = new Path();
         int[] orderPath = {3,0,5,4,2,1,4,3,8,5,4,6,7,4};
@@ -194,6 +205,7 @@ public class CanvasMap extends View  {
         canvas.drawPath(path, paint);
         paint.setShader(null);
     }
+
 
     public void drawBackground(){
         int bgImgID = map.getBgImgID();

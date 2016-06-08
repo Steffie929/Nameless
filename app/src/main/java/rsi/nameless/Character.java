@@ -142,6 +142,7 @@ public class Character implements Serializable {
         }
         score+=50;
     }
+
     public void giveBonusXP(int delta){
         currentXP += delta;
         levelUp();
@@ -282,7 +283,7 @@ public class Character implements Serializable {
     }
 
     /**
-     * @return the gold
+     * @return the amount of gold the player has
      */
     public int getGold() {
         return gold;
@@ -327,6 +328,7 @@ public class Character implements Serializable {
     }
 
     /**
+     * This function gives the player the statboosts gained from using a certain weapon.
      * @param weapon the weapon to set
      */
     private void setWeapon(Weapon weapon) {
@@ -352,6 +354,10 @@ public class Character implements Serializable {
         return armour;
     }
 
+    /**
+     *  This function equips new armour and adds the old armour to the backpack.
+     * @param index
+     */
     public void setArmour(int index) {
         Armour old = this.armour;
         Item item = backpack.get(index);
@@ -364,6 +370,10 @@ public class Character implements Serializable {
         }
     }
 
+    /**
+     * This function gives the player the statboosts gained from using a certain armour.
+     * @param armour
+     */
     private void setArmour(Armour armour) {
         if (level < armour.getLevel()) {
             return;
@@ -383,6 +393,10 @@ public class Character implements Serializable {
         changeCurrentHP(hpDelta);
     }
 
+    /**
+     * Returns the total value of all items in your backpack.
+     * @return
+     */
     public int getBackpackValue(){
         int result = 0;
         for(int i=0; i<backpack.size(); i++){
@@ -437,6 +451,10 @@ public class Character implements Serializable {
         }
     }
 
+
+    /**
+     * Changes which icon is used for the player depending on weapon,armour and level of the player.
+     */
     public void changeCharIcon (){
         if(weapon == null || armour == null)
             return;
@@ -486,6 +504,9 @@ public class Character implements Serializable {
         return boosts;
     }
 
+    /**
+     * reverts all temporary boosts
+     */
     public void revertBoosts() { //0 str, 1 def, 2 skl, 3 spd, 4 maxHP
         strength -= boosts[0];
         defense -= boosts[1];

@@ -15,6 +15,11 @@ public class CreationActivity extends AppCompatActivity {
     private int maxChanges, hpMod, strMod, defMod, sklMod, spdMod;
     private TextView hpPoints, strPoints, defPoints, sklPoints, spdPoints, points;
 
+    /**
+     * This method is called when the activity is created. It sets the view with default settings
+     * and calls updateTextxs().
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,6 +141,10 @@ public class CreationActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method sets the return intent and ends the activity
+     * @param v
+     */
     public void startGame(View v) {
         Intent returnIntent = new Intent();
         EditText editText = (EditText) findViewById(R.id.choosePlayerName);

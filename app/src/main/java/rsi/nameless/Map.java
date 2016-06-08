@@ -33,7 +33,6 @@ public class Map {
         this.events = new eventType[9];
         battle = false;
         shop = false;
-        this.player = player;
         generateEventTypes();
         currentPoint = 8;
 

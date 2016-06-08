@@ -18,6 +18,10 @@ public class CharacterScreen extends AppCompatActivity {
     private ImageView imgView;
 
 
+    /**
+     * When this activity is created, information is gathered from the intent and the view is edited accordingly.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

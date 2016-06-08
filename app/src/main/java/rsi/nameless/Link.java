@@ -14,6 +14,12 @@ public class Link implements Serializable{
     private boolean questAccepted;
     private boolean reward;
 
+    /**
+     * Constructor for the last link of a conversation
+     * @param text
+     * @param battle
+     * @param reward
+     */
     public Link(String text, boolean battle, boolean reward){
         this.text = text;
         last = true;
@@ -21,6 +27,12 @@ public class Link implements Serializable{
         this.reward = reward;
     }
 
+    /**
+     * Constructor for a regular link in a conversation
+     * @param text
+     * @param options
+     * @param links
+     */
     public Link(String text, String[] options, Link[] links){
         this.text = text;
         this.options = options;

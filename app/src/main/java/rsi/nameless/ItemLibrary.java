@@ -14,6 +14,7 @@ public class ItemLibrary implements Serializable{
 
     /**
      * Constructor
+     * Creates 4 arrays with weapons, armour, potions and quest items.
      */
     public ItemLibrary () {
         weapons = new ArrayList<>();

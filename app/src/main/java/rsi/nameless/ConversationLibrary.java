@@ -9,6 +9,7 @@ public class ConversationLibrary {
     private ArrayList<Conversation> conversations;
     private EnemyLibrary enemyLib;
 
+
     public ConversationLibrary(EnemyLibrary enemyLib){
         this.enemyLib = enemyLib;
         conversations = new ArrayList<>();
@@ -17,6 +18,10 @@ public class ConversationLibrary {
         conversations.add(new Conversation ("Wise man", R.drawable.desert_boss ,thirdConversation(), enemyLib.getBoss(1)));
     }
 
+    /**
+     * This function creates a series of links for the first conversation and returns the starting link.
+     * @return
+     */
     public Link firstConversation(){
         String text;
 
@@ -91,6 +96,10 @@ public class ConversationLibrary {
         return start;
     }
 
+    /**
+     * This function creates a series of links for the second conversation and returns the starting link.
+     * @return
+     */
     public Link secondConversation(){
         String text;
         String[] options = new String[3];

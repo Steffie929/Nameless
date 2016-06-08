@@ -17,6 +17,12 @@ public class BattleActivity extends AppCompatActivity {
     private boolean playerTurn; // is true when the user can click a button to set their next action.
     private final int BACKPACK_KEY = 37;
 
+
+    /**
+     * When this activity is created first information is gathered from the intent. Then the View is updated with
+     * the relevant information about the player and the enemy. At the end startRound() is called to start the fight.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +54,10 @@ public class BattleActivity extends AppCompatActivity {
         startRound();
     }
 
+    /**
+     * This function is called every round of the battle. It first checks if the player is still alive and if the enemy is still alive.
+     *  Then it gets the enemyAction and allows the player to chooce theirs.
+     */
     public void startRound(){
         if(player.getCurrentHP() <= 0){
             battleOver();
@@ -66,6 +76,10 @@ public class BattleActivity extends AppCompatActivity {
         playerTurn = true;
     }
 
+    /**
+     * This function is called at the end of a battle. It makes sure all temporary boosts from potions are canceled,
+     * and it sets the returnIntent before ending the activity.
+     */
     private void battleOver() {
         player.revertBoosts();
         Intent returnIntent = new Intent();
@@ -75,6 +89,11 @@ public class BattleActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * This method calls a method to give the player the rewards for winning this battle,
+     *  it calls a method to cancel all temporary boosts. And it shows the player a screen with
+     *  an overview of the rewards gained. When the player clicks 'ok' the activity is ended.
+     */
     private void getRewards() {
         battle.getRewards();
         player.revertBoosts();
@@ -97,6 +116,10 @@ public class BattleActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * This method is called after the player and the enemy picked their actions. It executes those actions
+     * and updates the view.
+     */
     public void afterInput(){
         info.setText("");
         Log.d("BATTLE", "user-input received");
@@ -160,6 +183,13 @@ public class BattleActivity extends AppCompatActivity {
     public void onBackPressed() {
     }
 
+    /**
+     * This method updates the player information after the use item option has been selected en the
+     * backpack activity has been called.
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
         if (requestCode == BACKPACK_KEY) {
             if (resultCode == RESULT_OK) {

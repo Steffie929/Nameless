@@ -21,6 +21,9 @@ public class EnemyLibrary {
         fillBossList();
     }
 
+    /**
+     * Here all enemies are created and added to enemies or bosses
+     */
     private void fillEnemyList() { //Name, str, def, skl, spd, maxHP, gold, maxXP, level, backpack, weapon
         //================LEVEL1 Forest/grass =================================================================
         ArrayList<Item> bunnyBackpack = new ArrayList<>();

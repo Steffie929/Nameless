@@ -14,12 +14,25 @@ public class Conversation extends Event implements Serializable{
     private int imgID;
 
 
+    /**
+     * The constructor of a conversation that cannot end in a battle.
+     * @param npcName the name of the person you're talking to.
+     * @param imgID the image shown on screen.
+     * @param start the first link of the conversation.
+     */
     public Conversation(String npcName, int imgID, Link start){
         this.npcName = npcName;
         this.imgID = imgID;
         this.currentLink = start;
     }
 
+    /**
+     * the Constructor of a conversation that could end in a battle depending on your choices.
+     * @param npcName
+     * @param imgID
+     * @param start
+     * @param enemy
+     */
     public Conversation(String npcName, int imgID, Link start, Character enemy){
         this.npcName = npcName;
         this.imgID = imgID;

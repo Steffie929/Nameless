@@ -15,6 +15,15 @@ public class MainModel {
     private ItemLibrary items;
     private ConversationLibrary convLib;
 
+    /**
+     * Constructor of the main model of our game. Here all items, weapons and maps are made and a player is created.
+     * @param playerName
+     * @param hpMod
+     * @param strMod
+     * @param defMod
+     * @param sklMod
+     * @param spdMod
+     */
     public MainModel(String playerName, int hpMod, int strMod, int defMod, int sklMod, int spdMod){
         this.items = new ItemLibrary();
         this.enemies = new EnemyLibrary(items);

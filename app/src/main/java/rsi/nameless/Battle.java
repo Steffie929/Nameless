@@ -23,6 +23,7 @@ public class Battle extends Event implements Serializable{
     private String battleInfo;
     private String battleRewards;
 
+
     public Battle (Character player, Character enemy) {
         this.player = player;
         this.enemy = enemy;
@@ -322,10 +323,7 @@ public class Battle extends Event implements Serializable{
         return rand < goal;
     }
 
-    /**
-     * Getter for player
-     * @return the player
-     */
+
     public Character getPlayer () {
         return player;
     }
@@ -334,6 +332,9 @@ public class Battle extends Event implements Serializable{
         return enemy;
     }
 
+    /**
+     * Determines what action the enemy chooses and stores that choice in enemyAction.
+     */
     public void chooseEnemyAction () {
         int rand = random.nextInt(100);
         if (enemyAction == BattleAction.DEFEND) {
@@ -406,6 +407,9 @@ public class Battle extends Event implements Serializable{
         return ranAway;
     }
 
+    /**
+     * This method evaluates what rewards are given for winning a fight. And calls the appropriate methods to do so.
+     */
     public void getRewards() {
         int goldReward = enemy.getGold();
         player.changeGold(goldReward);
