@@ -138,6 +138,10 @@ public class Map {
         return player;
     }
 
+    public int getLevel(){
+        return level;
+    }
+
     /**
      * Getter for an event at an index
      * @param index the index of the event
