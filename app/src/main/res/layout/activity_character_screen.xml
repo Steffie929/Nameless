@@ -34,7 +34,7 @@
         android:layout_height="match_parent"
         android:id="@+id/characterImage"
         android:layout_alignParentTop="true"
-        android:src="@drawable/char_icon"
+        android:src="@drawable/ci_3_sw_sh_nohlm"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@+id/playerStatsHeader"/>
 

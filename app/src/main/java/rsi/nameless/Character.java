@@ -450,16 +450,28 @@ public class Character implements Serializable {
             this.imgID = R.drawable.ci_1_nosw_nosh;
         else if (w.contains("Sword") && a.contains("Shield")&& level <2)
             this.imgID = R.drawable.ci_1_sw_sh;
+        else if (w.contains("Axe") && !a.contains("Shield") && level <2)
+            this.imgID = R.drawable.ci_1_ax_nosh;
+        else if (w.contains("Axe") && a.contains("Shield")&& level <2)
+            this.imgID = R.drawable.ci_1_ax_sh;
+        
         else if (w.contains("Sword") && !a.contains("Shield") && level <4)
             this.imgID = R.drawable.ci_2_sw_nosh;
         else if (!w.contains("Sword") && a.contains("Shield")&& level <4)
-            this.imgID = R.drawable.ci_2_nosw_sh;
+            this.imgID = R.drawable.ci_2_sw_sh;
+        else if (w.contains("Axe") && !a.contains("Shield") && level <4)
+            this.imgID = R.drawable.ci_2_ax_nosh;
+        else if (w.contains("Axe") && a.contains("Shield")&& level <4)
+            this.imgID = R.drawable.ci_2_ax_sh;
         else if (!w.contains("Sword") && !a.contains("Shield")&& level <4)
             this.imgID = R.drawable.ci_2_nosw_nosh;
+        
         else if (w.contains("Sword") && !a.contains("Shield"))
             this.imgID = R.drawable.ci_3_sw_nosh_nohlm;
         else if (!w.contains("Sword") && a.contains("Shield"))
             this.imgID = R.drawable.ci_3_nosw_sh_nohlm;
+        else if (w.contains("Axe") && !a.contains("Shield"))
+            this.imgID = R.drawable.ci_3_ax_nosh_nohlm;
         else if (!w.contains("Sword") && !a.contains("Shield"))
             this.imgID = R.drawable.ci_3_nosw_nosh_nohlm;
     }
