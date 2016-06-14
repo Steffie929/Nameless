@@ -49,19 +49,19 @@ public class EnemyLibrary {
         duneCrawlerBackpack.add(itemLibrary.getPotion(5));
         duneCrawlerBackpack.add(itemLibrary.getPotion(6));
         duneCrawlerBackpack.add(itemLibrary.getPotion(9));
-        enemies.add(new Character("Dune Crawler", 12, 10, 10, 10, 13, 8, 7, 2, duneCrawlerBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.dune_crawler));
+        enemies.add(new Character("Dune Crawler", 14, 12, 12, 12, 15, 8, 7, 2, duneCrawlerBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.dune_crawler));
 
         ArrayList<Item> scorpionBackpack = new ArrayList<>();
         scorpionBackpack.add(itemLibrary.getPotion(5));
         scorpionBackpack.add(itemLibrary.getPotion(7));
         scorpionBackpack.add(itemLibrary.getPotion(9));
-        enemies.add(new Character("Scorpion", 12, 8, 10, 10, 15, 6, 7, 2, scorpionBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.scorpion));
+        enemies.add(new Character("Scorpion", 14, 10, 12, 12, 16, 6, 7, 2, scorpionBackpack, itemLibrary.getWeapon(4), itemLibrary.getArmour(0), R.drawable.scorpion));
 
         ArrayList<Item> angryTreeBackpack = new ArrayList<>();
         angryTreeBackpack.add(itemLibrary.getPotion(5));
         angryTreeBackpack.add(itemLibrary.getPotion(6));
         angryTreeBackpack.add(itemLibrary.getPotion(8));
-        enemies.add(new Character("Angry Tree", 12, 14, 10, 6, 18, 7, 7, 2, angryTreeBackpack, itemLibrary.getWeapon(0), itemLibrary.getArmour(0), R.drawable.tree1));
+        enemies.add(new Character("Angry Tree", 13, 16, 12, 9, 20, 7, 7, 2, angryTreeBackpack, itemLibrary.getWeapon(0), itemLibrary.getArmour(0), R.drawable.tree1));
 
         //====================lEVEL3=================================================================================================================================
         //Name, str, def, skl, spd, maxHP, gold, maxXP, level, backpack, weapon
@@ -69,19 +69,19 @@ public class EnemyLibrary {
         dragonBackpack.add(itemLibrary.getWeapon(8));
         dragonBackpack.add(itemLibrary.getPotion(6));
         dragonBackpack.add(itemLibrary.getPotion(7));
-        enemies.add(new Character("Dragon", 14, 16, 12, 10, 25, 12, 12, 3, dragonBackpack, itemLibrary.getWeapon(8), itemLibrary.getArmour(0), R.drawable.dragon));
+        enemies.add(new Character("Dragon", 18, 20, 14, 12, 28, 12, 12, 3, dragonBackpack, itemLibrary.getWeapon(8), itemLibrary.getArmour(0), R.drawable.dragon));
 
         ArrayList<Item>axeBoarBackpack = new ArrayList<>();
         axeBoarBackpack.add(itemLibrary.getWeapon(7));
         axeBoarBackpack.add(itemLibrary.getPotion(6));
         axeBoarBackpack.add(itemLibrary.getPotion(8));
-        enemies.add(new Character("Axe Boar", 18, 8, 10, 12, 22, 11, 11, 3, axeBoarBackpack, itemLibrary.getWeapon(9), itemLibrary.getArmour(0), R.drawable.monster1));
+        enemies.add(new Character("Axe Boar", 20, 14, 12, 14, 25, 11, 11, 3, axeBoarBackpack, itemLibrary.getWeapon(9), itemLibrary.getArmour(0), R.drawable.monster1));
 
         ArrayList<Item>skelebroBackpack = new ArrayList<>();
         skelebroBackpack.add(itemLibrary.getWeapon(5));
         skelebroBackpack.add(itemLibrary.getPotion(7));
         skelebroBackpack.add(itemLibrary.getPotion(9));
-        enemies.add(new Character("Skelebro", 12, 14, 16, 16, 18, 7, 7, 3, skelebroBackpack, itemLibrary.getWeapon(5), itemLibrary.getArmour(0), R.drawable.monster2));
+        enemies.add(new Character("Skelebro", 15, 15, 18, 18, 20, 10, 12, 3, skelebroBackpack, itemLibrary.getWeapon(5), itemLibrary.getArmour(0), R.drawable.monster2));
 
     }
 

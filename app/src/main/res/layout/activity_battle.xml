@@ -85,10 +85,11 @@
         android:layout_height="match_parent">
 
         <ImageView android:id="@+id/imageEnemy"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
             android:layout_column="0"
             android:layout_span="3"
-            android:layout_gravity="center"
-            android:scaleType="fitCenter"/>
+            android:src="@drawable/scorpion"/>
 
     </TableRow>
 
